@@ -291,15 +291,22 @@ import { produtos } from '../data/produtos.js';
   <section class="raio-preview">
     <div class="raio-card">
       <div class="raio-visual">
-        <div class="raio-dot"><span class="pulse"></span></div>
-        <div class="raio-circle"></div>
+        <iframe 
+          src="https://maps.google.com/maps?q=R.+Ceará,+212+-+Parateí,+Guararema+-+SP,+08900-000&t=&z=6&ie=UTF8&iwloc=&output=embed" 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
       <div class="raio-text">
         <div class="section-header-premium" style="margin: 0 0 1rem 0; padding: 0; text-align: left;">
           <div class="section-badge" style="background: rgba(0,0,0,0.15); color: #343432;">ALCANCE</div>
           <h2 style="margin-bottom: 0;">Raio de <strong>Atuação</strong></h2>
         </div>
-        <p>Nossa fábrica está estrategicamente localizada para atender num raio de até <strong>500km</strong>, cobrindo SP, RJ, MG e PR.</p>
+        <p>Nossa fábrica em <strong>Guararema - SP</strong> está estrategicamente localizada para atender num raio de até <strong>500km</strong>, cobrindo SP, RJ, MG e PR.</p>
         <a href="/prototipo-hilariom/atuacao/" class="link-more">Ver cobertura completa →</a>
       </div>
     </div>
@@ -1174,40 +1181,17 @@ import { produtos } from '../data/produtos.js';
 
   .raio-visual {
     position: relative;
-    height: 180px;
+    height: 250px;
     background: #E8E8E6;
-    background-image: radial-gradient(#D4D4D2 1.5px, transparent 1.5px);
-    background-size: 16px 16px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
-  .raio-dot {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    background: var(--primary-color);
-    border-radius: 50%;
-    z-index: 2;
-  }
-
-  .raio-circle {
-    position: absolute;
-    width: 140px;
-    height: 140px;
-    border: 2px dashed var(--primary-color);
-    border-radius: 50%;
-    background: rgba(52, 52, 50, 0.06);
-  }
-
-  .pulse {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: var(--primary-color);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
+  
+  @media (min-width: 768px) {
+    .raio-visual {
+      height: 350px;
+    }
   }
 
   .raio-text {
