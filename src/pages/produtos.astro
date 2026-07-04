@@ -28,7 +28,7 @@ import { produtos } from '../data/produtos.js';
   <section class="products-container">
     <div class="products-grid">
       {produtos.map((p, index) => (
-        <a href={`/produtos/${p.id}`} class={`product-card fade-in-up delay-${(index % 3) + 1}`}>
+        <a href={`/prototipo-hilariom/produtos/${p.id}/`} class={`product-card fade-in-up delay-${(index % 3) + 1}`}>
           <div class="card-accent"></div>
           <div class="img-wrapper skeleton">
             <img src={p.img} alt={p.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />

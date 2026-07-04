@@ -134,7 +134,8 @@ a {
   .page-container > .hero,
   .page-container > .page-header,
   .page-container > .obra-hero,
-  .page-container > .product-hero {
+  .page-container > .product-hero,
+  .page-container > .header-spacing {
     max-width: 100%;
     padding-left: 0;
     padding-right: 0;

@@ -11,8 +11,8 @@ const navItems = [
 <nav class="bottom-nav">
   <div class="nav-container">
     {navItems.map((item) => {
-      // Very simple active check
-      const isActive = currentPath === item.path || (item.path !== '/' && currentPath.startsWith(item.path));
+      // Fix active check since the root path is now /prototipo-hilariom/
+      const isActive = currentPath === item.path || (item.path !== '/prototipo-hilariom/' && currentPath.startsWith(item.path));
       
       return (
         <a href={item.path} class={`nav-item ${isActive ? 'active' : ''}`}>
@@ -27,24 +27,28 @@ const navItems = [
 <style>
   .bottom-nav {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 420px;
     height: var(--nav-height);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     z-index: 50;
-    border-top: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    overflow: hidden;
   }
   
-  /* Constrain the nav width inside the app container */
-  @media (min-width: 480px) {
+  /* Slight adjustments on desktop */
+  @media (min-width: 768px) {
     .bottom-nav {
-      left: 50%;
-      transform: translateX(-50%);
-      width: 480px;
+      bottom: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
     }
   }
 

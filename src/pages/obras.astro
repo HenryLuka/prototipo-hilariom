@@ -49,7 +49,7 @@ const obras = [
 
   <section class="gallery fade-in-up delay-3">
     {obras.map((obra) => (
-      <a href={`/obras/detalhe`} class="obra-card hover-scale" data-segment={obra.segment}>
+      <a href="/prototipo-hilariom/obras/detalhe/" class="obra-card hover-scale" data-segment={obra.segment}>
         <div class="img-wrapper skeleton">
           <img src={obra.img} alt={obra.title} loading="lazy" onload="this.parentElement.classList.remove('skeleton')" />
         </div>
