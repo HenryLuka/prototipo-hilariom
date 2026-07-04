@@ -43,6 +43,36 @@ export default defineConfig({
       workbox: {
         navigateFallback: '/prototipo-hilariom/',
         globPatterns: ['**/*.{css,js,html,svg,png,webp,avif,ico,txt}'],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'unsplash-images-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 dias
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            urlPattern: /^https:\/\/www\.galleon\.com\.br\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'galleon-images-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 dias
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          }
+        ]
       },
     }),
     compress({
