@@ -1,0 +1,56 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import '../styles/global.css';
+import BottomNav from '../components/BottomNav.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Fab from '../components/Fab.astro';
+import CtaOrcamento from '../components/CtaOrcamento.astro';
+
+interface Props {
+  title: string;
+  hideCta?: boolean;
+}
+
+const { title, hideCta = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Ferramenta de vendas Hilariom - Estruturas Pré-fabricadas" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>{title} | Hilariom App</title>
+    
+    <!-- Google Analytics (GA4) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+      
+      // Global event tracking function
+      window.trackEvent = function(eventName, eventParams) {
+        gtag('event', eventName, eventParams);
+      };
+    </script>
+    
+    <ViewTransitions />
+    <script src="/src/pwa.ts"></script>
+  </head>
+  <body>
+    <main class="page-container" transition:animate="slide">
+      <slot />
+      {!hideCta && <CtaOrcamento />}
+    </main>
+    
+    <Fab />
+    <BottomNav />
+  </body>
+</html>
+

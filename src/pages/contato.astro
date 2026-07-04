@@ -1,0 +1,285 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contato e Orçamento" hideCta={true}>
+  <div class="header-spacing"></div>
+  
+  <header class="page-header">
+    <div class="header-content">
+      <div class="accent-line"></div>
+      <h1 class="fade-in-up">Fale <span class="text-yellow">Conosco</span></h1>
+      <p class="fade-in-up delay-1 text-light">Vamos construir juntos. Entre em contato para orçamentos e mais informações.</p>
+    </div>
+    
+    <!-- Abstract structural background -->
+    <div class="structural-bg">
+      <svg width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,200 L100,100 L150,200 Z" fill="rgba(252, 232, 131, 0.05)" />
+        <path d="M200,200 L300,50 L400,200 Z" fill="rgba(252, 232, 131, 0.03)" />
+        <line x1="50" y1="0" x2="50" y2="200" stroke="rgba(252, 232, 131, 0.1)" stroke-width="2" />
+        <line x1="250" y1="0" x2="250" y2="200" stroke="rgba(252, 232, 131, 0.1)" stroke-width="2" />
+        <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(252, 232, 131, 0.1)" stroke-width="2" />
+      </svg>
+    </div>
+  </header>
+
+  <section class="contact-section fade-in-up delay-2">
+    <!-- WhatsApp Direct Button -->
+    <a href="https://api.whatsapp.com/send?phone=5511989652498&text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento" class="whatsapp-btn hover-scale" target="_blank" rel="noopener">
+      <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+      <div class="btn-text">
+        <strong>Fale via WhatsApp</strong>
+        <span>Resposta rápida</span>
+      </div>
+      <span class="arrow">&rarr;</span>
+    </a>
+
+    <div class="divider">ou envie uma mensagem</div>
+
+    <!-- Contact Form -->
+    <form class="contact-form glass-panel">
+      <div class="form-group">
+        <label for="name">Nome completo</label>
+        <input type="text" id="name" placeholder="Ex: João da Silva" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="joao@empresa.com" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Telefone</label>
+        <input type="tel" id="phone" placeholder="(11) 99999-9999" required />
+      </div>
+
+      <div class="form-group">
+        <label for="message">Mensagem ou Detalhes da Obra</label>
+        <textarea id="message" rows="4" placeholder="Descreva sua necessidade..."></textarea>
+      </div>
+
+      <button type="button" class="submit-btn hover-scale" onclick="alert('Formulário enviado com sucesso! (Simulação)')">Solicitar Orçamento</button>
+    </form>
+    
+    <!-- Social links -->
+    <div class="social-links">
+      <a href="https://www.linkedin.com/company/hilariom-pr%C3%A9-fabricados/" target="_blank" rel="noopener" class="social-icon hover-scale" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="https://www.facebook.com/hilariomprefabricados" target="_blank" rel="noopener" class="social-icon hover-scale" aria-label="Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+      </a>
+      <a href="https://www.instagram.com/hilariom.prefab" target="_blank" rel="noopener" class="social-icon hover-scale" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .header-spacing { height: 60px; background: #1a1a1a; }
+  
+  .page-header {
+    position: relative;
+    padding: 2.5rem 1.5rem 2rem;
+    background-color: #1a1a1a;
+    color: white;
+    overflow: hidden;
+  }
+  
+  .header-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .accent-line {
+    width: 80px;
+    height: 4px;
+    background-color: #fce883;
+    margin-bottom: 1rem;
+  }
+  
+  .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .text-yellow {
+    color: #fce883;
+  }
+
+  .text-light { 
+    color: #a0a0a0; 
+    font-size: 1.15rem;
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  .structural-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 { font-size: 2.2rem; }
+  }
+
+  .text-muted { color: var(--text-muted); }
+
+  .contact-section {
+    padding: 1.5rem 1.5rem 3rem;
+  }
+
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    background: #25D366;
+    color: white;
+    padding: 1rem 1.25rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    margin-bottom: 1.5rem;
+  }
+
+  .whatsapp-btn .icon {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+  }
+
+  .whatsapp-btn .btn-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .whatsapp-btn .btn-text strong {
+    font-size: 1.1rem;
+  }
+
+  .whatsapp-btn .btn-text span {
+    font-size: 0.8rem;
+    opacity: 0.9;
+  }
+
+  .whatsapp-btn .arrow {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .divider {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 1.5rem 0;
+    position: relative;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 25%;
+    height: 1px;
+    background: var(--border-color);
+  }
+
+  .divider::before { left: 0; }
+  .divider::after { right: 0; }
+
+  .contact-form {
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+  }
+
+  .form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    background: #fdfdfd;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 52, 50, 0.1);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--surface-color);
+    color: var(--primary-color);
+    font-weight: bold;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+
+  /* Utilities */
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+
+

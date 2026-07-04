@@ -1,0 +1,179 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Trabalhe Conosco">
+  <div class="header-spacing"></div>
+  
+  <header class="page-header">
+    <h1 class="fade-in-up">Trabalhe Conosco</h1>
+    <p class="fade-in-up delay-1 text-muted">Faça parte da nossa equipe.</p>
+  </header>
+
+  <section class="careers-section fade-in-up delay-2">
+    <div class="intro glass-panel">
+      <p>A Hilariom está em constante crescimento e busca profissionais talentosos para fazer parte da nossa história de sucesso na construção civil.</p>
+    </div>
+
+    <form class="resume-form glass-panel">
+      <h3 class="form-title">Envie seu Currículo</h3>
+      
+      <div class="form-group">
+        <label for="name">Nome completo</label>
+        <input type="text" id="name" placeholder="Ex: Maria Silva" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="maria@email.com" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="area">Área de Interesse</label>
+        <select id="area" required>
+          <option value="" disabled selected>Selecione uma área</option>
+          <option value="engenharia">Engenharia</option>
+          <option value="producao">Produção / Fábrica</option>
+          <option value="comercial">Comercial</option>
+          <option value="administrativo">Administrativo</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="resume">Anexar Currículo (PDF)</label>
+        <div class="file-upload">
+          <input type="file" id="resume" accept=".pdf" required />
+          <div class="upload-btn">Escolher arquivo</div>
+        </div>
+      </div>
+
+      <button type="button" class="submit-btn hover-scale" onclick="alert('Currículo enviado com sucesso! (Simulação)')">Enviar Currículo</button>
+    </form>
+  </section>
+
+</Layout>
+
+<style>
+  .header-spacing { height: 40px; }
+  .page-header { padding: 1rem 1.5rem; }
+  .page-header h1 { font-size: 2rem; color: var(--primary-color); }
+  .text-muted { color: var(--text-muted); }
+
+  .careers-section {
+    padding: 1rem 1.5rem 3rem;
+  }
+
+  .intro {
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    background: var(--surface-color);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--primary-color);
+  }
+
+  .intro p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-main);
+  }
+
+  .resume-form {
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    background: var(--surface-color);
+  }
+
+  .form-title {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+  }
+
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    background: #fdfdfd;
+    transition: all 0.2s;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 52, 50, 0.1);
+  }
+
+  .file-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .file-upload input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    height: 100%;
+  }
+
+  .upload-btn {
+    border: 2px dashed var(--border-color);
+    color: var(--text-muted);
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    margin-top: 1rem;
+  }
+
+  /* Utilities */
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+
+
+

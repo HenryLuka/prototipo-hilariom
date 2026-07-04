@@ -1,0 +1,24 @@
+{
+  "name": "prototipo-vinicius",
+  "version": "1.0.0",
+  "description": "Mobile First PWA",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@vite-pwa/astro": "^1.2.0",
+    "astro": "^5.18.2",
+    "astro-compress": "^2.4.1",
+    "typescript": "^6.0.3",
+    "workbox-window": "^7.4.1"
+  }
+}

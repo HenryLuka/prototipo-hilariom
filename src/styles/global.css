@@ -1,0 +1,153 @@
+:root {
+  --primary-color: #343432; /* (texto, headlines) */
+  --secondary-color: #F7F7F6; /* (cards, seções alternadas) */
+  --accent-color: #FBF38E; /* (CTAs, ícones, destaques) */
+  --bg-color: #FFFFFF; /* (background principal) */
+  --surface-color: #F7F7F6; /* (cards, seções alternadas) */
+  --text-main: #343432;
+  --text-muted: #929291; /* (subtítulos, taglines) */
+  --border-color: #EAEAEA;
+  --hover-color: #F7F5D3; /* (hover, transição) */
+  
+  --nav-height: 64px;
+  
+  /* Typography */
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Shadows & Radius */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.04);
+  --border-radius: 16px;
+  --border-radius-lg: 28px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-family: var(--font-family);
+  background-color: #e0e0e0; /* Desktop background, to constrain app container */
+  color: var(--text-main);
+  
+  /* Hiding scrollbars for app-like feel */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+body {
+  margin: 0 auto;
+  max-width: 480px; /* Constrain to mobile app width */
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Skeleton Loading Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skeleton {
+  background: #f6f7f8;
+  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 100%; 
+  animation: shimmer 1.5s linear infinite forwards;
+  will-change: background-position;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Micro-animations */
+.hover-scale {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.hover-scale:active {
+  transform: scale(0.96);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.page-container {
+  padding-bottom: calc(var(--nav-height) + 20px);
+  flex: 1;
+}
+
+/* Desktop App Layout */
+@media (min-width: 768px) {
+  body {
+    max-width: 100%;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--surface-color); /* Fundo sutil atrás do container */
+    box-shadow: none; /* Remove lag on desktop */
+  }
+  
+  .page-container {
+    padding-bottom: calc(var(--nav-height) + 20px);
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--bg-color);
+  }
+
+  /* Limitar a largura do conteúdo para facilitar a leitura */
+  .page-container > * {
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* O Hero e Cabeçalhos devem continuar ocupando toda a largura */
+  .page-container > .hero,
+  .page-container > .page-header,
+  .page-container > .obra-hero,
+  .page-container > .product-hero {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin: 1.5rem 1rem 1rem;
+  color: var(--primary-color);
+}

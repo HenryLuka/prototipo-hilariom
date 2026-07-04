@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Apresentação Comercial">
+  <div class="header-spacing"></div>
+  
+  <header class="page-header">
+    <h1 class="fade-in-up">Apresentação</h1>
+    <p class="fade-in-up delay-1 text-muted">Baixe ou compartilhe nosso portfólio completo.</p>
+  </header>
+
+  <section class="presentation-section fade-in-up delay-2">
+    <div class="pdf-preview glass-panel skeleton">
+      <div class="preview-content">
+        <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+        <h2>Apresentação Hilariom 2026</h2>
+        <p>PDF • 5.2 MB</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=400&auto=format&fit=crop" alt="Capa da Apresentação" onload="this.parentElement.classList.remove('skeleton')" />
+    </div>
+
+    <div class="actions">
+      <a href="/apresentacao-Hilariom.pdf" download class="btn btn-primary hover-scale" onclick="window.trackEvent && window.trackEvent('download_pdf', { source: 'apresentacao' })">
+        <span class="icon" style="display:flex"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span> Baixar PDF
+      </a>
+      
+      <a href="https://wa.me/?text=Confira%20a%20apresentação%20comercial%20da%20Hilariom:%20https://Hilariom.com.br/apresentacao" target="_blank" rel="noopener" class="btn btn-whatsapp hover-scale">
+        <span class="icon" style="display:flex"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span> Compartilhar no WhatsApp
+      </a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .header-spacing { height: 40px; }
+  .page-header { padding: 1rem 1.5rem; }
+  .page-header h1 { font-size: 2rem; color: var(--primary-color); }
+  .text-muted { color: var(--text-muted); }
+
+  .presentation-section {
+    padding: 1rem 1.5rem 3rem;
+  }
+
+  .pdf-preview {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .pdf-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+  }
+
+  .preview-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    width: 80%;
+  }
+
+  .preview-content .icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .preview-content h2 {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-primary {
+    background: var(--accent-color);
+    color: var(--primary-color);
+  }
+
+  .btn-whatsapp {
+    background: #25D366;
+    color: white;
+  }
+
+  /* Utilities */
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+
+
+

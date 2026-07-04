@@ -1,0 +1,241 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { produtos } from '../../data/produtos.js';
+
+export function getStaticPaths() {
+  return produtos.map((produto) => ({
+    params: { id: produto.id },
+    props: { produto },
+  }));
+}
+
+const { produto } = Astro.props;---
+
+<Layout title={`${produto.title} | Hilariom`}>
+  <div class="product-hero">
+    <div class="hero-overlay"></div>
+    <img src={produto.img} alt={produto.title} class="hero-bg" style="object-fit: contain; background: var(--surface-color);" />
+    
+    <div class="top-actions">
+      <a href="/produtos" class="back-btn glass-panel hover-scale">
+        <span class="icon">←</span> Voltar
+      </a>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="fade-in-up">{produto.title}</h1>
+      <p class="fade-in-up delay-1 text-muted-light" style="color: var(--text-main);">Estruturas de alta resistência e versatilidade.</p>
+    </div>
+  </div>
+
+  <section class="product-details fade-in-up delay-2">
+    <div class="content-body">
+      <h3>Descrição</h3>
+      <p>{produto.desc}</p>
+    </div>
+    
+    <div class="content-body">
+      <h3>Dados Técnicos</h3>
+      <ul class="tech-list">
+        <li><strong>Fck (Resistência):</strong> 40 a 60 MPa</li>
+        <li><strong>Seções:</strong> Retangulares, quadradas ou circulares</li>
+        <li><strong>Consolos:</strong> Concretados junto com a peça</li>
+        <li><strong>Acabamento:</strong> Liso de forma metálica</li>
+      </ul>
+    </div>
+
+    <div class="content-body">
+      <h3>Obras que utilizaram</h3>
+      <div class="related-works">
+        <a href="/obras/detalhe" class="work-card skeleton">
+          <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=300&auto=format&fit=crop" alt="Obra 1" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+          <div class="work-title glass-panel">Galpão Logístico SP</div>
+        </a>
+        <a href="/obras/detalhe" class="work-card skeleton">
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=300&auto=format&fit=crop" alt="Obra 2" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+          <div class="work-title glass-panel">Fábrica Automotiva</div>
+        </a>
+      </div>
+    </div>
+    
+    <div class="cta-container">
+      <a href="/contato" class="btn btn-primary hover-scale">Solicitar Cotação para esta Peça</a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .product-hero {
+    position: relative;
+    height: 40vh;
+    min-height: 300px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+    z-index: 2;
+  }
+
+  .top-actions {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10;
+  }
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 2rem 1.5rem;
+    color: white;
+    width: 100%;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .text-muted-light {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+  }
+
+  .product-details {
+    padding: 1.5rem;
+  }
+
+  .content-body {
+    margin-bottom: 2rem;
+  }
+
+  .content-body h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    border-bottom: 4px solid var(--accent-color);
+    display: inline-block;
+    padding-bottom: 0.25rem;
+  }
+
+  .content-body p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .tech-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tech-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  
+  .tech-list li:last-child {
+    border-bottom: none;
+  }
+
+  .tech-list li strong {
+    color: var(--text-main);
+  }
+
+  .related-works {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .work-card {
+    min-width: 80%;
+    scroll-snap-align: center;
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .work-card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+
+  .work-title {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: center;
+  }
+  
+  .cta-container {
+    margin-top: 1rem;
+  }
+
+  .btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Utilities */
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+
+

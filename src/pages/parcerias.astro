@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const parceiros = [
+  { name: 'Votorantim Cimentos', time: '15 anos', logo: 'https://via.placeholder.com/150x80/f0f0f0/999999?text=Logo+A' },
+  { name: 'Gerdau', time: '12 anos', logo: 'https://via.placeholder.com/150x80/f0f0f0/999999?text=Logo+B' },
+  { name: 'ArcelorMittal', time: '10 anos', logo: 'https://via.placeholder.com/150x80/f0f0f0/999999?text=Logo+C' },
+  { name: 'Tigre', time: '8 anos', logo: 'https://via.placeholder.com/150x80/f0f0f0/999999?text=Logo+D' },
+];
+---
+
+<Layout title="Parcerias de Sucesso">
+  <div class="header-spacing"></div>
+  
+  <header class="page-header">
+    <h1 class="fade-in-up">Parcerias</h1>
+    <p class="fade-in-up delay-1 text-muted">Junto aos melhores fornecedores do mercado.</p>
+  </header>
+
+  <section class="partners-grid fade-in-up delay-2">
+    {parceiros.map((p) => (
+      <div class="partner-card glass-panel">
+        <img src={p.logo} alt={p.name} loading="lazy" />
+        <div class="partner-info">
+          <h4>{p.name}</h4>
+          <span class="badge">{p.time} de parceria</span>
+        </div>
+      </div>
+    ))}
+  </section>
+
+</Layout>
+
+<style>
+  .header-spacing { height: 40px; }
+  .page-header { padding: 1rem 1.5rem; }
+  .page-header h1 { font-size: 2rem; color: var(--primary-color); }
+  .text-muted { color: var(--text-muted); }
+
+  .partners-grid {
+    padding: 1rem 1.5rem 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .partner-card {
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .partner-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.2s;
+  }
+
+  .partner-card:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  .partner-info h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+  }
+
+  .badge {
+    background: #e0f2f1;
+    color: #00796b;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  /* Utilities */
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+

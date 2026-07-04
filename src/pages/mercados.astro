@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const markets = [
+  { 
+    id: 'industrial', 
+    title: 'Industrial', 
+    desc: 'Estruturas de alta resistência para galpões e fábricas.',
+    img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=600&auto=format&fit=crop',
+    color: '#3949ab'
+  },
+  { 
+    id: 'comercial', 
+    title: 'Comercial', 
+    desc: 'Versatilidade e estética para shoppings e escritórios.',
+    img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600&auto=format&fit=crop',
+    color: '#00897b'
+  },
+  { 
+    id: 'logistica', 
+    title: 'Logística', 
+    desc: 'Grandes vãos livres para centros de distribuição.',
+    img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=600&auto=format&fit=crop',
+    color: '#f4511e'
+  },
+  { 
+    id: 'agronegocio', 
+    title: 'Agronegócio', 
+    desc: 'Silos e armazéns projetados para o campo.',
+    img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop',
+    color: '#43a047'
+  }
+];
+---
+
+<Layout title="Mercados de Atuação">
+  <div class="header-spacing"></div>
+  
+  <header class="page-header">
+    <h1 class="fade-in-up">Mercados de Atuação</h1>
+    <p class="fade-in-up delay-1 text-muted">Soluções ideais para o seu setor.</p>
+  </header>
+
+  <section class="markets-list">
+    {markets.map((m, index) => (
+      <div class={`market-card fade-in-up delay-${(index % 3) + 1}`} style={`--market-color: ${m.color}`}>
+        <div class="market-img skeleton">
+          <img src={m.img} alt={m.title} loading="lazy" onload="this.parentElement.classList.remove('skeleton')" />
+          <div class="market-overlay"></div>
+          <h2 class="market-title">{m.title}</h2>
+        </div>
+        <div class="market-content">
+          <p>{m.desc}</p>
+          <div class="market-actions">
+            <a href={`/obras?segment=${m.id}`} class="btn btn-outline">Ver Obras</a>
+            <a href="/produtos" class="btn btn-solid">Produtos</a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </section>
+
+</Layout>
+
+<style>
+  .header-spacing { height: 40px; }
+  
+  .page-header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+  }
+  
+  .text-muted { color: var(--text-muted); }
+
+  .markets-list {
+    padding: 1rem 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .market-card {
+    background: var(--surface-color);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s;
+  }
+
+  .market-card:active {
+    transform: scale(0.98);
+  }
+
+  .market-img {
+    position: relative;
+    height: 180px;
+  }
+
+  .market-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .market-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  }
+
+  .market-title {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    color: white;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .market-content {
+    padding: 1.25rem;
+  }
+
+  .market-content p {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    margin-bottom: 1.25rem;
+  }
+
+  .market-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .btn-solid {
+    background: var(--market-color);
+    color: white;
+  }
+
+  .btn-outline {
+    border: 1.5px solid var(--border-color);
+    color: var(--text-main);
+  }
+
+  /* Utilities */
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+

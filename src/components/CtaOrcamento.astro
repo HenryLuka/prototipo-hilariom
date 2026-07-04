@@ -1,0 +1,187 @@
+---
+interface Props {
+  text?: string;
+  buttonText?: string;
+}
+
+const { text = "Pronto para iniciar seu projeto com qualidade garantida?", buttonText = "Solicitar Orçamento" } = Astro.props;
+---
+
+<div class="cta-contextual">
+  <div class="cta-content premium-panel">
+    <div class="structural-accent"></div>
+    <div class="cta-bg-pattern">
+      <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="diagonal-stripes" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="10" stroke="rgba(252, 232, 131, 0.03)" stroke-width="3" />
+          </pattern>
+        </defs>
+        <rect width="100" height="100" fill="url(#diagonal-stripes)" />
+        <line x1="0" y1="100" x2="100" y2="0" stroke="rgba(252, 232, 131, 0.05)" stroke-width="1" />
+        <line x1="20" y1="100" x2="100" y2="20" stroke="rgba(252, 232, 131, 0.02)" stroke-width="0.5" />
+      </svg>
+    </div>
+    
+    <div class="cta-inner">
+      <span class="cta-tag">Conecte-se com Especialistas</span>
+      <h3>{text}</h3>
+      <a href="/contato" class="btn btn-premium-cta">
+        <span>{buttonText}</span>
+        <span class="btn-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cta-contextual {
+    padding: 2.5rem 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .premium-panel {
+    position: relative;
+    background: linear-gradient(135deg, #1e1e1e 0%, #111111 100%);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(252, 232, 131, 0.1) inset;
+    overflow: hidden;
+    border: 1px solid rgba(252, 232, 131, 0.05);
+  }
+
+  .structural-accent {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background-color: #fce883; /* Brand yellow */
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 0 15px rgba(252, 232, 131, 0.4);
+  }
+
+  .cta-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fce883;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .cta-content h3 {
+    font-size: 1.6rem;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .btn-premium-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.1rem 2.5rem;
+    background-color: #fce883;
+    color: #111111;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(252, 232, 131, 0.3);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-decoration: none;
+    overflow: hidden;
+  }
+
+  .btn-premium-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: all 0.6s ease;
+  }
+
+  .btn-premium-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(252, 232, 131, 0.5);
+    background-color: #ffe875;
+  }
+
+  .btn-premium-cta:hover::before {
+    left: 100%;
+  }
+
+  .btn-premium-cta:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(252, 232, 131, 0.3);
+  }
+
+  .btn-icon {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-premium-cta:hover .btn-icon {
+    transform: translateX(4px);
+  }
+
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .cta-contextual {
+      padding: 1.5rem 1rem;
+    }
+    
+    .premium-panel {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .cta-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-premium-cta {
+      width: 100%;
+      padding: 1rem;
+      font-size: 0.95rem;
+    }
+  }
+</style>

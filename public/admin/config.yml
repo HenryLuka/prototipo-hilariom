@@ -1,0 +1,32 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/assets/images"
+public_folder: "../assets/images"
+
+collections:
+  - name: "obras"
+    label: "Obras Realizadas"
+    folder: "src/content/obras"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Segmento", name: "segmento", widget: "select", options: ["Industrial", "Comercial", "Logística", "Agronegócio", "Institucionais", "Garagens"]}
+      - {label: "Foto Hero", name: "image", widget: "image"}
+      - {label: "Volume (m³)", name: "volume", widget: "string", required: false}
+      - {label: "Prazo", name: "prazo", widget: "string", required: false}
+      - {label: "Local", name: "local", widget: "string"}
+      - {label: "Corpo de Texto", name: "body", widget: "markdown"}
+
+  - name: "produtos"
+    label: "Produtos / Peças"
+    folder: "src/content/produtos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nome da Peça", name: "title", widget: "string"}
+      - {label: "Foto Principal", name: "image", widget: "image"}
+      - {label: "Dados Técnicos", name: "tecnicos", widget: "text", required: false}
+      - {label: "Descrição", name: "body", widget: "markdown"}

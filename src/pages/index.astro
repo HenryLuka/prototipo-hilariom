@@ -1,0 +1,1039 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Quick Access data
+const fastAccess = [
+  { label: 'Quem Somos', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>', href: '/sobre' },
+  { label: 'Obras', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/></svg>', href: '/obras' },
+  { label: 'Produtos', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>', href: '/produtos' },
+  { label: 'Orçamento', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>', href: '/contato' },
+];
+
+// Stats
+const stats = [
+  { value: '30+', label: 'Anos de Mercado' },
+  { value: '5k+', label: 'Obras Entregues' },
+  { value: '100%', label: 'Garantia de Qualidade' },
+];
+
+// Markets
+const markets = [
+  { title: 'Industrial', desc: 'Galpões e fábricas de alta resistência', img: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=600&auto=format&fit=crop', href: '/mercados' },
+  { title: 'Comercial', desc: 'Shoppings, escritórios e sedes', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600&auto=format&fit=crop', href: '/mercados' },
+  { title: 'Logística', desc: 'Centros de distribuição com grandes vãos', img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=600&auto=format&fit=crop', href: '/mercados' },
+  { title: 'Agronegócio', desc: 'Silos e armazéns para o campo', img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop', href: '/mercados' },
+];
+
+// Featured works
+const featuredWorks = [
+  { title: 'Galpão Logístico SP', local: 'Guarulhos, SP', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=600&auto=format&fit=crop' },
+  { title: 'Fábrica Automotiva', local: 'Mogi das Cruzes, SP', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600&auto=format&fit=crop' },
+  { title: 'Sede Comercial', local: 'São José dos Campos, SP', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600&auto=format&fit=crop' },
+  { title: 'Armazém de Grãos', local: 'Ribeirão Preto, SP', img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop' },
+];
+
+// Processos
+const processos = [
+  { id: 1, title: 'VISITA TÉCNICA', desc: 'Reconhecimento do terreno e premissas para próximas etapas', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M12 2a5 5 0 0 0-5 5v2a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"></path><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path></svg>' },
+  { id: 2, title: 'LEVANTAMENTO TOPOGRÁFICO', desc: 'Conferência de medidas e limites do terreno', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>' },
+  { id: 3, title: 'PRÉ-FORMA', desc: 'Aprovação da locação da obra', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>' },
+  { id: 4, title: 'LOCAÇÃO E EXECUÇÃO', desc: 'Locação do posicionamento de cada estaca da fundação profunda e execução', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>' },
+  { id: 5, title: 'FUNDAÇÃO', desc: 'Execução dos blocos de fundação e vigas baldrames', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>' },
+  { id: 6, title: 'ACESSO', desc: 'Terreno nivelado, compactado e com agregados permitindo a circulação de veículos de monatagem', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle><path d="M5 17H3v-6l2-5h9l4 5h3v6h-2"></path></svg>' },
+  { id: 7, title: 'MONTAGEM', desc: 'Posicionamento e montagem das peças estruturais', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>' },
+  { id: 8, title: 'COBERTURA', desc: 'Posicionamento e montagem das peças de cobertura', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' },
+  { id: 9, title: 'FECHAMENTO', desc: 'Fechamento da obra', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>' },
+  { id: 10, title: 'ENTREGA DA OBRA', desc: 'Finalização de todas as etapas e conclusão da obra', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>' },
+];
+
+import { produtos } from '../data/produtos.js';
+---
+
+<Layout title="Home">
+  <!-- 1. HERO FULL-SCREEN -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop" alt="Fábrica Hilariom - Estruturas Pré-fabricadas" class="hero-bg" />
+    <div class="hero-text">
+      <div class="logo-hero-container fade-in-up">
+        <img src="/logo.png?v=2" alt="Hilariom - Soluções em Métodos Construtivos" class="hero-logo" />
+      </div>
+      <a href="/contato" class="hero-cta fade-in-up delay-1">
+        <svg class="cta-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="2" width="16" height="20" rx="3" ry="3"></rect>
+          <rect x="8" y="6" width="8" height="4" rx="1" ry="1"></rect>
+          <line x1="8" y1="14" x2="8.01" y2="14"></line>
+          <line x1="12" y1="14" x2="12.01" y2="14"></line>
+          <line x1="16" y1="14" x2="16.01" y2="14"></line>
+          <line x1="8" y1="18" x2="8.01" y2="18"></line>
+          <line x1="12" y1="18" x2="12.01" y2="18"></line>
+          <line x1="16" y1="18" x2="16.01" y2="18"></line>
+        </svg>
+        <span>Solicite um <strong>ORÇAMENTO</strong></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 2. ACESSO RÁPIDO -->
+  <section class="quick-access">
+    <div class="grid-4">
+      {fastAccess.map((item) => (
+        <a href={item.href} class="quick-btn hover-scale">
+          <span class="icon" set:html={item.icon}></span>
+          <span class="label">{item.label}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- 3. NÚMEROS DE IMPACTO -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      {stats.map((stat) => (
+        <div class="stat-card">
+          <div class="stat-value">{stat.value}</div>
+          <div class="stat-label">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 4. QUEM SOMOS (NARRATIVA) -->
+  <section class="about-preview">
+    <div class="about-img-wrapper skeleton">
+      <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=600&auto=format&fit=crop" alt="Fábrica Hilariom" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+    </div>
+    <div class="about-text">
+      <h2 class="section-title">Quem Somos</h2>
+      <p>Com mais de <strong>30 anos de experiência</strong>, a Hilariom é referência em soluções construtivas de alta performance. Nossa fábrica é equipada com tecnologia de ponta para produzir estruturas pré-fabricadas que entregam <strong>agilidade, economia e durabilidade</strong> em cada projeto.</p>
+      <a href="/sobre" class="link-more">Conheça nossa história →</a>
+    </div>
+  </section>
+
+  <!-- 5. MERCADOS DE ATUAÇÃO -->
+  <section class="markets-preview">
+    <h2 class="section-title">Mercados de Atuação</h2>
+    <p class="section-subtitle">Soluções sob medida para cada segmento</p>
+    <div class="scroll-container">
+      <button class="scroll-btn left" aria-label="Rolar para esquerda"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <div class="markets-scroll scroll-area">
+        {markets.map((m) => (
+          <a href={m.href} class="market-card hover-scale">
+            <div class="market-img skeleton">
+              <img src={m.img} alt={m.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+              <div class="market-overlay-card"></div>
+            </div>
+            <div class="market-label">
+              <h3>{m.title}</h3>
+              <p>{m.desc}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+      <button class="scroll-btn right" aria-label="Rolar para direita"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+    </div>
+  </section>
+
+  <!-- 6. OBRAS EM DESTAQUE -->
+  <section class="obras-preview">
+    <h2 class="section-title">Obras em Destaque</h2>
+    <p class="section-subtitle">Projetos que constroem a nossa reputação</p>
+    <div class="obras-grid">
+      {featuredWorks.map((work) => (
+        <a href="/obras/detalhe" class="obra-thumb hover-scale">
+          <div class="obra-thumb-img skeleton">
+            <img src={work.img} alt={work.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+            <div class="obra-thumb-overlay"></div>
+          </div>
+          <div class="obra-thumb-info">
+            <h3>{work.title}</h3>
+            <span class="obra-local">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              {work.local}
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="see-all-wrapper">
+      <a href="/obras" class="link-more">Ver todas as obras →</a>
+    </div>
+  </section>
+
+  <!-- NOVO: PROCESSOS HILARIOM -->
+  <section class="processos-preview">
+    <h2 class="section-title">Processos Hilariom</h2>
+    <p class="section-subtitle">Acompanhe as etapas de excelência de nossos métodos construtivos</p>
+    <div class="scroll-container">
+      <button class="scroll-btn left" aria-label="Rolar para esquerda"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <div class="processos-scroll scroll-area">
+        {processos.map((p) => (
+          <div class="processo-card">
+            <div class="processo-accent"></div>
+            <div class="processo-number-wrapper">
+              <div class="processo-number">{p.id}</div>
+            </div>
+            <div class="processo-content">
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </div>
+            <div class="processo-icon">
+              <span set:html={p.icon}></span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button class="scroll-btn right" aria-label="Rolar para direita"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+    </div>
+  </section>
+
+  <!-- 7. CATÁLOGO DE PEÇAS -->
+  <section class="pecas-preview">
+    <h2 class="section-title">Nossas Peças</h2>
+    <p class="section-subtitle">Conheça cada componente das nossas estruturas</p>
+    <div class="scroll-container">
+      <button class="scroll-btn left" aria-label="Rolar para esquerda"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <div class="pecas-scroll scroll-area">
+        {produtos.slice(0,6).map((p) => (
+          <a href={`/produtos/${p.id}`} class="peca-card hover-scale">
+            <div class="peca-img skeleton">
+              <img src={p.img} alt={p.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+            </div>
+            <span class="peca-title">{p.title}</span>
+          </a>
+        ))}
+      </div>
+      <button class="scroll-btn right" aria-label="Rolar para direita"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+    </div>
+  </section>
+
+  <!-- 8. RAIO DE ATUAÇÃO -->
+  <section class="raio-preview">
+    <div class="raio-card">
+      <div class="raio-visual">
+        <div class="raio-dot"><span class="pulse"></span></div>
+        <div class="raio-circle"></div>
+      </div>
+      <div class="raio-text">
+        <h2 class="section-title">Raio de Atuação</h2>
+        <p>Nossa fábrica está estrategicamente localizada para atender num raio de até <strong>500km</strong>, cobrindo SP, RJ, MG e PR.</p>
+        <a href="/atuacao" class="link-more">Ver cobertura completa →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. PAINEL DE CONTATO -->
+  <section class="contato-panel">
+    <h2 class="section-title">Fale Conosco</h2>
+    <p class="section-subtitle">Escolha o canal que preferir</p>
+    
+    <div class="contact-grid">
+      <a href="https://api.whatsapp.com/send?phone=5511989652498&text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento" target="_blank" rel="noopener" class="contact-btn whatsapp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <a href="https://www.instagram.com/hilariom.prefab" target="_blank" rel="noopener" class="contact-btn instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <span>Instagram</span>
+      </a>
+      <a href="tel:+5511989652498" class="contact-btn telefone">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>Telefone</span>
+      </a>
+      <a href="mailto:contato@hilariom.com.br" class="contact-btn email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span>E-mail</span>
+      </a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* ===== 1. HERO ===== */
+  .hero {
+    position: relative;
+    height: 55vh;
+    min-height: 380px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(52,52,50,0.85) 70%);
+    z-index: 2;
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 3;
+    padding: 2.5rem 1.5rem;
+    color: white;
+    width: 100%;
+  }
+
+  .logo-hero-container {
+    max-width: 320px;
+    margin: 0 0 1.25rem 0; /* Left alignment and closer to the button */
+  }
+
+  .hero-logo {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45)); /* Give it a shadow so it pops against the background */
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.75rem;
+    background: #fce883; /* Brand yellow */
+    color: #1a1a1a; /* Dark text */
+    border: none;
+    border-radius: 8px; /* Slightly squarer for tech/engineering look */
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 6px 20px rgba(252, 232, 131, 0.3);
+  }
+
+  .hero-cta strong {
+    font-weight: 900;
+  }
+
+  .cta-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .hero-cta:hover {
+    background: #f7e06a; /* Slightly brighter/solid on hover */
+    color: #1a1a1a;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(252, 232, 131, 0.5);
+  }
+
+  .hero-cta:hover .cta-icon {
+    transform: scale(1.1) rotate(-3deg);
+  }
+
+  .hero-cta:active {
+    transform: scale(0.97) translateY(0);
+  }
+
+  /* ===== 2. QUICK ACCESS ===== */
+  .quick-access {
+    margin-top: -28px;
+    position: relative;
+    z-index: 10;
+    padding: 0 1rem;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  .quick-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 0.25rem;
+    border-radius: var(--border-radius);
+    background: #FFFFFF;
+    color: var(--primary-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+  }
+
+  .quick-btn .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    margin-bottom: 0.4rem;
+  }
+
+  .quick-btn .label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* ===== 3. STATS ===== */
+  .stats-section {
+    padding: 2rem 1rem;
+  }
+
+  .stats-grid {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .stat-card {
+    text-align: center;
+    flex: 1;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .stat-card:last-child { border-right: none; }
+
+  .stat-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* ===== 4. QUEM SOMOS ===== */
+  .about-preview {
+    padding: 0 1.5rem 2rem;
+  }
+
+  .about-img-wrapper {
+    width: 100%;
+    height: 200px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .link-more {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: gap 0.2s;
+  }
+
+  .link-more:active {
+    gap: 0.5rem;
+  }
+
+  /* ===== 5. MERCADOS ===== */
+  .markets-preview {
+    padding: 1rem 1.5rem 2rem;
+  }
+
+  .markets-scroll, .processos-scroll, .pecas-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+  }
+  
+  @media (min-width: 768px) {
+    .markets-scroll, .processos-scroll {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow-x: visible;
+    }
+    .pecas-scroll {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      overflow-x: visible;
+    }
+    /* Hide scroll buttons on desktop since it's a grid now */
+    .scroll-btn {
+      display: none !important;
+    }
+  }
+
+  .markets-scroll::-webkit-scrollbar { display: none; }
+
+  .market-card {
+    flex: 0 0 auto;
+    min-width: 70%;
+    scroll-snap-align: center;
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+  }
+  
+  @media (min-width: 768px) {
+    .market-card {
+      min-width: 0;
+    }
+  }
+
+  .market-img {
+    position: relative;
+    height: 140px;
+  }
+
+  .market-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  .market-overlay-card {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  }
+
+  .market-label {
+    padding: 1rem;
+    background: var(--surface-color);
+  }
+
+  .market-label h3 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+  }
+
+  .market-label p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* ===== 6. OBRAS ===== */
+  .obras-preview {
+    padding: 1rem 1.5rem 2rem;
+  }
+
+  .obras-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 768px) {
+    .obras-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .obra-thumb {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+  }
+
+  .obra-thumb-img {
+    position: relative;
+    aspect-ratio: 3/4;
+  }
+
+  .obra-thumb-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  .obra-thumb-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 70%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  }
+
+  .obra-thumb-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 0.75rem;
+    z-index: 2;
+  }
+
+  .obra-thumb-info h3 {
+    font-size: 0.85rem;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+  }
+
+  .obra-local {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .see-all-wrapper {
+    text-align: center;
+    padding-top: 0.5rem;
+  }
+
+  /* ===== 7. PEÇAS ===== */
+  .pecas-preview {
+    padding: 1rem 1.5rem 2rem;
+  }
+
+  .pecas-scroll::-webkit-scrollbar { display: none; }
+
+  .peca-card {
+    flex: 0 0 auto;
+    min-width: 45%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+  
+  @media (min-width: 768px) {
+    .peca-card {
+      min-width: 0;
+    }
+  }
+
+  .peca-img {
+    width: 130px;
+    height: 130px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .peca-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  .peca-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: center;
+    display: block;
+  }
+
+  /* ===== 8. RAIO ===== */
+  .raio-preview {
+    padding: 1rem 1.5rem 2rem;
+  }
+
+  .raio-card {
+    background: var(--surface-color);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .raio-visual {
+    position: relative;
+    height: 180px;
+    background: #E8E8E6;
+    background-image: radial-gradient(#D4D4D2 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .raio-dot {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .raio-circle {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border: 2px dashed var(--primary-color);
+    border-radius: 50%;
+    background: rgba(52, 52, 50, 0.06);
+  }
+
+  .pulse {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .raio-text {
+    padding: 1.5rem;
+  }
+
+  .raio-text p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  /* ===== 9. CONTATO PANEL ===== */
+  .contato-panel {
+    padding: 1rem 1.5rem 6rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .contact-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.25rem 0.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .contact-btn:active { transform: scale(0.97); }
+
+  .contact-btn.whatsapp {
+    background: #25D366;
+    color: white;
+  }
+
+  .contact-btn.instagram {
+    background: linear-gradient(135deg, #833AB4, #E1306C, #F77737);
+    color: white;
+  }
+
+  .contact-btn.telefone {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  .contact-btn.email {
+    background: var(--accent-color);
+    color: var(--primary-color);
+  }
+
+  /* ===== SHARED ===== */
+  .section-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ===== UTILITIES ===== */
+  .fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    70% { transform: scale(3); opacity: 0; }
+    100% { transform: scale(1); opacity: 0; }
+  }
+
+  /* Scroll Containers */
+  .scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .scroll-container::before,
+  .scroll-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .scroll-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-color, white) 20%, transparent);
+  }
+
+  .scroll-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-color, white) 20%, transparent);
+  }
+
+  .scroll-container.can-scroll-left::before { opacity: 1; }
+  .scroll-container.can-scroll-right::after { opacity: 1; }
+
+  .scroll-btn {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: opacity 0.2s, background 0.2s;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .scroll-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .scroll-btn:active {
+    background: #f0f0f0;
+  }
+
+  .scroll-btn.left {
+    left: 8px;
+  }
+
+  .scroll-btn.right {
+    right: 8px;
+  }
+
+  /* ===== PROCESSOS ===== */
+  .processos-preview {
+    padding: 60px 20px;
+    background: #ffffff;
+  }
+
+  .processos-scroll {
+    display: flex;
+    gap: 30px;
+    padding: 20px 0 40px 0; /* extra padding bottom for the scrollbar */
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #fce883 transparent;
+  }
+
+  /* Custom scrollbar for webkit */
+  .processos-scroll::-webkit-scrollbar {
+    height: 8px;
+    display: block;
+  }
+  .processos-scroll::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
+  }
+  .processos-scroll::-webkit-scrollbar-thumb {
+    background-color: #fce883;
+    border-radius: 4px;
+  }
+
+  .processo-card {
+    min-width: 320px;
+    height: 420px;
+    background: #f4f5f8;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding: 40px 30px 40px 100px;
+  }
+
+  .processo-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100%;
+    background-color: #fce883; /* Yellow from Hilariom branding */
+    z-index: 0;
+  }
+
+  .processo-number-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 8px solid #fce883;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f5f8;
+    margin-bottom: 30px;
+    margin-left: -50px; /* Overlap with accent */
+  }
+
+  .processo-number {
+    font-size: 5rem;
+    font-weight: 900;
+    font-style: italic;
+    color: #1a1a1a;
+    line-height: 1;
+  }
+
+  .processo-content {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+  }
+
+  .processo-content h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .processo-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .processo-icon {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 64px;
+    height: 64px;
+    background: #fce883;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+  }
+</style>
+
+<script>
+  function initScrollButtons() {
+    const containers = document.querySelectorAll('.scroll-container');
+    
+    containers.forEach(container => {
+      const scrollArea = container.querySelector('.scroll-area');
+      const leftBtn = container.querySelector('.scroll-btn.left');
+      const rightBtn = container.querySelector('.scroll-btn.right');
+      
+      if (!scrollArea || !leftBtn || !rightBtn) return;
+
+      const updateButtons = () => {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollArea;
+        if (scrollLeft > 5) {
+          leftBtn.classList.add('visible');
+          container.classList.add('can-scroll-left');
+        } else {
+          leftBtn.classList.remove('visible');
+          container.classList.remove('can-scroll-left');
+        }
+        
+        if (scrollLeft + clientWidth < scrollWidth - 5) {
+          rightBtn.classList.add('visible');
+          container.classList.add('can-scroll-right');
+        } else {
+          rightBtn.classList.remove('visible');
+          container.classList.remove('can-scroll-right');
+        }
+      };
+
+      scrollArea.addEventListener('scroll', updateButtons, { passive: true });
+      window.addEventListener('resize', updateButtons, { passive: true });
+      
+      // Initial check
+      setTimeout(updateButtons, 100);
+
+      leftBtn.addEventListener('click', () => {
+        scrollArea.scrollBy({ left: -200, behavior: 'smooth' });
+      });
+
+      rightBtn.addEventListener('click', () => {
+        scrollArea.scrollBy({ left: 200, behavior: 'smooth' });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initScrollButtons);
+</script>

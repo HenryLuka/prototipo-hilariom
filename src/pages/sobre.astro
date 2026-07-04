@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const values = [
+  { title: 'Missão', desc: 'Entregar estruturas robustas com agilidade.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>' },
+  { title: 'Visão', desc: 'Ser referência nacional em pré-fabricados.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>' },
+  { title: 'Valores', desc: 'Qualidade, Segurança e Transparência.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13"/><path d="M13 3l3 6-4 13"/><path d="M2 9h20"/></svg>' },
+];
+
+const timeline = [
+  { year: '1994', event: 'Fundação da Hilariom em SP.' },
+  { year: '2005', event: 'Expansão da fábrica para 10.000m².' },
+  { year: '2015', event: 'Implementação de novas tecnologias BIM.' },
+  { year: '2026', event: 'Líder em inovações de pré-fabricados.' },
+];
+---
+
+<Layout title="Quem Somos">
+  <div class="header-spacing"></div>
+  
+  <header class="page-header">
+    <h1 class="fade-in-up">Quem Somos</h1>
+    <p class="fade-in-up delay-1 text-muted">Construindo o futuro com solidez desde 1994.</p>
+  </header>
+
+  <section class="mvv-section">
+    {values.map((v) => (
+      <div class="mvv-card glass-panel hover-scale fade-in-up delay-2">
+        <div class="icon" set:html={v.icon}></div>
+        <div>
+          <h3>{v.title}</h3>
+          <p>{v.desc}</p>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <section class="timeline-section fade-in-up delay-3">
+    <h2 class="section-title">Nossa História</h2>
+    <div class="timeline">
+      {timeline.map((item) => (
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="year">{item.year}</span>
+            <p>{item.event}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .header-spacing {
+    height: 40px;
+  }
+  
+  .page-header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+  }
+  
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .mvv-section {
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mvv-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mvv-card .icon {
+    font-size: 2.5rem;
+  }
+  
+  .mvv-card h3 {
+    margin-bottom: 0.25rem;
+    color: var(--text-main);
+  }
+  
+  .mvv-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .timeline-section {
+    padding: 1rem 1.5rem 3rem;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-color);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -6px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: 3px solid var(--surface-color);
+  }
+
+  .timeline-content .year {
+    font-weight: 800;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.9rem;
+    color: var(--text-main);
+  }
+  
+  /* Utilities */
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+
+
+
