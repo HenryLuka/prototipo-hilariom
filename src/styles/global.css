@@ -155,7 +155,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== PREMIUM SECTION HEADERS ===== */
 .section-header-premium {
-  padding: 0 1.5rem;
   margin: 3.5rem auto 2rem;
   max-width: 1200px;
   text-align: left;

@@ -72,6 +72,7 @@ import { produtos } from '../data/produtos.js';
     </div>
   </section>
 
+  <div class="home-container">
   <!-- 2. ACESSO RÁPIDO -->
   <section class="quick-access">
     <div class="grid-fast-access">
@@ -342,10 +343,25 @@ import { produtos } from '../data/produtos.js';
       </a>
     </div>
   </section>
+  </div>
 
 </Layout>
 
 <style>
+  .home-container {
+    width: 100%;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  @media (min-width: 768px) {
+    .home-container {
+      padding: 0;
+      gap: 5rem;
+    }
+  }
+
   /* ===== 1. HERO ===== */
   .hero {
     position: relative;
@@ -453,7 +469,6 @@ import { produtos } from '../data/produtos.js';
     margin-top: -28px;
     position: relative;
     z-index: 10;
-    padding: 0 1rem;
   }
 
   .grid-fast-access {
@@ -536,7 +551,6 @@ import { produtos } from '../data/produtos.js';
 
   /* ===== 4. QUEM SOMOS (PREMIUM) ===== */
   .about-preview {
-    padding: 2rem 0 2.5rem;
   }
 
   /* Hero image with overlay badge */
@@ -637,7 +651,7 @@ import { produtos } from '../data/produtos.js';
 
   /* Text content */
   .about-content {
-    padding: 1.75rem 1.5rem 0;
+    padding: 1.75rem 0 0;
   }
 
   .about-content p {
@@ -662,7 +676,7 @@ import { produtos } from '../data/produtos.js';
 
   /* Factory card */
   .about-factory-card {
-    margin: 1.75rem 1.5rem 0;
+    margin: 1.75rem 0 0;
     padding: 1.25rem;
     background: #f8f8f6;
     border-radius: 12px;
@@ -706,7 +720,7 @@ import { produtos } from '../data/produtos.js';
 
   /* Closing quote + CTA */
   .about-closing {
-    padding: 1.75rem 1.5rem 0;
+    padding: 1.75rem 0 0;
   }
 
   .about-quote {
@@ -769,7 +783,6 @@ import { produtos } from '../data/produtos.js';
 
   /* ===== 5. MERCADOS ===== */
   .markets-preview {
-    padding: 1rem 1.5rem 2rem;
   }
 
   .markets-scroll, .processos-scroll, .pecas-scroll {
@@ -779,9 +792,6 @@ import { produtos } from '../data/produtos.js';
     gap: 1rem;
     padding-bottom: 1rem;
     scrollbar-width: none;
-    scroll-padding-left: 1.5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
   }
   
 
@@ -921,7 +931,6 @@ import { produtos } from '../data/produtos.js';
 
   /* ===== 6. OBRAS ===== */
   .obras-preview {
-    padding: 1rem 1.5rem 2rem;
   }
 
   .obras-grid {
@@ -989,9 +998,6 @@ import { produtos } from '../data/produtos.js';
 
   /* ===== 7. PEÇAS (GRID PREMIUM) ===== */
   .pecas-preview {
-    padding: 3rem 1.5rem 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
   }
 
   .pecas-header-container {
@@ -1137,7 +1143,6 @@ import { produtos } from '../data/produtos.js';
 
   /* ===== 8. RAIO ===== */
   .raio-preview {
-    padding: 1rem 1.5rem 2rem;
   }
 
   .raio-card {
@@ -1198,9 +1203,8 @@ import { produtos } from '../data/produtos.js';
     margin-bottom: 1rem;
   }
 
-  /* ===== CAREERS BANNER ===== */
+  /* ===== CTA CARREIRAS ===== */
   .careers-banner {
-    padding: 0 1.5rem 3rem;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -1260,9 +1264,8 @@ import { produtos } from '../data/produtos.js';
     .careers-box { padding: 3rem; }
   }
 
-  /* ===== 9. CONTATO PANEL ===== */
+  /* ===== 9. CONTATO ===== */
   .contato-panel {
-    padding: 1rem 1.5rem 6rem;
   }
 
   .contact-grid {
