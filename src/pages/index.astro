@@ -26,10 +26,10 @@ const markets = [
 
 // Featured works
 const featuredWorks = [
-  { title: 'Galpão Logístico SP', local: 'Guarulhos, SP', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=600&auto=format&fit=crop' },
-  { title: 'Fábrica Automotiva', local: 'Mogi das Cruzes, SP', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600&auto=format&fit=crop' },
-  { title: 'Sede Comercial', local: 'São José dos Campos, SP', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600&auto=format&fit=crop' },
-  { title: 'Armazém de Grãos', local: 'Ribeirão Preto, SP', img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop' },
+  { id: 'galpao-logistico-sp', title: 'Galpão Logístico SP', local: 'Guarulhos, SP', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=600&auto=format&fit=crop' },
+  { id: 'fabrica-automotiva', title: 'Fábrica Automotiva', local: 'Mogi das Cruzes, SP', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600&auto=format&fit=crop' },
+  { id: 'sede-comercial', title: 'Sede Comercial', local: 'São José dos Campos, SP', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600&auto=format&fit=crop' },
+  { id: 'armazem-de-graos', title: 'Armazém de Grãos', local: 'Ribeirão Preto, SP', img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop' },
 ];
 
 // Processos
@@ -53,7 +53,7 @@ import { produtos } from '../data/produtos.js';
   <!-- 1. HERO FULL-SCREEN -->
   <section class="hero">
     <div class="hero-overlay"></div>
-    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop" alt="Fábrica Hilariom - Estruturas Pré-fabricadas" class="hero-bg" />
+    <img src="https://images.unsplash.com/photo-1569003339405-ea396a5a8a90?q=80&w=1200&auto=format&fit=crop" alt="Estrutura de Galpão Pré-fabricado Hilariom" class="hero-bg" />
     <div class="hero-text">
       <div class="logo-hero-container fade-in-up">
         <img src="/prototipo-hilariom/logo.png?v=2" alt="Hilariom - Soluções em Métodos Construtivos" class="hero-logo" />
@@ -140,7 +140,7 @@ import { produtos } from '../data/produtos.js';
     <p class="section-subtitle">Projetos que constroem a nossa reputação</p>
     <div class="obras-grid">
       {featuredWorks.map((work) => (
-        <a href="/prototipo-hilariom/obras/detalhe/" class="obra-thumb hover-scale">
+        <a href={`/prototipo-hilariom/obras/${work.id}/`} class="obra-thumb hover-scale">
           <div class="obra-thumb-img skeleton">
             <img src={work.img} alt={work.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
             <div class="obra-thumb-overlay"></div>

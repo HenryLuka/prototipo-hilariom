@@ -1,14 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { obras } from '../data/obras.js';
 
 const segments = ['Todos', 'Industrial', 'Comercial', 'Logística', 'Agronegócio'];
-
-const obras = [
-  { id: 1, title: 'Galpão Logístico SP', segment: 'Logística', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=400&auto=format&fit=crop', local: 'Guarulhos, SP' },
-  { id: 2, title: 'Fábrica Automotiva', segment: 'Industrial', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=400&auto=format&fit=crop', local: 'Mogi das Cruzes, SP' },
-  { id: 3, title: 'Sede Comercial', segment: 'Comercial', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400&auto=format&fit=crop', local: 'São José dos Campos, SP' },
-  { id: 4, title: 'Armazém de Grãos', segment: 'Agronegócio', img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=400&auto=format&fit=crop', local: 'Ribeirão Preto, SP' },
-];
 ---
 
 <Layout title="Obras Realizadas">
@@ -49,7 +43,7 @@ const obras = [
 
   <section class="gallery fade-in-up delay-3">
     {obras.map((obra) => (
-      <a href="/prototipo-hilariom/obras/detalhe/" class="obra-card hover-scale" data-segment={obra.segment}>
+      <a href={`/prototipo-hilariom/obras/${obra.id}/`} class="obra-card hover-scale" data-segment={obra.segment}>
         <div class="img-wrapper skeleton">
           <img src={obra.img} alt={obra.title} loading="lazy" onload="this.parentElement.classList.remove('skeleton')" />
         </div>
