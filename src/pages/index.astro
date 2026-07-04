@@ -802,13 +802,21 @@ import { produtos } from '../data/produtos.js';
     scrollbar-width: none;
   }
   
+  .markets-scroll::before,
+  .markets-scroll::after,
+  .pecas-scroll::before,
+  .pecas-scroll::after {
+    content: '';
+    flex: 0 0 10%;
+  }
+  
 
 
   .markets-scroll::-webkit-scrollbar { display: none; }
 
   .market-card {
     flex: 0 0 80%;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     scroll-snap-stop: always;
     position: relative;
     border-radius: var(--border-radius);
@@ -1066,7 +1074,7 @@ import { produtos } from '../data/produtos.js';
     overflow: hidden;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     scroll-snap-stop: always;
   }
 
