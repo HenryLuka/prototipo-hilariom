@@ -4,7 +4,8 @@ import compress from 'astro-compress';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://prototipo-vinicius.pages.dev', // Default cloudflare pages domain
+  site: 'https://henryluka.github.io',
+  base: '/prototipo-hilariom',
   prefetch: true,
   integrations: [
     AstroPWA({
@@ -39,7 +40,7 @@ export default defineConfig({
         ]
       },
       workbox: {
-        navigateFallback: '/',
+        navigateFallback: '/prototipo-hilariom/',
         globPatterns: ['**/*.{css,js,html,svg,png,webp,avif,ico,txt}'],
       },
     }),
