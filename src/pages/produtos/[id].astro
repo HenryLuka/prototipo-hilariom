@@ -98,8 +98,22 @@ const { produto } = Astro.props;---
     font-weight: 800;
     color: var(--text-main);
     margin-bottom: 0.25rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.4rem;
     letter-spacing: -1px;
     text-transform: uppercase;
+  }
+
+  .product-header-premium h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 5px;
+    background: var(--accent-color);
+    border-radius: 4px;
   }
 
   .product-header-premium p {
