@@ -19,7 +19,7 @@ const { obra } = Astro.props;
     
     <!-- Top Nav Actions (Back button) -->
     <div class="top-actions">
-      <a href="/prototipo-hilariom/obras/" class="back-btn glass-panel hover-scale">
+      <a href="/prototipo-hilariom/obras/" class="back-btn glass-panel hover-scale" id="smart-back-btn">
         <span class="icon">←</span> Voltar
       </a>
     </div>
@@ -221,8 +221,12 @@ const { obra } = Astro.props;
     gap: 1rem;
     overflow-x: auto;
     padding-bottom: 0.75rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0.5rem;
   }
 
   .pecas-list::-webkit-scrollbar {
@@ -240,6 +244,8 @@ const { obra } = Astro.props;
     flex-direction: column;
     gap: 0.5rem;
     text-decoration: none;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .peca-thumb {
@@ -368,8 +374,30 @@ const { obra } = Astro.props;
       window.addEventListener('resize', updateButtons, { passive: true });
       setTimeout(updateButtons, 100);
 
-      leftBtn.addEventListener('click', () => scrollArea.scrollBy({ left: -100, behavior: 'smooth' }));
-      rightBtn.addEventListener('click', () => scrollArea.scrollBy({ left: 100, behavior: 'smooth' }));
+      leftBtn.addEventListener('click', () => {
+        const firstCard = scrollArea.children[0];
+        const gap = parseFloat(getComputedStyle(scrollArea).gap) || 16;
+        const step = firstCard ? firstCard.offsetWidth + gap : 100;
+        scrollArea.scrollBy({ left: -step, behavior: 'smooth' });
+      });
+      rightBtn.addEventListener('click', () => {
+        const firstCard = scrollArea.children[0];
+        const gap = parseFloat(getComputedStyle(scrollArea).gap) || 16;
+        const step = firstCard ? firstCard.offsetWidth + gap : 100;
+        scrollArea.scrollBy({ left: step, behavior: 'smooth' });
+      });
     });
+
+    const backBtn = document.getElementById('smart-back-btn');
+    if (backBtn) {
+      backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = '/prototipo-hilariom/obras/';
+        }
+      });
+    }
   });
 </script>

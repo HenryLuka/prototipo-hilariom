@@ -152,3 +152,55 @@ h1, h2, h3, h4, h5, h6 {
   margin: 1.5rem 1rem 1rem;
   color: var(--primary-color);
 }
+
+/* ===== PREMIUM SECTION HEADERS ===== */
+.section-header-premium {
+  padding: 0 1.5rem;
+  margin: 3.5rem auto 2rem;
+  max-width: 1200px;
+  text-align: left;
+}
+
+.section-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a89115;
+  background: rgba(252, 232, 131, 0.3);
+  padding: 0.35rem 0.8rem;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.section-header-premium h2 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.section-header-premium h2 strong {
+  color: #a89115;
+  font-weight: 900;
+}
+
+.section-header-premium p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+@media (min-width: 768px) {
+  .section-header-premium {
+    text-align: center;
+    margin: 4.5rem auto 2.5rem;
+  }
+  .section-header-premium p {
+    margin: 0 auto;
+    font-size: 1.05rem;
+  }
+}

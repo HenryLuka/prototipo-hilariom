@@ -13,7 +13,7 @@ import Layout from '../../layouts/Layout.astro';
     
     <!-- Top Nav Actions (Back button) -->
     <div class="top-actions">
-      <a href="/prototipo-hilariom/obras/" class="back-btn glass-panel hover-scale">
+      <a href="/prototipo-hilariom/obras/" class="back-btn glass-panel hover-scale" id="smart-back-btn">
         <span class="icon">←</span> Voltar
       </a>
     </div>
@@ -231,6 +231,10 @@ import Layout from '../../layouts/Layout.astro';
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0.5rem;
   }
   .pecas-list::-webkit-scrollbar { display: none; }
 
@@ -241,6 +245,8 @@ import Layout from '../../layouts/Layout.astro';
     min-width: 100px;
     text-decoration: none;
     flex-shrink: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .peca-thumb {
@@ -411,9 +417,32 @@ import Layout from '../../layouts/Layout.astro';
       window.addEventListener('resize', updateButtons, { passive: true });
       setTimeout(updateButtons, 100);
 
-      leftBtn.addEventListener('click', () => scrollArea.scrollBy({ left: -150, behavior: 'smooth' }));
-      rightBtn.addEventListener('click', () => scrollArea.scrollBy({ left: 150, behavior: 'smooth' }));
+      leftBtn.addEventListener('click', () => {
+        const firstCard = scrollArea.children[0];
+        const gap = parseFloat(getComputedStyle(scrollArea).gap) || 12;
+        const step = firstCard ? firstCard.offsetWidth + gap : 150;
+        scrollArea.scrollBy({ left: -step, behavior: 'smooth' });
+      });
+      rightBtn.addEventListener('click', () => {
+        const firstCard = scrollArea.children[0];
+        const gap = parseFloat(getComputedStyle(scrollArea).gap) || 12;
+        const step = firstCard ? firstCard.offsetWidth + gap : 150;
+        scrollArea.scrollBy({ left: step, behavior: 'smooth' });
+      });
     });
+
+    // Smart Back Button
+    const backBtn = document.getElementById('smart-back-btn');
+    if (backBtn) {
+      backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = '/prototipo-hilariom/obras/';
+        }
+      });
+    }
   });
 </script>
 

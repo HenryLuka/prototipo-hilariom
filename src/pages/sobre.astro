@@ -1,32 +1,106 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+const highlights = [
+  { value: '2M+', label: 'm² construídos', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>' },
+  { value: '34k', label: 'm² de fábrica', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M2 20V8l5-4v6l5-4v6l5-4v8"/><path d="M2 20h20"/><rect x="17" y="12" width="5" height="8"/></svg>' },
+  { value: '30+', label: 'anos de mercado', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+];
+
 const values = [
-  { title: 'Missão', desc: 'Entregar estruturas robustas com agilidade.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>' },
-  { title: 'Visão', desc: 'Ser referência nacional em pré-fabricados.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>' },
-  { title: 'Valores', desc: 'Qualidade, Segurança e Transparência.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13"/><path d="M13 3l3 6-4 13"/><path d="M2 9h20"/></svg>' },
+  { title: 'Missão', desc: 'Entregar estruturas robustas com agilidade, qualidade e compromisso em cada etapa do processo construtivo.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>' },
+  { title: 'Visão', desc: 'Ser referência nacional em soluções construtivas pré-fabricadas, unindo tradição e inovação tecnológica.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>' },
+  { title: 'Valores', desc: 'Qualidade, Segurança, Transparência e Compromisso com o cliente em todos os projetos.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13"/><path d="M13 3l3 6-4 13"/><path d="M2 9h20"/></svg>' },
+];
+
+const diferenciais = [
+  { title: 'Formas Modernas', desc: 'Tecnologia de ponta para precisão dimensional.' },
+  { title: 'Pontes Rolantes', desc: 'Movimentação segura de peças de grande porte.' },
+  { title: 'Pórticos', desc: 'Infraestrutura para montagem de estruturas complexas.' },
+  { title: 'Usina Automatizada', desc: 'Concreto com dosagem controlada e rastreável.' },
+  { title: 'Laboratório Interno', desc: 'Ensaios de qualidade em todas as etapas.' },
+  { title: 'Equipe Especializada', desc: 'Profissionais com décadas de experiência no setor.' },
 ];
 
 const timeline = [
-  { year: '1994', event: 'Fundação da Hilariom em SP.' },
-  { year: '2005', event: 'Expansão da fábrica para 10.000m².' },
-  { year: '2015', event: 'Implementação de novas tecnologias BIM.' },
-  { year: '2026', event: 'Líder em inovações de pré-fabricados.' },
+  { year: '1994', event: 'Fundação da Hilariom, nascida dentro de uma das maiores indústrias do setor.' },
+  { year: '2005', event: 'Expansão da fábrica e diversificação de atuação em novos segmentos.' },
+  { year: '2015', event: 'Implementação de novas tecnologias e automação da usina de concreto.' },
+  { year: '2026', event: 'Mais de 2 milhões de m² construídos e referência nacional em pré-fabricados.' },
 ];
 ---
 
 <Layout title="Quem Somos">
   <div class="header-spacing"></div>
   
-  <header class="page-header">
-    <h1 class="fade-in-up">Quem Somos</h1>
-    <p class="fade-in-up delay-1 text-muted">Construindo o futuro com solidez desde 1994.</p>
+  <!-- Hero Header -->
+  <header class="sobre-header">
+    <div class="sobre-header-badge fade-in-up">SOBRE NÓS</div>
+    <h1 class="fade-in-up">Conheça mais sobre a <strong>HILARIOM</strong></h1>
   </header>
 
+  <!-- Highlights Bar -->
+  <section class="sobre-highlights fade-in-up delay-1">
+    {highlights.map((h) => (
+      <div class="sobre-hl-item">
+        <div class="sobre-hl-icon" set:html={h.icon}></div>
+        <div class="sobre-hl-text">
+          <span class="sobre-hl-value">{h.value}</span>
+          <span class="sobre-hl-label">{h.label}</span>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <!-- História Principal -->
+  <section class="sobre-story fade-in-up delay-2">
+    <div class="sobre-story-img skeleton">
+      <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=800&auto=format&fit=crop" alt="Fábrica Hilariom" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+    </div>
+    
+    <div class="sobre-story-content">
+      <p>Com mais de <strong>30 anos de atuação</strong>, a HILARIOM consolidou-se como uma das referências nacionais em estruturas pré-fabricadas de concreto. Ao longo de sua trajetória, já foram construídos mais de <strong>2 milhões de metros quadrados</strong>, resultado de uma combinação entre tradição, tecnologia e excelência em execução.</p>
+      
+      <div class="sobre-divider"></div>
+      
+      <p>A empresa nasceu dentro de uma das maiores indústrias do setor e, através da <strong>sucessão familiar</strong>, evoluiu para um grupo sólido e diversificado, com atuação em diferentes segmentos da construção civil.</p>
+      
+      <div class="sobre-divider"></div>
+      
+      <p>Hoje, a HILARIOM executa desde <strong>super-obras e projetos de infraestrutura portuária</strong>, até galpões logísticos, obras industriais e comerciais de grande porte.</p>
+    </div>
+  </section>
+
+  <!-- Fábrica -->
+  <section class="sobre-fabrica">
+    <h2 class="sobre-section-title">
+      <span class="sobre-title-accent"></span>
+      Nossa Fábrica
+    </h2>
+    <p class="sobre-fabrica-desc">A fábrica, com <strong>34 mil m²</strong> de área instalada, é equipada com tecnologias de ponta que garantem precisão, qualidade e total confiabilidade em cada etapa do processo produtivo.</p>
+    
+    <div class="sobre-diff-grid">
+      {diferenciais.map((d) => (
+        <div class="sobre-diff-card">
+          <div class="sobre-diff-dot"></div>
+          <div>
+            <h4>{d.title}</h4>
+            <p>{d.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- MVV -->
   <section class="mvv-section">
+    <h2 class="sobre-section-title">
+      <span class="sobre-title-accent"></span>
+      Nossos Pilares
+    </h2>
     {values.map((v) => (
-      <div class="mvv-card glass-panel hover-scale fade-in-up delay-2">
-        <div class="icon" set:html={v.icon}></div>
+      <div class="mvv-card hover-scale">
+        <div class="mvv-icon" set:html={v.icon}></div>
         <div>
           <h3>{v.title}</h3>
           <p>{v.desc}</p>
@@ -35,10 +109,14 @@ const timeline = [
     ))}
   </section>
 
-  <section class="timeline-section fade-in-up delay-3">
-    <h2 class="section-title">Nossa História</h2>
+  <!-- Timeline -->
+  <section class="timeline-section">
+    <h2 class="sobre-section-title">
+      <span class="sobre-title-accent"></span>
+      Nossa Trajetória
+    </h2>
     <div class="timeline">
-      {timeline.map((item) => (
+      {timeline.map((item, i) => (
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
@@ -50,106 +128,375 @@ const timeline = [
     </div>
   </section>
 
+  <!-- Quote final -->
+  <section class="sobre-closing">
+    <blockquote class="sobre-quote">
+      "Mais do que fabricar estruturas, a HILARIOM constrói relacionamentos duradouros, oferecendo ao cliente a certeza de estar apoiado por uma empresa que une história, inovação e credibilidade em cada projeto."
+    </blockquote>
+    <a href="/prototipo-hilariom/contato/" class="sobre-cta hover-scale">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+      <span>Solicite um <strong>Orçamento</strong></span>
+    </a>
+  </section>
+
 </Layout>
 
 <style>
   .header-spacing {
     height: 40px;
   }
-  
-  .page-header {
-    padding: 1rem 1.5rem;
-  }
-  
-  .page-header h1 {
-    font-size: 2rem;
-    color: var(--primary-color);
-  }
-  
-  .text-muted {
-    color: var(--text-muted);
+
+  /* ===== HEADER ===== */
+  .sobre-header {
+    padding: 1.5rem 1.5rem 0.5rem;
   }
 
-  .mvv-section {
-    padding: 1rem 1.5rem;
+  .sobre-header-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    background: #fce883;
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+  }
+
+  .sobre-header h1 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+
+  .sobre-header h1 strong {
+    font-weight: 900;
+    color: var(--text-main);
+  }
+
+  /* ===== HIGHLIGHTS BAR ===== */
+  .sobre-highlights {
     display: flex;
     flex-direction: column;
+    gap: 0;
+    margin: 1.5rem 1.5rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--primary-color);
+  }
+
+  .sobre-hl-item {
+    display: flex;
+    align-items: center;
     gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .sobre-hl-item:last-child {
+    border-bottom: none;
+  }
+
+  .sobre-hl-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(252, 232, 131, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fce883;
+    flex-shrink: 0;
+  }
+
+  .sobre-hl-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sobre-hl-value {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #fce883;
+    line-height: 1;
+  }
+
+  .sobre-hl-label {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.15rem;
+  }
+
+  /* ===== STORY ===== */
+  .sobre-story {
+    padding: 2rem 1.5rem 0;
+  }
+
+  .sobre-story-img {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .sobre-story-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sobre-story-content p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .sobre-story-content p strong {
+    color: var(--text-main);
+    font-weight: 700;
+  }
+
+  .sobre-divider {
+    width: 40px;
+    height: 3px;
+    background: #fce883;
+    border-radius: 2px;
+    margin: 1.25rem 0;
+  }
+
+  /* ===== SECTION TITLES ===== */
+  .sobre-section-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+  }
+
+  .sobre-title-accent {
+    width: 4px;
+    height: 24px;
+    background: #fce883;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ===== FÁBRICA ===== */
+  .sobre-fabrica {
+    padding: 2.5rem 1.5rem 0;
+  }
+
+  .sobre-fabrica-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  .sobre-fabrica-desc strong {
+    color: var(--text-main);
+  }
+
+  .sobre-diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .sobre-diff-card {
+    background: #f8f8f6;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+
+  .sobre-diff-dot {
+    width: 8px;
+    height: 8px;
+    background: #fce883;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.35rem;
+  }
+
+  .sobre-diff-card h4 {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+  }
+
+  .sobre-diff-card p {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* ===== MVV ===== */
+  .mvv-section {
+    padding: 2.5rem 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
   .mvv-card {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
     box-shadow: var(--shadow-sm);
   }
 
-  .mvv-card .icon {
-    font-size: 2.5rem;
-  }
-  
-  .mvv-card h3 {
-    margin-bottom: 0.25rem;
-    color: var(--text-main);
-  }
-  
-  .mvv-card p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+  .mvv-icon {
+    width: 48px;
+    height: 48px;
+    background: #fce883;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--primary-color);
   }
 
+  .mvv-card h3 {
+    font-size: 0.9rem;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .mvv-card p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* ===== TIMELINE ===== */
   .timeline-section {
-    padding: 1rem 1.5rem 3rem;
+    padding: 2.5rem 1.5rem 0;
   }
 
   .timeline {
     position: relative;
-    padding-left: 1rem;
-    margin-top: 1.5rem;
+    padding-left: 1.5rem;
   }
 
   .timeline::before {
     content: '';
     position: absolute;
-    left: 15px;
-    top: 0;
-    bottom: 0;
+    left: 7px;
+    top: 4px;
+    bottom: 4px;
     width: 2px;
-    background: var(--border-color);
+    background: linear-gradient(to bottom, #fce883, var(--border-color));
   }
 
   .timeline-item {
     position: relative;
-    padding-left: 2rem;
-    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
   }
 
   .timeline-dot {
     position: absolute;
-    left: -6px;
-    top: 4px;
-    width: 14px;
-    height: 14px;
+    left: -1.5rem;
+    top: 3px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: var(--primary-color);
-    border: 3px solid var(--surface-color);
+    background: #fce883;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--primary-color);
   }
 
   .timeline-content .year {
-    font-weight: 800;
+    font-weight: 900;
+    font-size: 1.1rem;
     color: var(--primary-color);
     display: block;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.3rem;
   }
 
   .timeline-content p {
-    font-size: 0.9rem;
-    color: var(--text-main);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
   }
-  
-  /* Utilities */
+
+  /* ===== CLOSING ===== */
+  .sobre-closing {
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .sobre-quote {
+    font-size: 0.92rem;
+    font-style: italic;
+    color: var(--text-main);
+    line-height: 1.7;
+    margin: 0 0 1.75rem 0;
+    padding: 1.25rem;
+    padding-left: 1.25rem;
+    border-left: 4px solid #fce883;
+    background: #faf9f5;
+    border-radius: 0 10px 10px 0;
+    font-weight: 500;
+  }
+
+  .sobre-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.9rem 2rem;
+    background: #fce883;
+    color: var(--primary-color);
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(252, 232, 131, 0.4);
+  }
+
+  .sobre-cta strong {
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .sobre-cta:active {
+    transform: scale(0.97);
+  }
+
+  /* ===== UTILITIES ===== */
   .fade-in-up {
     animation: fadeInUp 0.5s ease forwards;
     opacity: 0;
@@ -166,7 +513,3 @@ const timeline = [
     }
   }
 </style>
-
-
-
-

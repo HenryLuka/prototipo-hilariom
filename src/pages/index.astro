@@ -3,10 +3,8 @@ import Layout from '../layouts/Layout.astro';
 
 // Quick Access data
 const fastAccess = [
-  { label: 'Quem Somos', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>', href: '/prototipo-hilariom/sobre' },
-  { label: 'Obras', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/></svg>', href: '/prototipo-hilariom/obras' },
-  { label: 'Produtos', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>', href: '/prototipo-hilariom/produtos' },
-  { label: 'Orçamento', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>', href: '/prototipo-hilariom/contato' },
+  { label: 'Atuação', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="22" y1="12" x2="16" y2="12"/><line x1="8" y1="12" x2="2" y2="12"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/></svg>', href: '/prototipo-hilariom/atuacao' },
+  { label: 'Atendimento', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>', href: '/prototipo-hilariom/contato' },
 ];
 
 // Stats
@@ -76,7 +74,7 @@ import { produtos } from '../data/produtos.js';
 
   <!-- 2. ACESSO RÁPIDO -->
   <section class="quick-access">
-    <div class="grid-4">
+    <div class="grid-fast-access">
       {fastAccess.map((item) => (
         <a href={item.href} class="quick-btn hover-scale">
           <span class="icon" set:html={item.icon}></span>
@@ -86,34 +84,58 @@ import { produtos } from '../data/produtos.js';
     </div>
   </section>
 
-  <!-- 3. NÚMEROS DE IMPACTO -->
-  <section class="stats-section">
-    <div class="stats-grid">
-      {stats.map((stat) => (
-        <div class="stat-card">
-          <div class="stat-value">{stat.value}</div>
-          <div class="stat-label">{stat.label}</div>
-        </div>
-      ))}
-    </div>
-  </section>
 
-  <!-- 4. QUEM SOMOS (NARRATIVA) -->
+  <!-- 4. QUEM SOMOS (NARRATIVA PREMIUM) -->
   <section class="about-preview">
-    <div class="about-img-wrapper skeleton">
-      <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=600&auto=format&fit=crop" alt="Fábrica Hilariom" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+    <!-- Hero visual com overlay -->
+    <div class="about-hero-img skeleton">
+      <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=800&auto=format&fit=crop" alt="Fábrica Hilariom" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+      <div class="about-hero-overlay"></div>
+      <div class="about-hero-badge">
+        <span class="about-badge-label">SOBRE NÓS</span>
+        <h2 class="about-hero-title">Conheça mais sobre a <strong>HILARIOM</strong></h2>
+      </div>
     </div>
-    <div class="about-text">
-      <h2 class="section-title">Quem Somos</h2>
-      <p>Com mais de <strong>30 anos de experiência</strong>, a Hilariom é referência em soluções construtivas de alta performance. Nossa fábrica é equipada com tecnologia de ponta para produzir estruturas pré-fabricadas que entregam <strong>agilidade, economia e durabilidade</strong> em cada projeto.</p>
-      <a href="/prototipo-hilariom/sobre/" class="link-more">Conheça nossa história →</a>
+
+    <!-- Stats em destaque -->
+    <div class="about-highlights">
+      <div class="about-highlight-item">
+        <span class="about-hl-value">2M+</span>
+        <span class="about-hl-label">m² construídos</span>
+      </div>
+      <div class="about-hl-divider"></div>
+      <div class="about-highlight-item">
+        <span class="about-hl-value">34k</span>
+        <span class="about-hl-label">m² de fábrica</span>
+      </div>
+      <div class="about-hl-divider"></div>
+      <div class="about-highlight-item">
+        <span class="about-hl-value">30+</span>
+        <span class="about-hl-label">anos de mercado</span>
+      </div>
+    </div>
+
+    <!-- Texto principal resumido -->
+    <div class="about-content">
+      <p>Com mais de <strong>30 anos de atuação</strong>, a HILARIOM consolidou-se como uma das referências nacionais em estruturas pré-fabricadas de concreto, executando desde grandes projetos de infraestrutura até galpões logísticos, obras industriais e comerciais.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="about-closing">
+      <a href="/prototipo-hilariom/sobre/" class="about-cta-btn hover-scale">
+        <span>Conheça nossa história completa</span>
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
   </section>
 
   <!-- 5. MERCADOS DE ATUAÇÃO -->
   <section class="markets-preview">
-    <h2 class="section-title">Mercados de Atuação</h2>
-    <p class="section-subtitle">Soluções sob medida para cada segmento</p>
+    <div class="section-header-premium fade-in-up">
+      <div class="section-badge">MERCADOS</div>
+      <h2>Áreas de <strong>Atuação</strong></h2>
+      <p>Soluções pré-fabricadas de excelência para diferentes setores.</p>
+    </div>
     <div class="scroll-container">
       <button class="scroll-btn left" aria-label="Rolar para esquerda"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
       <div class="markets-scroll scroll-area">
@@ -136,8 +158,11 @@ import { produtos } from '../data/produtos.js';
 
   <!-- 6. OBRAS EM DESTAQUE -->
   <section class="obras-preview">
-    <h2 class="section-title">Obras em Destaque</h2>
-    <p class="section-subtitle">Projetos que constroem a nossa reputação</p>
+    <div class="section-header-premium fade-in-up">
+      <div class="section-badge">PORTFÓLIO</div>
+      <h2>Obras em <strong>Destaque</strong></h2>
+      <p>Conheça a magnitude e a qualidade dos nossos projetos recentes.</p>
+    </div>
     <div class="obras-grid">
       {featuredWorks.map((work) => (
         <a href={`/prototipo-hilariom/obras/${work.id}/`} class="obra-thumb hover-scale">
@@ -162,8 +187,11 @@ import { produtos } from '../data/produtos.js';
 
   <!-- NOVO: PROCESSOS HILARIOM -->
   <section class="processos-preview">
-    <h2 class="section-title">Processos Hilariom</h2>
-    <p class="section-subtitle">Acompanhe as etapas de excelência de nossos métodos construtivos</p>
+    <div class="section-header-premium fade-in-up">
+      <div class="section-badge">PROCESSOS</div>
+      <h2>Padrão <strong>Hilariom</strong></h2>
+      <p>Acompanhe passo a passo as etapas de excelência dos nossos métodos construtivos.</p>
+    </div>
     <div class="scroll-container">
       <button class="scroll-btn left" aria-label="Rolar para esquerda"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
       <div class="processos-scroll scroll-area">
@@ -190,9 +218,10 @@ import { produtos } from '../data/produtos.js';
   <!-- 7. CATÁLOGO DE PEÇAS (GRID RESPONSIVO PREMIUM) -->
   <section class="pecas-preview">
     <div class="pecas-header-container">
-      <div>
-        <h2 class="section-title">Nossas Peças</h2>
-        <p class="section-subtitle">Conheça cada componente das nossas estruturas de concreto pré-fabricado</p>
+      <div class="section-header-premium" style="margin: 0; padding: 0; text-align: left;">
+        <div class="section-badge">PRODUTOS</div>
+        <h2 style="margin-bottom: 0.2rem;">Nossas <strong>Peças</strong></h2>
+        <p style="margin: 0; font-size: 0.95rem;">Catálogo com nossas soluções pré-fabricadas.</p>
       </div>
       <a href="/prototipo-hilariom/produtos/" class="btn btn-outline desktop-only-btn">Ver Fichas Técnicas</a>
     </div>
@@ -223,6 +252,37 @@ import { produtos } from '../data/produtos.js';
     </div>
   </section>
 
+  <!-- CTA PARCEIROS E FORNECEDORES (MINI BANNERS) -->
+  <section class="partner-mini-banner">
+    <div class="partner-banners-grid">
+      <div class="partner-banner-content glass-panel hover-scale">
+        <div class="partner-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="partner-text">
+          <h3>Nossos Parceiros</h3>
+          <p>Conheça os grandes fornecedores que constroem nossa história.</p>
+        </div>
+        <a href="/prototipo-hilariom/parcerias/" class="partner-banner-btn" aria-label="Ir para Nossos Parceiros">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+
+      <div class="partner-banner-content glass-panel hover-scale">
+        <div class="partner-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+        </div>
+        <div class="partner-text">
+          <h3>Seja Fornecedor</h3>
+          <p>Junte-se à nossa rede de fornecedores e empresas parceiras.</p>
+        </div>
+        <a href="/prototipo-hilariom/seja-parceiro/" class="partner-banner-btn" aria-label="Ir para Seja Nosso Parceiro">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- 8. RAIO DE ATUAÇÃO -->
   <section class="raio-preview">
     <div class="raio-card">
@@ -231,17 +291,37 @@ import { produtos } from '../data/produtos.js';
         <div class="raio-circle"></div>
       </div>
       <div class="raio-text">
-        <h2 class="section-title">Raio de Atuação</h2>
+        <div class="section-header-premium" style="margin: 0 0 1rem 0; padding: 0; text-align: left;">
+          <div class="section-badge" style="background: rgba(0,0,0,0.15); color: #343432;">ALCANCE</div>
+          <h2 style="margin-bottom: 0;">Raio de <strong>Atuação</strong></h2>
+        </div>
         <p>Nossa fábrica está estrategicamente localizada para atender num raio de até <strong>500km</strong>, cobrindo SP, RJ, MG e PR.</p>
         <a href="/prototipo-hilariom/atuacao/" class="link-more">Ver cobertura completa →</a>
       </div>
     </div>
   </section>
 
+  <!-- CTA TRABALHE CONOSCO -->
+  <section class="careers-banner">
+    <div class="careers-box hover-scale">
+      <div class="careers-content">
+        <h2>Faça parte do nosso time</h2>
+        <p>Buscamos talentos que queiram construir grandes obras com a gente. Venha crescer na Hilariom.</p>
+        <a href="/prototipo-hilariom/carreiras/" class="careers-btn">Trabalhe Conosco</a>
+      </div>
+      <div class="careers-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+      </div>
+    </div>
+  </section>
+
   <!-- 9. PAINEL DE CONTATO -->
   <section class="contato-panel">
-    <h2 class="section-title">Fale Conosco</h2>
-    <p class="section-subtitle">Escolha o canal que preferir</p>
+    <div class="section-header-premium fade-in-up" style="margin-top: 0;">
+      <div class="section-badge">ATENDIMENTO</div>
+      <h2>Fale <strong>Conosco</strong></h2>
+      <p>Escolha o canal de comunicação que preferir.</p>
+    </div>
     
     <div class="contact-grid">
       <a href="https://api.whatsapp.com/send?phone=5511989652498&text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento" target="_blank" rel="noopener" class="contact-btn whatsapp">
@@ -376,10 +456,15 @@ import { produtos } from '../data/produtos.js';
     padding: 0 1rem;
   }
 
-  .grid-4 {
+  .grid-fast-access {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
     gap: 0.5rem;
+  }
+  @media (min-width: 768px) {
+    .grid-fast-access {
+      grid-template-columns: repeat(7, 1fr);
+    }
   }
 
   .quick-btn {
@@ -449,30 +534,222 @@ import { produtos } from '../data/produtos.js';
     font-weight: 500;
   }
 
-  /* ===== 4. QUEM SOMOS ===== */
+  /* ===== 4. QUEM SOMOS (PREMIUM) ===== */
   .about-preview {
-    padding: 0 1.5rem 2rem;
+    padding: 2rem 0 2.5rem;
   }
 
-  .about-img-wrapper {
+  /* Hero image with overlay badge */
+  .about-hero-img {
+    position: relative;
     width: 100%;
-    height: 200px;
-    border-radius: var(--border-radius);
+    height: 240px;
     overflow: hidden;
-    margin-bottom: 1.25rem;
   }
 
-  .about-img-wrapper img {
+  .about-hero-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .about-text p {
-    font-size: 0.95rem;
+  .about-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.3) 50%, transparent 100%);
+  }
+
+  .about-hero-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    z-index: 2;
+  }
+
+  .about-badge-label {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fce883;
+    background: rgba(252, 232, 131, 0.15);
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 0.6rem;
+  }
+
+  .about-hero-title {
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .about-hero-title strong {
+    font-weight: 800;
+    color: #fff;
+  }
+
+  /* Highlights bar */
+  .about-highlights {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: var(--primary-color);
+    gap: 0.5rem;
+  }
+
+  .about-highlight-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+  }
+
+  .about-hl-value {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #fce883;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .about-hl-label {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .about-hl-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+
+  /* Text content */
+  .about-content {
+    padding: 1.75rem 1.5rem 0;
+  }
+
+  .about-content p {
+    font-size: 0.92rem;
     color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .about-content p strong {
+    color: var(--text-main);
+    font-weight: 700;
+  }
+
+  .about-accent-divider {
+    width: 40px;
+    height: 3px;
+    background: #fce883;
+    border-radius: 2px;
+    margin: 1.25rem 0;
+  }
+
+  /* Factory card */
+  .about-factory-card {
+    margin: 1.75rem 1.5rem 0;
+    padding: 1.25rem;
+    background: #f8f8f6;
+    border-radius: 12px;
+    border-left: 4px solid #fce883;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .about-factory-icon {
+    width: 48px;
+    height: 48px;
+    background: #fce883;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--primary-color);
+  }
+
+  .about-factory-text h3 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .about-factory-text p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .about-factory-text p strong {
+    color: var(--text-main);
+  }
+
+  /* Closing quote + CTA */
+  .about-closing {
+    padding: 1.75rem 1.5rem 0;
+  }
+
+  .about-quote {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-main);
+    line-height: 1.65;
+    margin: 0 0 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid #fce883;
+    font-weight: 500;
+  }
+
+  .about-cta-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(52, 52, 50, 0.2);
+  }
+
+  .about-cta-btn svg {
+    transition: transform 0.2s ease;
+  }
+
+  .about-cta-btn:active {
+    transform: scale(0.97);
+  }
+
+  .about-cta-btn:hover {
+    box-shadow: 0 6px 20px rgba(52, 52, 50, 0.3);
+  }
+
+  .about-cta-btn:hover svg {
+    transform: translateX(3px);
   }
 
   .link-more {
@@ -502,6 +779,9 @@ import { produtos } from '../data/produtos.js';
     gap: 1rem;
     padding-bottom: 1rem;
     scrollbar-width: none;
+    scroll-padding-left: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
   
 
@@ -509,9 +789,9 @@ import { produtos } from '../data/produtos.js';
   .markets-scroll::-webkit-scrollbar { display: none; }
 
   .market-card {
-    flex: 0 0 auto;
-    min-width: 70%;
-    scroll-snap-align: center;
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     position: relative;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -555,7 +835,88 @@ import { produtos } from '../data/produtos.js';
 
   .market-label p {
     font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  /* ===== PARTNER BANNER ===== */
+  .partner-mini-banner {
+    padding: 0 1.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .partner-banners-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .partner-banners-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .partner-banner-content {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--accent-color);
+    gap: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .partner-banner-content:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .partner-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(252, 232, 131, 0.2);
+    color: var(--primary-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .partner-text {
+    flex-grow: 1;
+  }
+
+  .partner-text h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.2rem;
+  }
+
+  .partner-text p {
+    font-size: 0.8rem;
     color: var(--text-muted);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .partner-banner-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .partner-banner-btn:hover {
+    background: #f7e06a;
   }
 
   /* ===== 6. OBRAS ===== */
@@ -672,6 +1033,9 @@ import { produtos } from '../data/produtos.js';
     gap: 1.25rem;
     padding-bottom: 1.5rem;
     scrollbar-width: none;
+    scroll-padding-left: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .pecas-scroll::-webkit-scrollbar {
@@ -679,8 +1043,7 @@ import { produtos } from '../data/produtos.js';
   }
 
   .peca-card-premium {
-    flex: 0 0 auto;
-    width: 65%;
+    flex: 0 0 80%;
     display: flex;
     flex-direction: column;
     background: #f8f9fa;
@@ -690,11 +1053,12 @@ import { produtos } from '../data/produtos.js';
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   @media (min-width: 768px) {
     .peca-card-premium {
-      width: 260px;
+      flex: 0 0 280px;
     }
   }
 
@@ -832,6 +1196,68 @@ import { produtos } from '../data/produtos.js';
     color: var(--text-muted);
     line-height: 1.5;
     margin-bottom: 1rem;
+  }
+
+  /* ===== CAREERS BANNER ===== */
+  .careers-banner {
+    padding: 0 1.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .careers-box {
+    background: var(--text-main);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .careers-box::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at top right, rgba(252, 232, 131, 0.15), transparent 60%);
+    pointer-events: none;
+  }
+  .careers-content {
+    position: relative;
+    z-index: 2;
+  }
+  .careers-content h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: #fce883;
+  }
+  .careers-content p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+  .careers-btn {
+    display: inline-block;
+    background: #fce883;
+    color: var(--text-main);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .careers-btn:hover { background: #f7e06a; }
+  .careers-icon {
+    color: rgba(252, 232, 131, 0.3);
+    flex-shrink: 0;
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .careers-icon { display: block; }
+    .careers-box { padding: 3rem; }
   }
 
   /* ===== 9. CONTATO PANEL ===== */
@@ -996,11 +1422,13 @@ import { produtos } from '../data/produtos.js';
 
   .processos-scroll {
     display: flex;
-    gap: 30px;
-    padding: 20px 0 40px 0; /* extra padding bottom for the scrollbar */
+    gap: 20px;
+    padding: 20px 1.5rem 40px 1.5rem;
     overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: #fce883 transparent;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 1.5rem;
   }
 
   /* Custom scrollbar for webkit */
@@ -1018,7 +1446,8 @@ import { produtos } from '../data/produtos.js';
   }
 
   .processo-card {
-    min-width: 320px;
+    flex: 0 0 85%;
+    min-width: 280px;
     height: 420px;
     background: #f4f5f8;
     border-radius: 12px;
@@ -1028,6 +1457,14 @@ import { produtos } from '../data/produtos.js';
     position: relative;
     overflow: hidden;
     padding: 40px 30px 40px 100px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  @media (min-width: 768px) {
+    .processo-card {
+      flex: 0 0 320px;
+    }
   }
 
   .processo-accent {
@@ -1110,6 +1547,15 @@ import { produtos } from '../data/produtos.js';
       
       if (!scrollArea || !leftBtn || !rightBtn) return;
 
+      // Get the width of the first card to use as scroll step
+      const getCardWidth = () => {
+        const firstCard = scrollArea.children[0];
+        if (!firstCard) return 300;
+        const style = getComputedStyle(scrollArea);
+        const gap = parseFloat(style.gap) || 16;
+        return firstCard.offsetWidth + gap;
+      };
+
       const updateButtons = () => {
         const { scrollLeft, scrollWidth, clientWidth } = scrollArea;
         if (scrollLeft > 5) {
@@ -1136,11 +1582,11 @@ import { produtos } from '../data/produtos.js';
       setTimeout(updateButtons, 100);
 
       leftBtn.addEventListener('click', () => {
-        scrollArea.scrollBy({ left: -200, behavior: 'smooth' });
+        scrollArea.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
       });
 
       rightBtn.addEventListener('click', () => {
-        scrollArea.scrollBy({ left: 200, behavior: 'smooth' });
+        scrollArea.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
       });
     });
   }

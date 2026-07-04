@@ -2,89 +2,255 @@
 import Layout from '../layouts/Layout.astro';
 
 const parceiros = [
-  { name: 'Votorantim Cimentos', time: '15 anos', logo: 'https://via.placeholder.com/150x80/f0f0f0/999999?text=Logo+A' },
-  { name: 'Gerdau', time: '12 anos', logo: 'https://via.placeholder.com/150x80/f0f0f0/999999?text=Logo+B' },
-  { name: 'ArcelorMittal', time: '10 anos', logo: 'https://via.placeholder.com/150x80/f0f0f0/999999?text=Logo+C' },
-  { name: 'Tigre', time: '8 anos', logo: 'https://via.placeholder.com/150x80/f0f0f0/999999?text=Logo+D' },
+  { name: 'Votorantim Cimentos', time: '15 anos', logo: 'https://placehold.co/300x120/fcfcfc/1a1a1a?text=Votorantim\nCimentos&font=montserrat' },
+  { name: 'Gerdau', time: '12 anos', logo: 'https://placehold.co/300x120/fcfcfc/1a1a1a?text=Gerdau&font=montserrat' },
+  { name: 'ArcelorMittal', time: '10 anos', logo: 'https://placehold.co/300x120/fcfcfc/1a1a1a?text=ArcelorMittal&font=montserrat' },
+  { name: 'Tigre', time: '8 anos', logo: 'https://placehold.co/300x120/fcfcfc/1a1a1a?text=Tigre&font=montserrat' },
 ];
 ---
 
-<Layout title="Parcerias de Sucesso">
-  <div class="header-spacing"></div>
-  
-  <header class="page-header">
-    <h1 class="fade-in-up">Parcerias</h1>
-    <p class="fade-in-up delay-1 text-muted">Junto aos melhores fornecedores do mercado.</p>
+<Layout title="Nossos Parceiros | Hilariom">
+  <!-- Top Nav Actions (Back button) -->
+  <div class="top-actions fade-in-up">
+    <a href="/prototipo-hilariom/" class="back-btn glass-panel hover-scale">
+      <span class="icon">←</span> Voltar
+    </a>
+  </div>
+
+  <header class="page-header-premium fade-in-up">
+    <div class="badge-accent">NOSSOS PARCEIROS</div>
+    <h1>Construindo <strong>junto com os melhores</strong></h1>
+    <p class="text-muted-premium">A excelência das nossas estruturas pré-fabricadas só é possível graças à confiança e qualidade dos nossos fornecedores e parceiros de longa data.</p>
   </header>
 
-  <section class="partners-grid fade-in-up delay-2">
+  <section class="partners-grid fade-in-up delay-1">
     {parceiros.map((p) => (
-      <div class="partner-card glass-panel">
-        <img src={p.logo} alt={p.name} loading="lazy" />
-        <div class="partner-info">
+      <div class="partner-card-premium hover-scale">
+        <div class="partner-logo-wrapper">
+          <img src={p.logo} alt={`Logo ${p.name}`} loading="lazy" />
+        </div>
+        <div class="partner-info-premium">
           <h4>{p.name}</h4>
-          <span class="badge">{p.time} de parceria</span>
+          <div class="partner-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>{p.time} de parceria</span>
+          </div>
         </div>
       </div>
     ))}
   </section>
 
+  <section class="cta-section fade-in-up delay-2">
+    <div class="cta-box glass-panel">
+      <h3>Quer ser um fornecedor?</h3>
+      <p>Junte-se à nossa rede de parceiros e faça parte de grandes obras pelo país.</p>
+      <a href="/prototipo-hilariom/seja-parceiro/" class="btn-primary hover-scale">Cadastre sua Empresa</a>
+    </div>
+  </section>
+
 </Layout>
 
 <style>
-  .header-spacing { height: 40px; }
-  .page-header { padding: 1rem 1.5rem; }
-  .page-header h1 { font-size: 2rem; color: var(--primary-color); }
-  .text-muted { color: var(--text-muted); }
-
-  .partners-grid {
-    padding: 1rem 1.5rem 3rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+  /* ===== NAVIGATION ===== */
+  .top-actions {
+    padding: 1.5rem 1.5rem 0.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .partner-card {
-    background: var(--surface-color);
-    border-radius: var(--border-radius);
-    padding: 1rem;
-    text-align: center;
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 20px;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    background: #ffffff;
     box-shadow: var(--shadow-sm);
+  }
+
+  /* ===== HEADER ===== */
+  .page-header-premium {
+    padding: 1.5rem 1.5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .badge-accent {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #bfa519;
+    background: rgba(252, 232, 131, 0.3);
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .page-header-premium h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .page-header-premium h1 strong {
+    font-weight: 900;
+    color: var(--text-main);
+    display: block;
+  }
+
+  .text-muted-premium {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ===== GRID DE PARCEIROS ===== */
+  .partners-grid {
+    padding: 0 1.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  @media (min-width: 768px) {
+    .partners-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .partners-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .partner-card-premium {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.04);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .partner-card-premium:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+    border-color: rgba(252, 232, 131, 0.5);
+  }
+
+  .partner-logo-wrapper {
+    background: #fafafa;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+    aspect-ratio: 16/9;
+  }
+
+  .partner-logo-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.4s ease;
+  }
+
+  .partner-card-premium:hover .partner-logo-wrapper img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .partner-info-premium {
+    padding: 1.5rem;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.75rem;
   }
 
-  .partner-card img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    transition: all 0.2s;
-  }
-
-  .partner-card:hover img {
-    filter: grayscale(0%);
-    opacity: 1;
-  }
-
-  .partner-info h4 {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+  .partner-info-premium h4 {
+    font-size: 1.1rem;
+    font-weight: 800;
     color: var(--text-main);
+    margin: 0;
   }
 
-  .badge {
-    background: #e0f2f1;
-    color: #00796b;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: 600;
+  .partner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(252, 232, 131, 0.15);
+    color: #a89115;
+    padding: 0.4rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
   }
 
-  /* Utilities */
+  /* ===== CTA SECTION ===== */
+  .cta-section {
+    padding: 0 1.5rem 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .cta-box {
+    background: var(--surface-color);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-top: 4px solid #fce883;
+  }
+
+  .cta-box h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-box p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .btn-primary {
+      width: auto;
+    }
+  }
+
+  /* ===== UTILITIES ===== */
   .fade-in-up {
     animation: fadeInUp 0.5s ease forwards;
     opacity: 0;

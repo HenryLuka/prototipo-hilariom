@@ -13,8 +13,8 @@ const { produto } = Astro.props;---
 
 <Layout title={`${produto.title} | Hilariom`}>
   <div class="top-nav-bar">
-    <a href="/prototipo-hilariom/produtos/" class="back-btn glass-panel hover-scale">
-      <span class="icon">←</span> Voltar para Catálogo
+    <a href="/prototipo-hilariom/produtos/" class="back-btn glass-panel hover-scale" id="smart-back-btn">
+      <span class="icon">←</span> Voltar
     </a>
   </div>
 
@@ -191,13 +191,20 @@ const { produto } = Astro.props;---
     gap: 1rem;
     overflow-x: auto;
     padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     scroll-snap-type: x mandatory;
+    scroll-padding-left: 0.5rem;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
+  .related-works::-webkit-scrollbar { display: none; }
+
   .work-card {
-    min-width: 80%;
-    scroll-snap-align: center;
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     position: relative;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -252,6 +259,22 @@ const { produto } = Astro.props;---
     to { opacity: 1; transform: translateY(0); }
   }
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const backBtn = document.getElementById('smart-back-btn');
+    if (backBtn) {
+      backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = '/prototipo-hilariom/produtos/';
+        }
+      });
+    }
+  });
+</script>
 
 
 
