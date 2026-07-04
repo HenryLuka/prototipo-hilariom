@@ -418,13 +418,13 @@ import Layout from '../../layouts/Layout.astro';
       setTimeout(updateButtons, 100);
 
       leftBtn.addEventListener('click', () => {
-        const firstCard = scrollArea.children[0];
+        const firstCard = scrollArea.children[0] as HTMLElement;
         const gap = parseFloat(getComputedStyle(scrollArea).gap) || 12;
         const step = firstCard ? firstCard.offsetWidth + gap : 150;
         scrollArea.scrollBy({ left: -step, behavior: 'smooth' });
       });
       rightBtn.addEventListener('click', () => {
-        const firstCard = scrollArea.children[0];
+        const firstCard = scrollArea.children[0] as HTMLElement;
         const gap = parseFloat(getComputedStyle(scrollArea).gap) || 12;
         const step = firstCard ? firstCard.offsetWidth + gap : 150;
         scrollArea.scrollBy({ left: step, behavior: 'smooth' });

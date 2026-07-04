@@ -1549,7 +1549,7 @@ import { produtos } from '../data/produtos.js';
 
       // Get the width of the first card to use as scroll step
       const getCardWidth = () => {
-        const firstCard = scrollArea.children[0];
+        const firstCard = scrollArea.children[0] as HTMLElement;
         if (!firstCard) return 300;
         const style = getComputedStyle(scrollArea);
         const gap = parseFloat(style.gap) || 16;
