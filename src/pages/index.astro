@@ -363,7 +363,9 @@ import { produtos } from '../data/produtos.js';
   }
   @media (min-width: 768px) {
     .home-container {
-      padding: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
       gap: 5rem;
     }
   }
@@ -488,7 +490,9 @@ import { produtos } from '../data/produtos.js';
   }
   @media (min-width: 768px) {
     .grid-fast-access {
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 160px));
+      justify-content: center;
+      gap: 1rem;
     }
   }
 
