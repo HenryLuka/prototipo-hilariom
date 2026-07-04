@@ -1,29 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { produtos } from '../data/produtos.js';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
 <Layout title="Produtos e Peças">
-  <div class="header-spacing"></div>
-  
-  <header class="page-header">
-    <div class="header-content">
-      <div class="accent-line"></div>
-      <h1 class="fade-in-up">Catálogo <span class="text-yellow">Técnico</span></h1>
-      <p class="fade-in-up delay-1 text-light">Peças em concreto pré-fabricado projetadas para máxima resistência e durabilidade em estruturas industriais, comerciais e logísticas.</p>
-    </div>
-    
-    <!-- Abstract structural background -->
-    <div class="structural-bg">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,200 L100,100 L150,200 Z" fill="rgba(252, 232, 131, 0.05)" />
-        <path d="M200,200 L300,50 L400,200 Z" fill="rgba(252, 232, 131, 0.03)" />
-        <line x1="50" y1="0" x2="50" y2="200" stroke="rgba(252, 232, 131, 0.1)" stroke-width="2" />
-        <line x1="250" y1="0" x2="250" y2="200" stroke="rgba(252, 232, 131, 0.1)" stroke-width="2" />
-        <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(252, 232, 131, 0.1)" stroke-width="2" />
-      </svg>
-    </div>
-  </header>
+  <PageHeader 
+    title1="Catálogo" 
+    title2="Técnico" 
+    subtitle="Peças em concreto pré-fabricado projetadas para máxima resistência e durabilidade em estruturas industriais, comerciais e logísticas."
+  />
 
   <section class="products-container">
     <div class="products-grid">
@@ -57,60 +43,6 @@ import { produtos } from '../data/produtos.js';
 </Layout>
 
 <style>
-  .header-spacing { height: 60px; background: #1a1a1a; }
-  
-  .page-header {
-    position: relative;
-    padding: 2.5rem 1.5rem 2rem;
-    background-color: #1a1a1a; /* Dark premium background */
-    color: white;
-    overflow: hidden;
-  }
-  
-  .header-content {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .accent-line {
-    width: 80px;
-    height: 4px;
-    background-color: #fce883; /* Hilariom yellow */
-    margin-bottom: 1rem;
-  }
-  
-  .page-header h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    text-transform: uppercase;
-    color: #ffffff; /* Explicitly set to white so "Catálogo" is visible */
-  }
-
-  .text-yellow {
-    color: #fce883;
-  }
-
-  .text-light { 
-    color: #a0a0a0; 
-    font-size: 1.15rem;
-    max-width: 700px;
-    line-height: 1.6;
-  }
-
-  .structural-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-  }
-
   .products-container {
     background-color: #f8f9fa;
     padding: 4rem 1.5rem 6rem;

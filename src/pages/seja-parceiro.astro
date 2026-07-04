@@ -1,14 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
 <Layout title="Seja Nosso Parceiro">
-  <div class="header-spacing"></div>
-  
-  <header class="page-header">
-    <h1 class="fade-in-up">Seja Parceiro</h1>
-    <p class="fade-in-up delay-1 text-muted">Cresça junto com a Hilariom.</p>
-  </header>
+  <PageHeader 
+    title1="Seja" 
+    title2="Parceiro" 
+    subtitle="Cresça junto com a Hilariom."
+  />
 
   <section class="partner-section fade-in-up delay-2">
     <div class="value-prop glass-panel">
@@ -50,11 +50,6 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-  .header-spacing { height: 40px; }
-  .page-header { padding: 1rem 1.5rem; }
-  .page-header h1 { font-size: 2rem; color: var(--primary-color); }
-  .text-muted { color: var(--text-muted); }
-
   .partner-section {
     padding: 1rem 1.5rem 3rem;
   }

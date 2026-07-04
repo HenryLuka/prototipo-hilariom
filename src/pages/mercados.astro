@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const markets = [
   { 
@@ -34,12 +35,11 @@ const markets = [
 ---
 
 <Layout title="Mercados de Atuação">
-  <div class="header-spacing"></div>
-  
-  <header class="page-header">
-    <h1 class="fade-in-up">Mercados de Atuação</h1>
-    <p class="fade-in-up delay-1 text-muted">Soluções ideais para o seu setor.</p>
-  </header>
+  <PageHeader 
+    title1="Mercados de" 
+    title2="Atuação" 
+    subtitle="Soluções ideais para o seu setor."
+  />
 
   <section class="markets-list">
     {markets.map((m, index) => (
@@ -63,19 +63,6 @@ const markets = [
 </Layout>
 
 <style>
-  .header-spacing { height: 40px; }
-  
-  .page-header {
-    padding: 1rem 1.5rem;
-  }
-  
-  .page-header h1 {
-    font-size: 2rem;
-    color: var(--primary-color);
-  }
-  
-  .text-muted { color: var(--text-muted); }
-
   .markets-list {
     padding: 1rem 1.5rem 3rem;
     display: flex;
