@@ -10,7 +10,7 @@
 <style>
   .fab {
     position: fixed;
-    bottom: calc(var(--nav-height) + 16px);
+    bottom: calc(var(--nav-height) + 32px); /* Lifted to stay 16px above the floating island */
     right: 16px;
     width: 56px;
     height: 56px;
@@ -25,7 +25,12 @@
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
   }
   
-  /* Constrain removed so it stays on the bottom right corner in desktop too */
+  @media (min-width: 768px) {
+    .fab {
+      bottom: calc(var(--nav-height) + 40px); /* Lifted to match desktop floating menu position */
+      right: 24px;
+    }
+  }
 
   .fab:hover {
     transform: scale(1.05);
