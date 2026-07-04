@@ -6,6 +6,7 @@ import compress from 'astro-compress';
 export default defineConfig({
   site: 'https://henryluka.github.io',
   base: '/prototipo-hilariom',
+  trailingSlash: 'always',
   prefetch: true,
   integrations: [
     AstroPWA({
