@@ -38,37 +38,39 @@ const timeline = [
     subtitle="Conheça mais sobre a história da HILARIOM."
   />
 
-  <!-- Highlights Bar -->
-  <section class="sobre-highlights fade-in-up delay-1">
-    {highlights.map((h) => (
-      <div class="sobre-hl-item">
-        <div class="sobre-hl-icon" set:html={h.icon}></div>
-        <div class="sobre-hl-text">
-          <span class="sobre-hl-value">{h.value}</span>
-          <span class="sobre-hl-label">{h.label}</span>
+  <div class="sobre-intro-wrapper">
+    <!-- Highlights Bar -->
+    <section class="sobre-highlights fade-in-up delay-1">
+      {highlights.map((h) => (
+        <div class="sobre-hl-item">
+          <div class="sobre-hl-icon" set:html={h.icon}></div>
+          <div class="sobre-hl-text">
+            <span class="sobre-hl-value">{h.value}</span>
+            <span class="sobre-hl-label">{h.label}</span>
+          </div>
         </div>
-      </div>
-    ))}
-  </section>
+      ))}
+    </section>
 
-  <!-- História Principal -->
-  <section class="sobre-story fade-in-up delay-2">
-    <div class="sobre-story-img skeleton">
-      <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=800&auto=format&fit=crop" alt="Fábrica Hilariom" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
-    </div>
-    
-    <div class="sobre-story-content">
-      <p>Com mais de <strong>30 anos de atuação</strong>, a HILARIOM consolidou-se como uma das referências nacionais em estruturas pré-fabricadas de concreto. Ao longo de sua trajetória, já foram construídos mais de <strong>2 milhões de metros quadrados</strong>, resultado de uma combinação entre tradição, tecnologia e excelência em execução.</p>
+    <!-- História Principal -->
+    <section class="sobre-story fade-in-up delay-2">
+      <div class="sobre-story-img skeleton">
+        <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=800&auto=format&fit=crop" alt="Fábrica Hilariom" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+      </div>
       
-      <div class="sobre-divider"></div>
-      
-      <p>A empresa nasceu dentro de uma das maiores indústrias do setor e, através da <strong>sucessão familiar</strong>, evoluiu para um grupo sólido e diversificado, com atuação em diferentes segmentos da construção civil.</p>
-      
-      <div class="sobre-divider"></div>
-      
-      <p>Hoje, a HILARIOM executa desde <strong>super-obras e projetos de infraestrutura portuária</strong>, até galpões logísticos, obras industriais e comerciais de grande porte.</p>
-    </div>
-  </section>
+      <div class="sobre-story-content">
+        <p>Com mais de <strong>30 anos de atuação</strong>, a HILARIOM consolidou-se como uma das referências nacionais em estruturas pré-fabricadas de concreto. Ao longo de sua trajetória, já foram construídos mais de <strong>2 milhões de metros quadrados</strong>, resultado de uma combinação entre tradição, tecnologia e excelência em execução.</p>
+        
+        <div class="sobre-divider"></div>
+        
+        <p>A empresa nasceu dentro de uma das maiores indústrias do setor e, através da <strong>sucessão familiar</strong>, evoluiu para um grupo sólido e diversificado, com atuação em diferentes segmentos da construção civil.</p>
+        
+        <div class="sobre-divider"></div>
+        
+        <p>Hoje, a HILARIOM executa desde <strong>super-obras e projetos de infraestrutura portuária</strong>, até galpões logísticos, obras industriais e comerciais de grande porte.</p>
+      </div>
+    </section>
+  </div>
 
   <!-- Fábrica -->
   <section class="sobre-fabrica">
@@ -449,6 +451,42 @@ const timeline = [
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  /* ===== DESKTOP INTRO WRAPPER ===== */
+  @media (min-width: 1024px) {
+    .sobre-intro-wrapper {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .sobre-highlights {
+      flex: 0 0 350px;
+      margin: 0;
+      background: #3a3a3a;
+    }
+    
+    .sobre-hl-item {
+      padding: 1.75rem 1.5rem;
+    }
+
+    .sobre-story {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sobre-story-img {
+      height: 350px;
+      margin-bottom: 2rem;
+    }
+
+    .sobre-story-content p {
+      font-size: 1.05rem;
+      line-height: 1.8;
     }
   }
 </style>
