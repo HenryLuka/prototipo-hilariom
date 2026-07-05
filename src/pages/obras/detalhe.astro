@@ -84,6 +84,14 @@ import Layout from '../../layouts/Layout.astro';
     </div>
   </section>
 
+  <!-- Gallery Modal -->
+  <div id="gallery-modal" class="modal-backdrop">
+    <div class="modal-content">
+      <button class="close-modal" id="close-modal">&times;</button>
+      <img id="modal-img" src="" alt="Foto expandida" />
+    </div>
+  </div>
+
 </Layout>
 
 <style>
@@ -364,25 +372,76 @@ import Layout from '../../layouts/Layout.astro';
 
   .scroll-btn.left { left: -10px; }
   .scroll-btn.right { right: -10px; }
+
+  /* Modal Styles */
+  .modal-backdrop {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .modal-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  .modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+  .close-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 10px;
+  }
 </style>
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    // Gallery Logic
+    // Gallery Modal Logic
     const galleryImgs = document.querySelectorAll('.gallery-img');
-    const heroImg = document.querySelector('.obra-hero-img') as HTMLImageElement;
-    
+    const modal = document.getElementById('gallery-modal');
+    const modalImg = document.getElementById('modal-img') as HTMLImageElement;
+    const closeModal = document.getElementById('close-modal');
+
     galleryImgs.forEach(img => {
       img.addEventListener('click', () => {
-        if (heroImg && img instanceof HTMLImageElement) {
-          heroImg.style.opacity = '0';
-          setTimeout(() => {
-            heroImg.src = img.src;
-            heroImg.style.opacity = '1';
-          }, 200);
+        if (modal && modalImg && img instanceof HTMLImageElement) {
+          modalImg.src = img.src;
+          modal.classList.add('active');
         }
       });
     });
+
+    if (closeModal && modal) {
+      closeModal.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    }
 
     // Scroll Buttons Logic
     const containers = document.querySelectorAll('.scroll-container');
