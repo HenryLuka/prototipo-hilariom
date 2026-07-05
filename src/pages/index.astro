@@ -1304,36 +1304,51 @@ import { produtos } from '../data/produtos.js';
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 1.25rem 0.5rem;
-    border-radius: var(--border-radius);
+    gap: 0.75rem;
+    padding: 1.5rem 0.5rem;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: var(--shadow-sm);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+  }
+
+  .contact-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border-color: rgba(0,0,0,0.1);
   }
 
   .contact-btn:active { transform: scale(0.97); }
 
-  .contact-btn.whatsapp {
-    background: #25D366;
-    color: white;
+  .contact-btn svg {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease;
   }
 
-  .contact-btn.instagram {
-    background: linear-gradient(135deg, #833AB4, #E1306C, #F77737);
-    color: white;
+  .contact-btn:hover svg {
+    transform: scale(1.1);
   }
 
-  .contact-btn.telefone {
-    background: var(--primary-color);
-    color: white;
+  .contact-btn.whatsapp svg {
+    color: #25D366;
   }
 
-  .contact-btn.email {
-    background: var(--accent-color);
-    color: var(--primary-color);
+  .contact-btn.instagram svg {
+    color: #E1306C;
+  }
+
+  .contact-btn.telefone svg {
+    color: var(--text-main);
+  }
+
+  .contact-btn.email svg {
+    color: #eab308;
   }
 
   /* ===== SHARED ===== */
@@ -1604,11 +1619,11 @@ import { produtos } from '../data/produtos.js';
       setTimeout(updateButtons, 100);
 
       leftBtn.addEventListener('click', () => {
-        scrollArea.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+        scrollArea.scrollBy({ left: -(getCardWidth() + 20), behavior: 'smooth' });
       });
 
       rightBtn.addEventListener('click', () => {
-        scrollArea.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+        scrollArea.scrollBy({ left: getCardWidth() + 20, behavior: 'smooth' });
       });
     });
   }

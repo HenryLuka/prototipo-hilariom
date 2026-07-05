@@ -479,13 +479,13 @@ import Layout from '../../layouts/Layout.astro';
       leftBtn.addEventListener('click', () => {
         const firstCard = scrollArea.children[0] as HTMLElement;
         const gap = parseFloat(getComputedStyle(scrollArea).gap) || 12;
-        const step = firstCard ? firstCard.offsetWidth + gap : 150;
+        const step = (firstCard ? firstCard.offsetWidth + gap : 150) + 20;
         scrollArea.scrollBy({ left: -step, behavior: 'smooth' });
       });
       rightBtn.addEventListener('click', () => {
         const firstCard = scrollArea.children[0] as HTMLElement;
         const gap = parseFloat(getComputedStyle(scrollArea).gap) || 12;
-        const step = firstCard ? firstCard.offsetWidth + gap : 150;
+        const step = (firstCard ? firstCard.offsetWidth + gap : 150) + 20;
         scrollArea.scrollBy({ left: step, behavior: 'smooth' });
       });
     });

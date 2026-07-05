@@ -426,13 +426,13 @@ const { obra } = Astro.props;
       leftBtn.addEventListener('click', () => {
         const firstCard = scrollArea.children[0] as HTMLElement;
         const gap = parseFloat(getComputedStyle(scrollArea).gap) || 16;
-        const step = firstCard ? firstCard.offsetWidth + gap : 100;
+        const step = (firstCard ? firstCard.offsetWidth + gap : 100) + 20;
         scrollArea.scrollBy({ left: -step, behavior: 'smooth' });
       });
       rightBtn.addEventListener('click', () => {
         const firstCard = scrollArea.children[0] as HTMLElement;
         const gap = parseFloat(getComputedStyle(scrollArea).gap) || 16;
-        const step = firstCard ? firstCard.offsetWidth + gap : 100;
+        const step = (firstCard ? firstCard.offsetWidth + gap : 100) + 20;
         scrollArea.scrollBy({ left: step, behavior: 'smooth' });
       });
     });
