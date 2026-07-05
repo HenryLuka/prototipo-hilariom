@@ -1,17 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
 <Layout title="Apresentação Comercial">
+  <PageHeader 
+    title1="Apresentação" 
+    title2="Institucional" 
+    subtitle="Conheça a fundo o padrão de qualidade Hilariom. Baixe nosso portfólio completo para compartilhar com sua equipe." 
+  />
+
   <div class="apresentacao-wrapper">
     <div class="apresentacao-container">
       
       <!-- Lado Esquerdo: Conteúdo e Ações -->
       <div class="content-side fade-in-up">
         <div class="badge">Material Exclusivo</div>
-        <h1>Apresentação Institucional</h1>
-        <p class="subtitle">Conheça a fundo o padrão de qualidade Hilariom. Baixe nosso portfólio completo para compartilhar com sua equipe.</p>
-        
         <div class="features-list">
           <div class="feature-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>

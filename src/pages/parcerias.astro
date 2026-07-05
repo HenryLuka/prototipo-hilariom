@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const parceiros = [
   { name: 'Votorantim Cimentos', time: '15 anos', logo: 'https://placehold.co/300x120/fcfcfc/1a1a1a?text=Votorantim\nCimentos&font=montserrat' },
@@ -17,11 +18,11 @@ const parceiros = [
     </a>
   </div>
 
-  <header class="page-header-premium fade-in-up">
-    <div class="badge-accent">NOSSOS PARCEIROS</div>
-    <h1>Construindo <strong>junto com os melhores</strong></h1>
-    <p class="text-muted-premium">A excelência das nossas estruturas pré-fabricadas só é possível graças à confiança e qualidade dos nossos fornecedores e parceiros de longa data.</p>
-  </header>
+  <PageHeader 
+    title1="Nossos" 
+    title2="Parceiros" 
+    subtitle="A excelência das nossas estruturas pré-fabricadas só é possível graças à confiança e qualidade dos nossos fornecedores e parceiros de longa data." 
+  />
 
   <section class="partners-grid fade-in-up delay-1">
     {parceiros.map((p) => (
