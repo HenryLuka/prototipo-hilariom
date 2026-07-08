@@ -112,13 +112,19 @@ import PageHeader from '../components/PageHeader.astro';
 
   .form-group input, .form-group textarea {
     width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--border-color);
+    padding: 0.9rem 1rem;
+    border: 2px solid #a0a0a0;
     border-radius: 8px;
     font-family: inherit;
     font-size: 1rem;
-    background: #fdfdfd;
+    background: #ffffff;
+    color: var(--text-main);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: all 0.2s;
+  }
+
+  .form-group input::placeholder, .form-group textarea::placeholder {
+    color: #888888;
   }
 
   .form-group input:focus, .form-group textarea:focus {
@@ -141,18 +147,7 @@ import PageHeader from '../components/PageHeader.astro';
     margin-top: 1rem;
   }
 
-  /* Utilities */
-  .fade-in-up {
-    animation: fadeInUp 0.5s ease forwards;
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  
 </style>
 
 

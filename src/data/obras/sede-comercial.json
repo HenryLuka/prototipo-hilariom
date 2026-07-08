@@ -1,0 +1,32 @@
+{
+  "id": "sede-comercial",
+  "title": "Sede Comercial",
+  "segment": "Comercial",
+  "img": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
+  "local": "São José dos Campos, SP",
+  "area": "8.500 m²",
+  "volume": "950 m³",
+  "prazo": "35 dias",
+  "desc": "Edifício de escritórios moderno de múltiplos pavimentos utilizando lajes alveolares protendidas, eliminando a necessidade de escoramento e permitindo acabamento rápido dos andares.",
+  "pecas": [
+    {
+      "id": "lajes",
+      "title": "Lajes Alveolares",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/04.png"
+    },
+    {
+      "id": "vigas-mezanino",
+      "title": "Vigas de Mezanino",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/09.png"
+    },
+    {
+      "id": "escadas",
+      "title": "Escadas",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/02.png"
+    }
+  ],
+  "gallery": [
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=300&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=300&auto=format&fit=crop"
+  ]
+}

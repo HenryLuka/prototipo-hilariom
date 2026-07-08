@@ -1,32 +1,90 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: henryluka/prototipo-hilariom
   branch: main
 
-media_folder: "src/assets/images"
-public_folder: "../assets/images"
+local_backend: true
+
+# Configurações Visuais do CMS
+logo_url: "/prototipo-hilariom/logo.png"
+locale: "pt"
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "obras"
-    label: "Obras Realizadas"
-    folder: "src/content/obras"
+    label: "Obras (Portfólio)"
+    folder: "src/data/obras"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "json"
+    format: "json"
+    identifier_field: "title"
+    summary: '{{title}} - {{local}}'
     fields:
-      - {label: "Título", name: "title", widget: "string"}
-      - {label: "Segmento", name: "segmento", widget: "select", options: ["Industrial", "Comercial", "Logística", "Agronegócio", "Institucionais", "Garagens"]}
-      - {label: "Foto Hero", name: "image", widget: "image"}
-      - {label: "Volume (m³)", name: "volume", widget: "string", required: false}
-      - {label: "Prazo", name: "prazo", widget: "string", required: false}
-      - {label: "Local", name: "local", widget: "string"}
-      - {label: "Corpo de Texto", name: "body", widget: "markdown"}
-
+      - {label: "ID (Identificador único na URL)", name: "id", widget: "string", hint: "Exemplo: galpao-logistico-sp. Sem espaços ou acentos."}
+      - {label: "Título da Obra", name: "title", widget: "string"}
+      - {label: "Segmento", name: "segment", widget: "select", options: ["Industrial", "Comercial", "Logística", "Agronegócio", "Institucionais", "Garagens"]}
+      - {label: "Imagem Principal (Hero)", name: "img", widget: "image", hint: "Faça o upload ou cole a URL da imagem destaque da obra"}
+      - {label: "Localização", name: "local", widget: "string", hint: "Ex: São Paulo, SP"}
+      
+      # Métricas (Agrupadas visualmente, mas mantendo a mesma estrutura JSON)
+      - {label: "Área Total", name: "area", widget: "string", required: false, hint: "Exemplo: 15.000 m²"}
+      - {label: "Volume de Concreto", name: "volume", widget: "string", required: false, hint: "Exemplo: 1.250 m³"}
+      - {label: "Prazo de Execução", name: "prazo", widget: "string", required: false, hint: "Exemplo: 45 dias"}
+      
+      - {label: "Descrição da Obra", name: "desc", widget: "text", hint: "Resumo do case de sucesso"}
+      
+      - label: "Peças Pré-fabricadas Utilizadas"
+        name: "pecas"
+        widget: "list"
+        required: false
+        summary: '{{fields.title}}'
+        fields:
+          - {label: "ID da peça", name: "id", widget: "string"}
+          - {label: "Título da Peça", name: "title", widget: "string"}
+          - {label: "Imagem da Peça", name: "img", widget: "image"}
+          
+      - label: "Galeria de Fotos da Obra"
+        name: "gallery"
+        widget: "list"
+        required: false
+        hint: "Adicione fotos extras para o carrossel da obra"
+        field: {label: "Foto", name: "photo", widget: "image"}
+        
   - name: "produtos"
-    label: "Produtos / Peças"
-    folder: "src/content/produtos"
+    label: "Produtos (Catálogo)"
+    folder: "src/data/produtos"
     create: true
-    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    identifier_field: "title"
+    summary: '{{title}}'
     fields:
-      - {label: "Nome da Peça", name: "title", widget: "string"}
-      - {label: "Foto Principal", name: "image", widget: "image"}
-      - {label: "Dados Técnicos", name: "tecnicos", widget: "text", required: false}
-      - {label: "Descrição", name: "body", widget: "markdown"}
+      - {label: "ID (slug)", name: "id", widget: "string"}
+      - {label: "Título do Produto", name: "title", widget: "string"}
+      - {label: "Imagem do Produto", name: "img", widget: "image"}
+      - {label: "Descrição Técnica", name: "desc", widget: "text"}
+
+  - name: "parcerias"
+    label: "Parcerias (Logos)"
+    folder: "src/data/parcerias"
+    create: true
+    extension: "json"
+    format: "json"
+    identifier_field: "name"
+    summary: '{{name}} ({{time}})'
+    fields:
+      - {label: "Nome da Empresa Parceira", name: "name", widget: "string"}
+      - {label: "Tempo de Parceria", name: "time", widget: "string", hint: "Exemplo: 15 anos"}
+      - {label: "Logo da Empresa", name: "logo", widget: "image", hint: "Dê preferência para logos com fundo transparente (PNG)"}
+
+  - name: "configuracoes"
+    label: "Configurações Globais"
+    files:
+      - label: "Apresentação Comercial"
+        name: "apresentacao"
+        file: "src/data/config/apresentacao.json"
+        fields:
+          - {label: "Arquivo PDF", name: "arquivo", widget: "file", hint: "Faça o upload do arquivo PDF da apresentação"}
+          - {label: "Tamanho do Arquivo (Ex: 5.2 MB)", name: "tamanho", widget: "string", required: false}
+

@@ -1,32 +1,59 @@
 backend:
-  name: git-gateway
-  branch: main
+  name: test-repo
 
-media_folder: "src/assets/images"
-public_folder: "../assets/images"
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "obras"
     label: "Obras Realizadas"
-    folder: "src/content/obras"
+    folder: "src/data/obras"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "json"
+    format: "json"
     fields:
-      - {label: "Título", name: "title", widget: "string"}
-      - {label: "Segmento", name: "segmento", widget: "select", options: ["Industrial", "Comercial", "Logística", "Agronegócio", "Institucionais", "Garagens"]}
-      - {label: "Foto Hero", name: "image", widget: "image"}
-      - {label: "Volume (m³)", name: "volume", widget: "string", required: false}
+      - {label: "ID (slug)", name: "id", widget: "string"}
+      - {label: "Título da Obra", name: "title", widget: "string"}
+      - {label: "Segmento", name: "segment", widget: "select", options: ["Industrial", "Comercial", "Logística", "Agronegócio", "Institucionais", "Garagens"]}
+      - {label: "Imagem Principal", name: "img", widget: "string"}
+      - {label: "Localização", name: "local", widget: "string"}
+      - {label: "Área (ex: 15.000 m²)", name: "area", widget: "string", required: false}
+      - {label: "Volume", name: "volume", widget: "string", required: false}
       - {label: "Prazo", name: "prazo", widget: "string", required: false}
-      - {label: "Local", name: "local", widget: "string"}
-      - {label: "Corpo de Texto", name: "body", widget: "markdown"}
-
+      - {label: "Descrição", name: "desc", widget: "text"}
+      - label: "Peças Pré-fabricadas"
+        name: "pecas"
+        widget: "list"
+        required: false
+        fields:
+          - {label: "ID da peça", name: "id", widget: "string"}
+          - {label: "Título da Peça", name: "title", widget: "string"}
+          - {label: "Imagem da Peça", name: "img", widget: "string"}
+      - label: "Galeria (URLs)"
+        name: "gallery"
+        widget: "list"
+        required: false
+        field: {label: "URL da Imagem", name: "url", widget: "string"}
+        
   - name: "produtos"
-    label: "Produtos / Peças"
-    folder: "src/content/produtos"
+    label: "Produtos (Catálogo)"
+    folder: "src/data/produtos"
     create: true
-    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     fields:
-      - {label: "Nome da Peça", name: "title", widget: "string"}
-      - {label: "Foto Principal", name: "image", widget: "image"}
-      - {label: "Dados Técnicos", name: "tecnicos", widget: "text", required: false}
-      - {label: "Descrição", name: "body", widget: "markdown"}
+      - {label: "ID (slug)", name: "id", widget: "string"}
+      - {label: "Título do Produto", name: "title", widget: "string"}
+      - {label: "Imagem do Produto", name: "img", widget: "string"}
+      - {label: "Descrição", name: "desc", widget: "text"}
+
+  - name: "parcerias"
+    label: "Parcerias (Logos)"
+    folder: "src/data/parcerias"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - {label: "Nome do Parceiro", name: "name", widget: "string"}
+      - {label: "Tempo de Parceria", name: "time", widget: "string"}
+      - {label: "URL da Logo", name: "logo", widget: "string"}

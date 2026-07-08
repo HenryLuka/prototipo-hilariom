@@ -1,15 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { produtos } from '../../data/produtos.js';
 
 export function getStaticPaths() {
+  const produtosData = import.meta.glob('../../data/produtos/*.json', { eager: true });
+  const produtos = Object.values(produtosData).map((f: any) => f.default || f);
   return produtos.map((produto) => ({
     params: { id: produto.id },
     props: { produto },
   }));
 }
 
-const { produto } = Astro.props;---
+const { produto } = Astro.props;
+---
 
 <Layout title={`${produto.title} | Hilariom`}>
   <div class="top-nav-bar">
@@ -260,18 +262,7 @@ const { produto } = Astro.props;---
     box-shadow: var(--shadow-sm);
   }
 
-  /* Utilities */
-  .fade-in-up {
-    animation: fadeInUp 0.5s ease forwards;
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  
 </style>
 
 <script>

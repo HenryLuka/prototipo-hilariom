@@ -1,0 +1,32 @@
+{
+  "id": "armazem-de-graos",
+  "title": "Armazém de Grãos",
+  "segment": "Agronegócio",
+  "img": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop",
+  "local": "Ribeirão Preto, SP",
+  "area": "12.000 m²",
+  "volume": "1.100 m³",
+  "prazo": "40 dias",
+  "desc": "Silos horizontais e galpões de armazenamento projetados para suportar empuxo de grãos estocados a granel, utilizando painéis de fechamento maciços e de altíssima resistência mecânica.",
+  "pecas": [
+    {
+      "id": "paineis",
+      "title": "Painéis de Fechamento",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/05.png"
+    },
+    {
+      "id": "tercas",
+      "title": "Terças Protendidas",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/07.png"
+    },
+    {
+      "id": "calhas",
+      "title": "Calhas de Concreto",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/011.png"
+    }
+  ],
+  "gallery": [
+    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=300&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1534951474654-87823058444a?q=80&w=300&auto=format&fit=crop"
+  ]
+}

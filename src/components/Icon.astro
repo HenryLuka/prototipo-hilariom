@@ -1,0 +1,15 @@
+---
+interface Props {
+  name: string;
+  class?: string;
+  width?: string;
+  height?: string;
+  [x: string]: any; 
+}
+
+const { name, class: className, width, height, ...rest } = Astro.props;
+---
+
+<svg class={className} width={width} height={height} {...rest}>
+  <use href={`#${name}`} />
+</svg>

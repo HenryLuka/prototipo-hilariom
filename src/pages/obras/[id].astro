@@ -1,8 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { obras } from '../../data/obras.js';
 
 export function getStaticPaths() {
+  const obrasData = import.meta.glob('../../data/obras/*.json', { eager: true });
+  const obras = Object.values(obrasData).map((f: any) => f.default || f);
   return obras.map((obra) => ({
     params: { id: obra.id },
     props: { obra },
@@ -58,7 +59,7 @@ const { obra } = Astro.props;
       <div class="scroll-container">
         <button class="scroll-btn left" aria-label="Rolar para esquerda"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
         <div class="pecas-list scroll-area">
-          {obra.pecas.map((peca) => (
+          {obra.pecas?.map((peca: any) => (
             <a href={`/prototipo-hilariom/produtos/${peca.id}/`} class="peca-visual hover-scale">
               <div class="peca-thumb skeleton">
                 <img src={peca.img} alt={peca.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
@@ -74,7 +75,7 @@ const { obra } = Astro.props;
     <div class="content-body">
       <h3>Galeria da Obra</h3>
       <div class="gallery-grid">
-        {obra.gallery.map((photo, idx) => (
+        {obra.gallery?.map((photo: any, idx: number) => (
           <img src={photo} class="gallery-img skeleton" alt={`Foto ${idx + 1}`} loading="lazy" decoding="async" onload="this.classList.remove('skeleton')" />
         ))}
       </div>

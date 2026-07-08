@@ -1,7 +1,10 @@
----
+---import Icon from '../components/Icon.astro';
+
 import Layout from '../layouts/Layout.astro';
-import { produtos } from '../data/produtos.js';
 import PageHeader from '../components/PageHeader.astro';
+
+const produtosData = import.meta.glob('../data/produtos/*.json', { eager: true });
+const produtos = Object.values(produtosData).map((f: any) => f.default || f);
 ---
 
 <Layout title="Produtos e Peças">
@@ -12,7 +15,7 @@ import PageHeader from '../components/PageHeader.astro';
   />
 
   <section class="products-container">
-    <div class="products-grid">
+    <div class="products-grid horizontal-catalog">
       {produtos.map((p, index) => (
         <a href={`/prototipo-hilariom/produtos/${p.id}/`} class={`product-card fade-in-up delay-${(index % 3) + 1}`}>
           <div class="card-accent"></div>
@@ -20,7 +23,7 @@ import PageHeader from '../components/PageHeader.astro';
             <img src={p.img} alt={p.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
             <div class="img-overlay">
               <span class="icon-plus">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <Icon name="icon_29b48b7f" width="24" height="24" />
               </span>
             </div>
           </div>
@@ -32,7 +35,7 @@ import PageHeader from '../components/PageHeader.astro';
             <p class="text-muted">{p.desc}</p>
             <div class="product-footer">
               <span class="view-more">Ver Ficha Técnica</span>
-              <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              <Icon name="icon_0f0482d6" class="arrow-icon" width="20" height="20" />
             </div>
           </div>
         </a>
@@ -236,19 +239,7 @@ import PageHeader from '../components/PageHeader.astro';
     transform: translateX(5px);
   }
 
-  /* Utilities */
-  .fade-in-up {
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-  .delay-3 { animation-delay: 0.3s; }
-
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  
 
   /* Responsive grid adjustments */
   @media (max-width: 768px) {

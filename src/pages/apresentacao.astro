@@ -1,6 +1,14 @@
 ---
+import Icon from '../components/Icon.astro';
+
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import apresentacaoData from '../data/config/apresentacao.json';
+
+// Ensure the PDF URL includes the correct base path for GitHub Pages/production
+const rawPath = apresentacaoData.arquivo || '';
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pdfUrl = rawPath.startsWith(baseUrl) ? rawPath : baseUrl + rawPath;
 ---
 
 <Layout title="Apresentação Comercial">
@@ -18,27 +26,35 @@ import PageHeader from '../components/PageHeader.astro';
         <div class="badge">Material Exclusivo</div>
         <div class="features-list">
           <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <Icon name="icon_295390ab" />
             <span>Catálogo completo de soluções pré-fabricadas</span>
           </div>
           <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <Icon name="icon_295390ab" />
             <span>Galeria com nossas maiores obras entregues</span>
           </div>
           <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <Icon name="icon_295390ab" />
             <span>Detalhes sobre nossa capacidade fabril</span>
           </div>
         </div>
 
         <div class="actions">
-          <a href="/prototipo-hilariom/apresentacao-Hilariom.pdf" download class="btn btn-download hover-scale" onclick="window.trackEvent && window.trackEvent('download_pdf', { source: 'apresentacao' })">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Baixar PDF (5.2 MB)
+          <a href={pdfUrl} download class="btn btn-download hover-scale" onclick="window.trackEvent && window.trackEvent('download_pdf', { source: 'apresentacao' })">
+            <Icon name="icon_fa9cc44e" width="22" height="22" />
+            Baixar PDF ({apresentacaoData.tamanho})
           </a>
           
+          <button id="btn-view-pdf" class="btn btn-view hover-scale" data-pdf={pdfUrl}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            Visualizar Online
+          </button>
+
           <a href="https://wa.me/?text=Confira%20a%20apresentação%20comercial%20da%20Hilariom:%20https://Hilariom.com.br/apresentacao" target="_blank" rel="noopener" class="btn btn-whatsapp hover-scale">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            <Icon name="icon_950d58a4" width="22" height="22" />
             Compartilhar via WhatsApp
           </a>
         </div>
@@ -62,6 +78,14 @@ import PageHeader from '../components/PageHeader.astro';
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Modal de Visualização Leve e Responsiva -->
+  <div id="pdf-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button id="close-modal" class="close-btn" aria-label="Fechar modal">&times;</button>
+      <div id="pdf-container" class="pdf-container"></div>
     </div>
   </div>
 </Layout>
@@ -191,6 +215,21 @@ import PageHeader from '../components/PageHeader.astro';
     box-shadow: 0 6px 16px rgba(52, 52, 50, 0.3);
   }
 
+  .btn-view {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .btn-view:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
   .btn-whatsapp {
     background: white;
     color: var(--text-main);
@@ -309,18 +348,203 @@ import PageHeader from '../components/PageHeader.astro';
     font-weight: 500;
   }
 
-  /* Utilities */
-  .fade-in-up {
-    animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  /* Modal de PDF */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
     opacity: 0;
-    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
   }
-  .delay-1 { animation-delay: 0.2s; }
 
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    height: 85vh;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.active .modal-content {
+    transform: scale(1);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s;
+  }
+
+  .close-btn:hover {
+    background: #e11d48;
+    transform: scale(1.1);
+  }
+
+  .pdf-container {
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  /* Fazemos o canvas do PDF escalar responsivamente em mobile */
+  :global(.pdf-container canvas) {
+    max-width: 95%;
+    height: auto !important;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    background: white;
+  }
+
+  :global(.pdf-loading) {
+    color: white;
+    font-size: 1.2rem;
+    margin-top: 50px;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
   }
 </style>
+
+<script>
+  const btnView = document.getElementById('btn-view-pdf');
+  const modal = document.getElementById('pdf-modal');
+  const closeBtn = document.getElementById('close-modal');
+  const pdfContainer = document.getElementById('pdf-container');
+  const pdfCard = document.querySelector('.pdf-card');
+
+  // Carrega a biblioteca PDF.js apenas quando o usuário clica em visualizar
+  async function loadPdfJs() {
+    if (window.pdfjsLib) return;
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+      script.onload = () => {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        resolve();
+      };
+      script.onerror = reject;
+      document.body.appendChild(script);
+    });
+  }
+
+  async function renderPDF(pdfUrl) {
+    pdfContainer.innerHTML = '<div class="pdf-loading">Carregando apresentação...</div>';
+    
+    try {
+      await loadPdfJs();
+      const loadingTask = window.pdfjsLib.getDocument(pdfUrl);
+      const pdf = await loadingTask.promise;
+      
+      pdfContainer.innerHTML = ''; // Limpa o loading
+      
+      // Renderiza todas as páginas (ou apenas as primeiras se for muito pesado, mas para apresentações curtas é ótimo)
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        const page = await pdf.getPage(pageNum);
+        const viewport = page.getViewport({ scale: 1.5 }); // Escala boa para nitidez, o CSS reduz visualmente
+        
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        
+        pdfContainer.appendChild(canvas);
+        
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
+        // Await para não sobrecarregar a memória renderizando tudo de uma vez
+        await page.render(renderContext).promise;
+      }
+    } catch (err) {
+      console.error('Erro ao renderizar PDF: ', err);
+      pdfContainer.innerHTML = '<div class="pdf-loading">Não foi possível carregar a apresentação.</div>';
+    }
+  }
+
+  function openModal(pdfUrl) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    renderPDF(pdfUrl);
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      pdfContainer.innerHTML = ''; // Limpa os canvas para liberar memória do celular
+    }, 300);
+  }
+
+  if(btnView) {
+    btnView.addEventListener('click', () => openModal(btnView.getAttribute('data-pdf')));
+  }
+
+  if (pdfCard) {
+      pdfCard.style.cursor = 'pointer';
+      pdfCard.title = "Clique para visualizar";
+      pdfCard.addEventListener('click', () => {
+          if(btnView) openModal(btnView.getAttribute('data-pdf'));
+      });
+  }
+
+  if(closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  if(modal) {
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) closeModal();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+</script>
 
 
 

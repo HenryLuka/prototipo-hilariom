@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,200 L100,100 L150,200 Z" fill="rgba(252, 232, 131, 0.05)" />
+      <path d="M200,200 L300,50 L400,200 Z" fill="rgba(252, 232, 131, 0.03)" />
+      <line x1="50" y1="0" x2="50" y2="200" stroke="rgba(252, 232, 131, 0.1)" stroke-width="2" />
+      <line x1="250" y1="0" x2="250" y2="200" stroke="rgba(252, 232, 131, 0.1)" stroke-width="2" />
+      <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(252, 232, 131, 0.1)" stroke-width="2" />
+    </svg>

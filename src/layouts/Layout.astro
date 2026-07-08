@@ -5,6 +5,8 @@ import BottomNav from '../components/BottomNav.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Fab from '../components/Fab.astro';
 import CtaOrcamento from '../components/CtaOrcamento.astro';
+import fs from 'node:fs';
+import path from 'node:path';
 
 interface Props {
   title: string;
@@ -12,6 +14,10 @@ interface Props {
 }
 
 const { title, hideCta = false } = Astro.props;
+
+// Lê o sprite gerado para injetar inline
+const spritePath = path.resolve(process.cwd(), 'public', 'sprite.svg');
+const spriteContent = fs.existsSync(spritePath) ? fs.readFileSync(spritePath, 'utf-8') : '';
 ---
 
 <!doctype html>
@@ -44,6 +50,9 @@ const { title, hideCta = false } = Astro.props;
     <script src="/src/pwa.ts"></script>
   </head>
   <body>
+    <!-- Injeta o SVG Sprite inline -->
+    <div set:html={spriteContent} style="display: none;" aria-hidden="true"></div>
+
     <main class="page-container" transition:animate="slide">
       <slot />
       {!hideCta && <CtaOrcamento />}

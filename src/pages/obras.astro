@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { obras } from '../data/obras.js';
 import PageHeader from '../components/PageHeader.astro';
+
+const obrasData = import.meta.glob('../data/obras/*.json', { eager: true });
+const obras = Object.values(obrasData).map((f: any) => f.default || f);
 
 const segments = ['Todos', 'Industrial', 'Comercial', 'Logística', 'Agronegócio'];
 ---
@@ -27,7 +29,7 @@ const segments = ['Todos', 'Industrial', 'Comercial', 'Logística', 'Agronegóci
     </div>
   </div>
 
-  <section class="gallery fade-in-up delay-3">
+  <section class="gallery horizontal-catalog fade-in-up delay-3">
     {obras.map((obra) => (
       <a href={`/prototipo-hilariom/obras/${obra.id}/`} class="obra-card hover-scale" data-segment={obra.segment}>
         <div class="img-wrapper skeleton">
@@ -149,19 +151,7 @@ const segments = ['Todos', 'Industrial', 'Comercial', 'Logística', 'Agronegóci
     color: var(--primary-color);
   }
 
-  /* Utilities */
-  .fade-in-up {
-    animation: fadeInUp 0.5s ease forwards;
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-  .delay-3 { animation-delay: 0.3s; }
-
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  
 
   /* Scroll Containers */
   .scroll-container {

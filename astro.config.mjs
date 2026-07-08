@@ -23,17 +23,17 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: 'https://via.placeholder.com/192/fce883/1a1a1a?text=Hilariom',
+            src: '/prototipo-hilariom/logo.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'https://via.placeholder.com/512/fce883/1a1a1a?text=Hilariom',
+            src: '/prototipo-hilariom/logo.png',
             sizes: '512x512',
             type: 'image/png'
           },
           {
-            src: 'https://via.placeholder.com/512/fce883/1a1a1a?text=Hilariom',
+            src: '/prototipo-hilariom/logo.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'

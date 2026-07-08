@@ -1,0 +1,32 @@
+{
+  "id": "fabrica-automotiva",
+  "title": "Fábrica Automotiva",
+  "segment": "Industrial",
+  "img": "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop",
+  "local": "Mogi das Cruzes, SP",
+  "area": "24.000 m²",
+  "volume": "2.800 m³",
+  "prazo": "90 dias",
+  "desc": "Projeto industrial de alta complexidade técnica utilizando vigas de ponte rolante dimensionadas para suportar cargas dinâmicas pesadas e fadiga extrema na área de montagem de veículos.",
+  "pecas": [
+    {
+      "id": "pilares",
+      "title": "Pilares",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/06.png"
+    },
+    {
+      "id": "vigas-ponte",
+      "title": "Vigas de Ponte Rolante",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/10.png"
+    },
+    {
+      "id": "fundacoes",
+      "title": "Fundações",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/03.png"
+    }
+  ],
+  "gallery": [
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=300&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=300&auto=format&fit=crop"
+  ]
+}

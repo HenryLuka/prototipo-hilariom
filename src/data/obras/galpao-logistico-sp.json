@@ -1,0 +1,32 @@
+{
+  "id": "galpao-logistico-sp",
+  "title": "Galpão Logístico SP",
+  "segment": "Logística",
+  "img": "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=800&auto=format&fit=crop",
+  "local": "Guarulhos, SP",
+  "area": "15.000 m²",
+  "volume": "1.250 m³",
+  "prazo": "45 dias",
+  "desc": "Projeto de centro logístico de alto padrão, desenvolvido com estrutura totalmente pré-fabricada para garantir velocidade e robustez. Os vãos de 25 metros foram vencidos com vigas protendidas de alta resistência.",
+  "pecas": [
+    {
+      "id": "pilares",
+      "title": "Pilares",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/06.png"
+    },
+    {
+      "id": "vigas-cobertura",
+      "title": "Vigas de Cobertura",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/08.png"
+    },
+    {
+      "id": "paineis",
+      "title": "Painéis de Fechamento",
+      "img": "https://www.galleon.com.br/wp-content/uploads/2015/12/05.png"
+    }
+  ],
+  "gallery": [
+    "https://images.unsplash.com/photo-1541888079011-309df51ab0c6?q=80&w=300&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1518640035171-897db674d812?q=80&w=300&auto=format&fit=crop"
+  ]
+}
