@@ -1,8 +1,8 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import BottomNav from '../components/BottomNav.astro';
-import Sidebar from '../components/Sidebar.astro';
+
 import Fab from '../components/Fab.astro';
 import CtaOrcamento from '../components/CtaOrcamento.astro';
 import fs from 'node:fs';
@@ -41,12 +41,12 @@ const spriteContent = fs.existsSync(spritePath) ? fs.readFileSync(spritePath, 'u
       gtag('config', 'G-XXXXXXXXXX');
       
       // Global event tracking function
-      window.trackEvent = function(eventName, eventParams) {
+      window['trackEvent'] = function(eventName, eventParams) {
         gtag('event', eventName, eventParams);
       };
     </script>
     
-    <ViewTransitions />
+    <ClientRouter />
     <script src="/src/pwa.ts"></script>
   </head>
   <body>

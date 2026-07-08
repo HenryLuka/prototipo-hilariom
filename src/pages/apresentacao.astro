@@ -40,7 +40,7 @@ const pdfUrl = rawPath.startsWith(baseUrl) ? rawPath : baseUrl + rawPath;
         </div>
 
         <div class="actions">
-          <a href={pdfUrl} download class="btn btn-download hover-scale" onclick="window.trackEvent && window.trackEvent('download_pdf', { source: 'apresentacao' })">
+          <a href={pdfUrl} download class="btn btn-download hover-scale" onclick="window['trackEvent'] && window['trackEvent']('download_pdf', { source: 'apresentacao' })">
             <Icon name="icon_fa9cc44e" width="22" height="22" />
             Baixar PDF ({apresentacaoData.tamanho})
           </a>
@@ -451,16 +451,16 @@ const pdfUrl = rawPath.startsWith(baseUrl) ? rawPath : baseUrl + rawPath;
   const modal = document.getElementById('pdf-modal');
   const closeBtn = document.getElementById('close-modal');
   const pdfContainer = document.getElementById('pdf-container');
-  const pdfCard = document.querySelector('.pdf-card');
+  const pdfCard = document.querySelector('.pdf-card') as HTMLElement | null;
 
   // Carrega a biblioteca PDF.js apenas quando o usuário clica em visualizar
-  async function loadPdfJs() {
-    if (window.pdfjsLib) return;
+  async function loadPdfJs(): Promise<void> {
+    if ((window as any).pdfjsLib) return;
     return new Promise((resolve, reject) => {
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
       script.onload = () => {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        (window as any).pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
         resolve();
       };
       script.onerror = reject;
@@ -468,12 +468,13 @@ const pdfUrl = rawPath.startsWith(baseUrl) ? rawPath : baseUrl + rawPath;
     });
   }
 
-  async function renderPDF(pdfUrl) {
+  async function renderPDF(pdfUrl: string) {
+    if (!pdfContainer) return;
     pdfContainer.innerHTML = '<div class="pdf-loading">Carregando apresentação...</div>';
     
     try {
       await loadPdfJs();
-      const loadingTask = window.pdfjsLib.getDocument(pdfUrl);
+      const loadingTask = (window as any).pdfjsLib.getDocument(pdfUrl);
       const pdf = await loadingTask.promise;
       
       pdfContainer.innerHTML = ''; // Limpa o loading
@@ -499,33 +500,33 @@ const pdfUrl = rawPath.startsWith(baseUrl) ? rawPath : baseUrl + rawPath;
       }
     } catch (err) {
       console.error('Erro ao renderizar PDF: ', err);
-      pdfContainer.innerHTML = '<div class="pdf-loading">Não foi possível carregar a apresentação.</div>';
+      if (pdfContainer) pdfContainer.innerHTML = '<div class="pdf-loading">Não foi possível carregar a apresentação.</div>';
     }
   }
 
-  function openModal(pdfUrl) {
-    modal.classList.add('active');
+  function openModal(pdfUrl: string) {
+    if (modal) modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     renderPDF(pdfUrl);
   }
 
   function closeModal() {
-    modal.classList.remove('active');
+    if (modal) modal.classList.remove('active');
     document.body.style.overflow = '';
     setTimeout(() => {
-      pdfContainer.innerHTML = ''; // Limpa os canvas para liberar memória do celular
+      if (pdfContainer) pdfContainer.innerHTML = ''; // Limpa os canvas para liberar memória do celular
     }, 300);
   }
 
   if(btnView) {
-    btnView.addEventListener('click', () => openModal(btnView.getAttribute('data-pdf')));
+    btnView.addEventListener('click', () => openModal(btnView.getAttribute('data-pdf') || ''));
   }
 
   if (pdfCard) {
       pdfCard.style.cursor = 'pointer';
       pdfCard.title = "Clique para visualizar";
       pdfCard.addEventListener('click', () => {
-          if(btnView) openModal(btnView.getAttribute('data-pdf'));
+          if(btnView) openModal(btnView.getAttribute('data-pdf') || '');
       });
   }
 
@@ -540,7 +541,7 @@ const pdfUrl = rawPath.startsWith(baseUrl) ? rawPath : baseUrl + rawPath;
   }
 
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && modal.classList.contains('active')) {
+    if(modal && e.key === 'Escape' && modal.classList.contains('active')) {
       closeModal();
     }
   });

@@ -497,8 +497,8 @@ import Layout from '../../layouts/Layout.astro';
 <script is:inline>
   // Dispatch view_obra event when page loads
   document.addEventListener('astro:page-load', () => {
-    if (window.trackEvent) {
-      window.trackEvent('view_obra', { obra_name: 'Galpão Logístico SP' });
+    if (window['trackEvent']) {
+      window['trackEvent']('view_obra', { obra_name: 'Galpão Logístico SP' });
     }
   }, { once: true });
 </script>
