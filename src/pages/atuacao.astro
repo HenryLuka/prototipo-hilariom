@@ -40,32 +40,41 @@ const whatsappUrl = `https://api.whatsapp.com/send?phone=5511989652498&text=${en
       </div>
     </div>
 
-    <!-- Radar Visual com Círculos Concéntricos de Distância -->
-    <div class="map-container glass-panel">
-      <div class="map-radar">
-        <!-- Anéis de raio concêntricos -->
-        <div class="radar-ring ring-500">
-          <span class="ring-label">500 km (Raio Máximo)</span>
+    <!-- Mapa Real Geográfico Interativo com Leaflet -->
+    <div class="real-map-card glass-panel">
+      <div class="map-toolbar">
+        <div class="map-live-tag">
+          <span class="live-dot"></span>
+          <span>Mapa Geográfico Real &bull; Escala Geodésica</span>
         </div>
-        <div class="radar-ring ring-250">
-          <span class="ring-label">250 km</span>
+        <div class="map-actions">
+          <button type="button" id="btn-fit-500" class="map-btn active" title="Enquadrar o raio de 500 km">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            <span>Raio 500 km</span>
+          </button>
+          <button type="button" id="btn-focus-factory" class="map-btn" title="Aproximar na fábrica em Guararema">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Ver Fábrica</span>
+          </button>
         </div>
-        <div class="radar-ring ring-100">
-          <span class="ring-label">100 km</span>
-        </div>
+      </div>
 
-        <!-- Ponto central da fábrica -->
-        <div class="factory-center-point">
-          <span class="center-pulse"></span>
-          <div class="center-marker">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-            </svg>
-          </div>
-          <div class="center-tooltip">
-            <strong>Guararema - SP</strong>
-            <span>Origem do Frete</span>
-          </div>
+      <div class="map-viewport">
+        <div id="coverage-map" class="map-canvas"></div>
+      </div>
+
+      <div class="map-legend-bar">
+        <div class="legend-chip">
+          <span class="chip-circle c-500"></span>
+          <span><strong>500 km:</strong> Alcance Máximo (SP, RJ, Sul de MG, PR)</span>
+        </div>
+        <div class="legend-chip">
+          <span class="chip-circle c-250"></span>
+          <span><strong>250 km:</strong> Raio Estratégico</span>
+        </div>
+        <div class="legend-chip">
+          <span class="chip-circle c-100"></span>
+          <span><strong>100 km:</strong> Raio Imediato (SP, Vale & Campinas)</span>
         </div>
       </div>
     </div>
@@ -249,138 +258,228 @@ const whatsappUrl = `https://api.whatsapp.com/send?phone=5511989652498&text=${en
     border: 1px solid rgba(0,0,0,0.08);
   }
 
-  /* Radar Visual */
-  .map-container {
-    height: 340px;
+  /* Real Map Styling */
+  .real-map-card {
+    background: #ffffff;
     border-radius: var(--border-radius-lg);
-    background: #252523;
-    position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.08);
   }
 
-  .map-radar {
+  .map-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .map-live-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #343432;
+    letter-spacing: 0.2px;
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+    animation: dot-pulse 2s infinite;
+  }
+
+  @keyframes dot-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .map-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border: 1px solid rgba(0,0,0,0.12);
+    background: #f8f8f6;
+    color: #343432;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .map-btn:hover {
+    background: #e8e8e4;
+  }
+
+  .map-btn.active {
+    background: #343432;
+    color: #fce883;
+    border-color: #343432;
+  }
+
+  .map-viewport {
+    height: 460px;
+    width: 100%;
     position: relative;
+    background: #f4f4f2;
+  }
+
+  .map-canvas {
     width: 100%;
     height: 100%;
+    z-index: 1;
+  }
+
+  .map-legend-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    padding: 0.9rem 1.25rem;
+    background: #fafaf8;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .legend-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .chip-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .c-500 {
+    background: #fce883;
+    border: 2px dashed #343432;
+  }
+
+  .c-250 {
+    background: rgba(252, 232, 131, 0.5);
+    border: 1.5px dashed #555;
+  }
+
+  .c-100 {
+    background: #fce883;
+    border: 2px solid #262624;
+  }
+
+  /* Injected Leaflet elements need :global */
+  :global(.factory-div-icon) {
+    background: transparent !important;
+    border: none !important;
+  }
+
+  :global(.factory-marker-wrapper) {
+    position: relative;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: radial-gradient(rgba(255,255,255,0.08) 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
   }
 
-  .radar-ring {
+  :global(.factory-marker-pulse) {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    border: 1.5px dashed rgba(252, 232, 131, 0.35);
+    background: rgba(252, 232, 131, 0.65);
+    animation: marker-pulse-anim 2s infinite;
+    z-index: 1;
+  }
+
+  :global(.factory-marker-pin) {
+    position: relative;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    background: #343432;
+    color: #fce883;
+    border-radius: 50%;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    border: 2px solid #ffffff;
   }
 
-  .ring-500 {
-    width: 310px;
-    height: 310px;
-    background: rgba(252, 232, 131, 0.03);
-    border-color: rgba(252, 232, 131, 0.5);
+  @keyframes marker-pulse-anim {
+    0% { transform: scale(0.8); opacity: 0.9; }
+    100% { transform: scale(2.2); opacity: 0; }
   }
 
-  .ring-250 {
-    width: 210px;
-    height: 210px;
-    background: rgba(252, 232, 131, 0.05);
+  :global(.leaflet-hilariom-popup) {
+    padding: 0.2rem;
+    min-width: 190px;
+    font-family: inherit;
   }
 
-  .ring-100 {
-    width: 110px;
-    height: 110px;
-    background: rgba(252, 232, 131, 0.08);
-  }
-
-  .ring-label {
+  :global(.leaflet-hilariom-popup .popup-badge) {
+    display: inline-block;
+    background: #343432;
+    color: #fce883;
     font-size: 0.65rem;
     font-weight: 800;
-    color: #fce883;
-    background: rgba(0, 0, 0, 0.65);
-    padding: 0.15rem 0.45rem;
+    padding: 0.15rem 0.5rem;
     border-radius: 4px;
-    margin-top: -10px;
+    margin-bottom: 0.35rem;
     letter-spacing: 0.5px;
   }
 
-  .factory-center-point {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  :global(.leaflet-hilariom-popup .popup-title) {
+    display: block;
+    font-size: 0.95rem;
+    color: #111;
+    margin-bottom: 0.2rem;
+    font-weight: 800;
   }
 
-  .center-marker {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #fce883;
-    color: #262624;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 15px rgba(252, 232, 131, 0.6);
-    position: relative;
-    z-index: 2;
+  :global(.leaflet-hilariom-popup .popup-addr) {
+    font-size: 0.8rem;
+    color: #555;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.35;
   }
 
-  .center-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 48px;
-    height: 48px;
-    background: rgba(252, 232, 131, 0.4);
-    border-radius: 50%;
-    z-index: 1;
-    animation: radar-pulse 2s infinite;
+  :global(.leaflet-hilariom-popup .popup-meta) {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #166534;
+    background: #dcfce7;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.6rem;
   }
 
-  @keyframes radar-pulse {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.9; }
-    100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
-  }
-
-  .center-tooltip {
-    position: absolute;
-    top: 42px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.85);
-    padding: 0.35rem 0.75rem;
-    border-radius: 6px;
-    white-space: nowrap;
-    border: 1px solid rgba(252, 232, 131, 0.3);
-  }
-
-  .center-tooltip strong {
-    color: #ffffff;
-    font-size: 0.75rem;
-  }
-
-  .center-tooltip span {
-    color: #fce883;
-    font-size: 0.65rem;
-    font-weight: 600;
+  :global(.leaflet-hilariom-popup .popup-link) {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #343432;
+    text-decoration: underline;
   }
 
   /* Logistics Grid */
@@ -552,3 +651,140 @@ const whatsappUrl = `https://api.whatsapp.com/send?phone=5511989652498&text=${en
     flex-shrink: 0;
   }
 </style>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  const FACTORY_LAT = -23.3191164;
+  const FACTORY_LNG = -46.1231937;
+
+  let currentMap: L.Map | null = null;
+
+  function initCoverageMap() {
+    const mapContainer = document.getElementById('coverage-map');
+    if (!mapContainer) return;
+
+    // Clean up existing map instance if any (for Astro view-transitions)
+    if (currentMap) {
+      try {
+        currentMap.remove();
+      } catch (e) {
+        // ignore
+      }
+      currentMap = null;
+    }
+
+    // Initialize Leaflet Map
+    const map = L.map(mapContainer, {
+      center: [FACTORY_LAT, FACTORY_LNG],
+      zoom: 7,
+      scrollWheelZoom: false,
+      attributionControl: true
+    });
+    currentMap = map;
+
+    // CartoDB Voyager tiles (crisp, modern styling with roads, state lines and cities)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map);
+
+    // 500 km Geodesic circle (500,000 meters radius)
+    const circle500 = L.circle([FACTORY_LAT, FACTORY_LNG], {
+      radius: 500000,
+      color: '#343432',
+      weight: 2,
+      dashArray: '8, 8',
+      fillColor: '#fce883',
+      fillOpacity: 0.18
+    }).addTo(map);
+
+    // 250 km Geodesic circle
+    L.circle([FACTORY_LAT, FACTORY_LNG], {
+      radius: 250000,
+      color: '#4a4a47',
+      weight: 1.5,
+      dashArray: '5, 5',
+      fillColor: '#fce883',
+      fillOpacity: 0.12
+    }).addTo(map);
+
+    // 100 km Geodesic circle
+    L.circle([FACTORY_LAT, FACTORY_LNG], {
+      radius: 100000,
+      color: '#262624',
+      weight: 2,
+      fillColor: '#fce883',
+      fillOpacity: 0.28
+    }).addTo(map);
+
+    // Custom Marker for Factory
+    const factoryIcon = L.divIcon({
+      className: 'factory-div-icon',
+      html: `
+        <div class="factory-marker-wrapper">
+          <span class="factory-marker-pulse"></span>
+          <div class="factory-marker-pin">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+        </div>
+      `,
+      iconSize: [36, 36],
+      iconAnchor: [18, 18],
+      popupAnchor: [0, -20]
+    });
+
+    const marker = L.marker([FACTORY_LAT, FACTORY_LNG], { icon: factoryIcon }).addTo(map);
+
+    const popupContent = `
+      <div class="leaflet-hilariom-popup">
+        <span class="popup-badge">FÁBRICA HILARIOM</span>
+        <strong class="popup-title">Origem do Frete</strong>
+        <p class="popup-addr">R. Ceará, 212 - Parateí<br>Guararema - SP, 08900-000</p>
+        <div class="popup-meta">
+          <span>Alcance: Raio até 500 km</span>
+        </div>
+        <a href="https://maps.google.com/?q=R.+Cear%C3%A1,+212+-+Parate%C3%AD,+Guararema+-+SP,+08900-000" target="_blank" rel="noopener" class="popup-link">
+          Abrir rota no Google Maps &rarr;
+        </a>
+      </div>
+    `;
+
+    marker.bindPopup(popupContent);
+
+    // Fit map bounds to show the entire 500 km radius
+    map.fitBounds(circle500.getBounds(), { padding: [25, 25] });
+
+    // Buttons actions
+    const btn500 = document.getElementById('btn-fit-500');
+    const btnFactory = document.getElementById('btn-focus-factory');
+
+    btn500?.addEventListener('click', () => {
+      btn500.classList.add('active');
+      btnFactory?.classList.remove('active');
+      map.fitBounds(circle500.getBounds(), { padding: [25, 25], animate: true });
+    });
+
+    btnFactory?.addEventListener('click', () => {
+      btnFactory.classList.add('active');
+      btn500?.classList.remove('active');
+      map.setView([FACTORY_LAT, FACTORY_LNG], 15, { animate: true });
+      marker.openPopup();
+    });
+
+    // Invalidate map size after animation/render
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 250);
+  }
+
+  // Support both standard DOMContentLoaded and Astro view-transitions
+  document.addEventListener('astro:page-load', initCoverageMap);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initCoverageMap();
+  }
+</script>
