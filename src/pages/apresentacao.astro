@@ -82,7 +82,7 @@ const pdfUrl = rawPath.startsWith(baseUrl) ? rawPath : baseUrl + rawPath;
   </div>
 
   <!-- Modal de Visualização Leve e Responsiva -->
-  <div id="pdf-modal" class="modal-overlay">
+  <div slot="modal" id="pdf-modal" class="modal-overlay">
     <div class="modal-content">
       <button id="close-modal" class="close-btn" aria-label="Fechar modal">&times;</button>
       <div id="pdf-container" class="pdf-container"></div>

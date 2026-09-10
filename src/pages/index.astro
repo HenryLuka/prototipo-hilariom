@@ -45,6 +45,18 @@ const processos = [
 
 const produtosData = import.meta.glob('../data/produtos/*.json', { eager: true });
 const produtos = Object.values(produtosData).map((f: any) => f.default || f);
+
+// Configuração do Vídeo Institucional Hilariom
+// Cole abaixo o link completo do YouTube ou apenas o ID do vídeo (ex: 'https://www.youtube.com/watch?v=SEU_CODIGO' ou 'SEU_CODIGO')
+const institucionalVideoUrlOuId = 'https://www.youtube.com/watch?v=ScMzIvxBSi4'; 
+
+function getYoutubeEmbedUrl(input: string) {
+  if (!input) return '';
+  const match = input.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+  const id = match ? match[1] : input.trim();
+  return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+}
+const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId);
 ---
 
 <Layout title="Home" hideCta={true}>
@@ -121,6 +133,98 @@ const produtos = Object.values(produtosData).map((f: any) => f.default || f);
     </div>
   </section>
 
+  <!-- 4.1. VÍDEO INSTITUCIONAL HILARIOM -->
+  <section class="institutional-video-section fade-in-up">
+    <div class="section-header-premium" style="margin-top: 0.5rem; margin-bottom: 1.5rem;">
+      <div class="section-badge video-badge">
+        <span class="video-badge-pulse"></span>
+        VÍDEO INSTITUCIONAL
+      </div>
+      <h2>Hilariom em <strong>Movimento</strong></h2>
+      <p>Veja de perto nossa infraestrutura fabril, a tecnologia de ponta na pré-fabricação e a precisão da engenharia em campo.</p>
+    </div>
+
+    <div class="institutional-video-card">
+      <div class="video-card-header">
+        <div class="video-meta-left">
+          <span class="video-status-dot"></span>
+          <span class="video-meta-title">TOUR FABRIL & MONTAGEM</span>
+        </div>
+        <div class="video-meta-badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+          FULL HD 1080P
+        </div>
+      </div>
+
+      <div class="institutional-player-box" id="institutionalPlayerBox" data-video-src={institutionalVideoEmbedUrl}>
+        <!-- Fachada de alta performance com imagem de capa nítida e botão Play destacado -->
+        <div class="institutional-video-facade" id="institutionalVideoFacade">
+          <img 
+            src="/prototipo-hilariom/galpao_pre_moldado.png" 
+            alt="Vídeo Institucional Hilariom Estruturas Pré-Fabricadas" 
+            class="video-poster-img"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="video-poster-gradient"></div>
+          
+          <button type="button" class="video-play-action" id="institutionalPlayBtn" aria-label="Reproduzir vídeo institucional da Hilariom">
+            <div class="play-btn-wrapper">
+              <div class="play-ripple"></div>
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+                  <polygon points="8 5 19 12 8 19 8 5"></polygon>
+                </svg>
+              </div>
+            </div>
+            <span class="play-action-title">Assistir Apresentação Oficial</span>
+            <span class="play-action-subtitle">Conheça nossa fábrica e capacidade construtiva</span>
+          </button>
+        </div>
+
+        <!-- O Iframe oficial do YouTube com autoplay é acionado no play -->
+        <div class="institutional-iframe-container" id="institutionalIframeContainer"></div>
+      </div>
+
+      <!-- Destaques em pílulas informativas abaixo do vídeo -->
+      <div class="video-pills-row">
+        <div class="video-pill-item">
+          <div class="video-pill-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M5 20V8l5 4V8l5 4V4l5 4v12"/></svg>
+          </div>
+          <div class="video-pill-text">
+            <strong>34.000 m² de Fábrica</strong>
+            <span>Estrutura própria e alta capacidade</span>
+          </div>
+        </div>
+
+        <div class="video-pill-divider"></div>
+
+        <div class="video-pill-item">
+          <div class="video-pill-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="video-pill-text">
+            <strong>Engenharia de Ponta</strong>
+            <span>Projetos otimizados para grandes vãos</span>
+          </div>
+        </div>
+
+        <div class="video-pill-divider"></div>
+
+        <div class="video-pill-item">
+          <div class="video-pill-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="video-pill-text">
+            <strong>Montagem Ágil</strong>
+            <span>Frotas e equipes pesadas especializadas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 5. MERCADOS DE ATUAÇÃO -->
   <section class="markets-preview">
     <div class="section-header-premium fade-in-up">
@@ -155,22 +259,26 @@ const produtos = Object.values(produtosData).map((f: any) => f.default || f);
       <h2>Obras em <strong>Destaque</strong></h2>
       <p>Conheça a magnitude e a qualidade dos nossos projetos recentes.</p>
     </div>
-    <div class="obras-grid horizontal-catalog">
-      {featuredWorks.map((work) => (
-        <a href={`/prototipo-hilariom/obras/${work.id}/`} class="obra-thumb hover-scale">
-          <div class="obra-thumb-img skeleton">
-            <img src={work.img} alt={work.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
-            <div class="obra-thumb-overlay"></div>
-          </div>
-          <div class="obra-thumb-info">
-            <h3>{work.title}</h3>
-            <span class="obra-local">
-              <Icon name="icon_62d1f773" width="12" height="12" />
-              {work.local}
-            </span>
-          </div>
-        </a>
-      ))}
+    <div class="scroll-container">
+      <button class="scroll-btn left" aria-label="Rolar para esquerda"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <div class="obras-grid horizontal-catalog scroll-area">
+        {featuredWorks.map((work) => (
+          <a href={`/prototipo-hilariom/obras/${work.id}/`} class="obra-thumb hover-scale">
+            <div class="obra-thumb-img skeleton">
+              <img src={work.img} alt={work.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+              <div class="obra-thumb-overlay"></div>
+            </div>
+            <div class="obra-thumb-info">
+              <h3>{work.title}</h3>
+              <span class="obra-local">
+                <Icon name="icon_62d1f773" width="12" height="12" />
+                {work.local}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <button class="scroll-btn right" aria-label="Rolar para direita"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
     </div>
     <div class="see-all-wrapper">
       <a href="/prototipo-hilariom/obras/" class="link-more">Ver todas as obras →</a>
@@ -935,22 +1043,35 @@ const produtos = Object.values(produtosData).map((f: any) => f.default || f);
   }
 
   .obras-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.25rem;
+    padding-bottom: 1.5rem;
+    scrollbar-width: none;
+    scroll-padding-left: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
-  @media (min-width: 768px) {
-    .obras-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
+
+  .obras-grid::-webkit-scrollbar {
+    display: none;
   }
 
   .obra-thumb {
+    flex: 0 0 75%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     text-decoration: none;
+  }
+
+  @media (min-width: 768px) {
+    .obra-thumb {
+      flex: 0 0 300px;
+    }
   }
 
   .obra-thumb-img {
@@ -1543,62 +1664,503 @@ const produtos = Object.values(produtosData).map((f: any) => f.default || f);
     justify-content: center;
     color: #333;
   }
+
+  /* ===== SEÇÃO VÍDEO INSTITUCIONAL ===== */
+  .institutional-video-section {
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .video-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .video-badge-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e53e3e;
+    box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.7);
+    animation: badge-pulse 1.8s infinite;
+  }
+
+  @keyframes badge-pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 8px rgba(229, 62, 62, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(229, 62, 62, 0);
+    }
+  }
+
+  .institutional-video-card {
+    background: linear-gradient(145deg, #272725 0%, #1a1a19 100%);
+    border-radius: 18px;
+    border: 1px solid rgba(252, 232, 131, 0.25);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.35), 0 0 25px -5px rgba(252, 232, 131, 0.08);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .video-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    background: rgba(0, 0, 0, 0.45);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .video-meta-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .video-status-dot {
+    width: 8px;
+    height: 8px;
+    background: #fce883;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #fce883;
+  }
+
+  .video-meta-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #f7f7f6;
+    text-transform: uppercase;
+  }
+
+  .video-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e2dc;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .institutional-player-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #0d0d0c;
+    overflow: hidden;
+  }
+
+  .institutional-video-facade {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .video-poster-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .institutional-video-facade:hover .video-poster-img {
+    transform: scale(1.04);
+  }
+
+  .video-poster-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(30, 30, 28, 0.35) 0%, rgba(15, 15, 14, 0.85) 100%);
+  }
+
+  .video-play-action {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .play-btn-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.35rem;
+  }
+
+  .play-ripple {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid #fce883;
+    animation: ripple 2s infinite ease-out;
+    pointer-events: none;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.9;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  .play-btn-circle {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: #fce883;
+    color: #242422;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(252, 232, 131, 0.4), 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s, box-shadow 0.3s;
+    padding-left: 3px;
+  }
+
+  .institutional-video-facade:hover .play-btn-circle {
+    transform: scale(1.12);
+    background: #fff2a3;
+    box-shadow: 0 12px 30px rgba(252, 232, 131, 0.6), 0 6px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .play-action-title {
+    font-size: 0.98rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+    letter-spacing: 0.3px;
+  }
+
+  .play-action-subtitle {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #e2e2dc;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
+  }
+
+  .institutional-iframe-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .institutional-iframe-container :global(iframe),
+  .institutional-iframe-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: 0 !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+
+  .video-pills-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.15rem 1.25rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .video-pill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .video-pill-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(252, 232, 131, 0.15);
+    color: #fce883;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(252, 232, 131, 0.2);
+  }
+
+  .video-pill-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .video-pill-text strong {
+    font-size: 0.86rem;
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .video-pill-text span {
+    font-size: 0.76rem;
+    color: #b3b3ac;
+    line-height: 1.35;
+  }
+
+  .video-pill-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .institutional-video-card {
+      border-radius: 24px;
+    }
+
+    .video-pills-row {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.35rem 2rem;
+      gap: 1.5rem;
+    }
+
+    .video-pill-item {
+      flex: 1;
+    }
+
+    .video-pill-divider {
+      width: 1px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.12);
+      flex-shrink: 0;
+    }
+
+    .play-btn-circle {
+      width: 76px;
+      height: 76px;
+    }
+
+    .play-ripple {
+      inset: -10px;
+      width: auto;
+      height: auto;
+      margin: 0;
+    }
+
+    .play-action-title {
+      font-size: 1.12rem;
+    }
+
+    .play-action-subtitle {
+      font-size: 0.85rem;
+    }
+  }
 </style>
 
 <script>
-  function initScrollButtons() {
+  // Gerenciador de carrosséis automáticos ultra-leve nativo (sem dependências)
+  let carouselCleanups: Array<() => void> = [];
+
+  function initCarousels() {
+    // Limpa listeners e timers anteriores para navegação suave do Astro
+    carouselCleanups.forEach(fn => fn());
+    carouselCleanups = [];
+
     const containers = document.querySelectorAll('.scroll-container');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     containers.forEach(container => {
-      const scrollArea = container.querySelector('.scroll-area');
-      const leftBtn = container.querySelector('.scroll-btn.left');
-      const rightBtn = container.querySelector('.scroll-btn.right');
+      const scrollArea = container.querySelector('.scroll-area') as HTMLElement | null;
+      const leftBtn = container.querySelector('.scroll-btn.left') as HTMLElement | null;
+      const rightBtn = container.querySelector('.scroll-btn.right') as HTMLElement | null;
       
-      if (!scrollArea || !leftBtn || !rightBtn) return;
+      if (!scrollArea) return;
+      const el = scrollArea as HTMLElement;
 
-      // Get the width of the first card to use as scroll step
       const getCardWidth = () => {
-        const firstCard = scrollArea.children[0] as HTMLElement;
+        const firstCard = el.children[0] as HTMLElement | null;
         if (!firstCard) return 300;
-        const style = getComputedStyle(scrollArea);
+        const style = getComputedStyle(el);
         const gap = parseFloat(style.gap) || 16;
         return firstCard.offsetWidth + gap;
       };
 
       const updateButtons = () => {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollArea;
-        if (scrollLeft > 5) {
-          leftBtn.classList.add('visible');
-          container.classList.add('can-scroll-left');
-        } else {
-          leftBtn.classList.remove('visible');
-          container.classList.remove('can-scroll-left');
+        const { scrollLeft, scrollWidth, clientWidth } = el;
+        if (leftBtn) {
+          if (scrollLeft > 5) {
+            leftBtn.classList.add('visible');
+            container.classList.add('can-scroll-left');
+          } else {
+            leftBtn.classList.remove('visible');
+            container.classList.remove('can-scroll-left');
+          }
         }
         
-        if (scrollLeft + clientWidth < scrollWidth - 5) {
-          rightBtn.classList.add('visible');
-          container.classList.add('can-scroll-right');
-        } else {
-          rightBtn.classList.remove('visible');
-          container.classList.remove('can-scroll-right');
+        if (rightBtn) {
+          if (scrollLeft + clientWidth < scrollWidth - 15) {
+            rightBtn.classList.add('visible');
+            container.classList.add('can-scroll-right');
+          } else {
+            rightBtn.classList.remove('visible');
+            container.classList.remove('can-scroll-right');
+          }
         }
       };
 
-      scrollArea.addEventListener('scroll', updateButtons, { passive: true });
+      el.addEventListener('scroll', updateButtons, { passive: true });
       window.addEventListener('resize', updateButtons, { passive: true });
-      
-      // Initial check
       setTimeout(updateButtons, 100);
 
-      leftBtn.addEventListener('click', () => {
-        scrollArea.scrollBy({ left: -(getCardWidth() + 20), behavior: 'smooth' });
-      });
+      // Controle de rotação automática
+      let autoTimer: any = null;
+      let isHovered = false;
+      let isTouching = false;
+      let isVisible = false;
 
-      rightBtn.addEventListener('click', () => {
-        scrollArea.scrollBy({ left: getCardWidth() + 20, behavior: 'smooth' });
+      function advanceNext() {
+        const { scrollLeft, scrollWidth, clientWidth } = el;
+        // Se chegou ao fim do carrossel, volta suavemente ao início
+        if (scrollLeft + clientWidth >= scrollWidth - 20) {
+          el.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          el.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+        }
+      }
+
+      function startAutoScroll() {
+        stopAutoScroll();
+        if (prefersReducedMotion) return;
+        autoTimer = setInterval(() => {
+          if (!isHovered && !isTouching && isVisible && document.visibilityState === 'visible') {
+            advanceNext();
+          }
+        }, 3600);
+      }
+
+      function stopAutoScroll() {
+        if (autoTimer) {
+          clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+
+      function resetAutoScroll() {
+        startAutoScroll();
+      }
+
+      if (leftBtn) {
+        leftBtn.addEventListener('click', () => {
+          el.scrollBy({ left: -(getCardWidth()), behavior: 'smooth' });
+          resetAutoScroll();
+        });
+      }
+
+      if (rightBtn) {
+        rightBtn.addEventListener('click', () => {
+          advanceNext();
+          resetAutoScroll();
+        });
+      }
+
+      // Pausa ao passar o mouse (desktop) para permitir leitura sem pressa
+      const onMouseEnter = () => { isHovered = true; };
+      const onMouseLeave = () => { isHovered = false; };
+      container.addEventListener('mouseenter', onMouseEnter, { passive: true });
+      container.addEventListener('mouseleave', onMouseLeave, { passive: true });
+
+      // Pausa ao tocar/arrastar (mobile) para não interferir no gesto do usuário
+      const onTouchStart = () => { isTouching = true; };
+      const onTouchEnd = () => { setTimeout(() => { isTouching = false; }, 2200); };
+      container.addEventListener('touchstart', onTouchStart, { passive: true });
+      container.addEventListener('touchend', onTouchEnd, { passive: true });
+
+      // IntersectionObserver: só consome timer quando estiver visível no viewport (0% CPU fora da tela)
+      let observer: IntersectionObserver | null = null;
+      if ('IntersectionObserver' in window) {
+        observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            isVisible = entry.isIntersecting;
+            if (isVisible) {
+              startAutoScroll();
+            } else {
+              stopAutoScroll();
+            }
+          });
+        }, { threshold: 0.2 });
+
+        observer.observe(container);
+      } else {
+        isVisible = true;
+        startAutoScroll();
+      }
+
+      // Função de limpeza para evitar vazamento de memória ou timers duplicados
+      carouselCleanups.push(() => {
+        stopAutoScroll();
+        if (observer) observer.disconnect();
+        container.removeEventListener('mouseenter', onMouseEnter);
+        container.removeEventListener('mouseleave', onMouseLeave);
+        container.removeEventListener('touchstart', onTouchStart);
+        container.removeEventListener('touchend', onTouchEnd);
       });
     });
   }
 
-  document.addEventListener('astro:page-load', initScrollButtons);
+  function initVideoPlayer() {
+    const facade = document.getElementById('institutionalVideoFacade');
+    const playerBox = document.getElementById('institutionalPlayerBox');
+    const iframeSlot = document.getElementById('institutionalIframeContainer');
+
+    if (!facade || !playerBox || !iframeSlot) return;
+
+    facade.addEventListener('click', () => {
+      const src = playerBox.getAttribute('data-video-src');
+      if (!src) return;
+      iframeSlot.innerHTML = `<iframe src="${src}" title="Vídeo Institucional Hilariom" style="width:100%;height:100%;border:0;position:absolute;top:0;left:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+      facade.style.display = 'none';
+    });
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initCarousels();
+    initVideoPlayer();
+  });
+  // Fallback para primeiro carregamento
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initCarousels();
+      initVideoPlayer();
+    });
+  } else {
+    initCarousels();
+    initVideoPlayer();
+  }
 </script>
