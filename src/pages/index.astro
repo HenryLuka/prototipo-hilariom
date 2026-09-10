@@ -345,15 +345,22 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
   <section class="raio-preview">
     <div class="raio-card">
       <div class="raio-visual">
-        <div class="raio-dot"><span class="pulse"></span></div>
+        <div class="raio-dot">
+          <span class="pulse"></span>
+        </div>
+        <div class="raio-origin-tag">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <span>Fábrica Guararema - SP</span>
+        </div>
         <div class="raio-circle"></div>
+        <div class="raio-range-tag">Raio 500 km</div>
       </div>
       <div class="raio-text">
         <div class="section-header-premium" style="margin: 0 0 1rem 0; padding: 0; text-align: left;">
           <div class="section-badge" style="background: rgba(0,0,0,0.15); color: #343432;">ALCANCE</div>
           <h2 style="margin-bottom: 0;">Raio de <strong>Atuação</strong></h2>
         </div>
-        <p>Nossa fábrica está estrategicamente localizada para atender num raio de até <strong>500km</strong>, cobrindo SP, RJ, MG e PR.</p>
+        <p>Partindo de nossa fábrica em <strong>Guararema - SP</strong> (R. Ceará, 212 - Parateí), atendemos estrategicamente num raio de até <strong>500km</strong>, cobrindo com agilidade logística os estados de SP, RJ, MG e PR.</p>
         <a href="/prototipo-hilariom/atuacao/" class="link-more">Ver cobertura completa →</a>
       </div>
     </div>
@@ -1257,6 +1264,36 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
     background: var(--primary-color);
     border-radius: 50%;
     z-index: 2;
+  }
+
+  .raio-origin-tag {
+    position: absolute;
+    top: calc(50% - 32px);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: #343432;
+    color: #fce883;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 3;
+    letter-spacing: 0.3px;
+  }
+
+  .raio-range-tag {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.85);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.08);
   }
 
   .raio-circle {

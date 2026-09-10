@@ -49,6 +49,24 @@ import PageHeader from '../components/PageHeader.astro';
       <button type="button" class="submit-btn hover-scale" onclick="alert('Formulário enviado com sucesso! (Simulação)')">Solicitar Orçamento</button>
     </form>
     
+    <!-- Factory Address Card -->
+    <div class="factory-contact-card">
+      <div class="factory-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      </div>
+      <div class="factory-details">
+        <span class="factory-badge">FÁBRICA & CENTRO LOGÍSTICO</span>
+        <strong>Hilariom Pré-Fabricados</strong>
+        <p>R. Ceará, 212 - Parateí, Guararema - SP, 08900-000</p>
+        <div class="factory-actions">
+          <a href="https://maps.google.com/?q=R.+Cear%C3%A1,+212+-+Parate%C3%AD,+Guararema+-+SP,+08900-000" target="_blank" rel="noopener" class="factory-link-btn">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver no Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+
     <!-- Social links -->
     <div class="social-links">
       <a href="https://www.linkedin.com/company/hilariom-pr%C3%A9-fabricados/" target="_blank" rel="noopener" class="social-icon hover-scale" aria-label="LinkedIn">
@@ -202,7 +220,78 @@ import PageHeader from '../components/PageHeader.astro';
     border: 1px solid var(--border-color);
   }
 
-  
+  .factory-contact-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .factory-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(252, 232, 131, 0.25);
+    color: #343432;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .factory-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .factory-badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #6b6b66;
+  }
+
+  .factory-details strong {
+    font-size: 0.95rem;
+    color: var(--text-main);
+  }
+
+  .factory-details p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+  }
+
+  .factory-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .factory-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #343432;
+    background: #f4f4f2;
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .factory-link-btn:hover {
+    background: #343432;
+    color: #fce883;
+  }
 </style>
 
 

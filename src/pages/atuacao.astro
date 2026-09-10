@@ -1,158 +1,554 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
+
+const factoryAddress = "R. Ceará, 212 - Parateí, Guararema - SP, 08900-000";
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(factoryAddress)}`;
+const wazeUrl = `https://waze.com/ul?q=${encodeURIComponent(factoryAddress)}`;
+const whatsappUrl = `https://api.whatsapp.com/send?phone=5511989652498&text=${encodeURIComponent("Olá! Gostaria de consultar a viabilidade e orçamento para minha obra partindo da fábrica de Guararema (raio de 500km).")}`;
 ---
 
-<Layout title="Raio de Atuação">
+<Layout title="Raio de Atuação | Hilariom">
   <PageHeader 
     title1="Raio de" 
     title2="Atuação" 
-    subtitle="Chegamos onde sua obra precisa."
+    subtitle="Logística inteligente e montagem rápida partindo de nossa fábrica em Guararema - SP."
   />
 
   <section class="map-section fade-in-up delay-2">
-    <div class="map-container glass-panel">
-      <!-- Simulated visual map -->
-      <div class="map-placeholder">
-        <div class="factory-point">
-          <span class="pulse"></span>
-          <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2 22 8-8v8"/><path d="M10 14V2a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v20"/><path d="m2 22 20 0"/><path d="M16 10h-2"/><path d="M16 14h-2"/><path d="M16 6h-2"/></svg></span>
+    <!-- Card do Ponto de Partida -->
+    <div class="origin-card glass-panel">
+      <div class="origin-badge">PONTO DE PARTIDA</div>
+      <div class="origin-header">
+        <div class="origin-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
-        <div class="radius-circle"></div>
+        <div class="origin-text">
+          <h2>Fábrica & Centro Operacional Hilariom</h2>
+          <p class="origin-address">{factoryAddress}</p>
+        </div>
+      </div>
+      <div class="origin-actions">
+        <a href={mapsUrl} target="_blank" rel="noopener" class="origin-btn google-btn hover-scale">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <span>Abrir no Google Maps</span>
+        </a>
+        <a href={wazeUrl} target="_blank" rel="noopener" class="origin-btn waze-btn hover-scale">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8l4 4-4 4"/></svg>
+          <span>Navegar no Waze</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Radar Visual com Círculos Concéntricos de Distância -->
+    <div class="map-container glass-panel">
+      <div class="map-radar">
+        <!-- Anéis de raio concêntricos -->
+        <div class="radar-ring ring-500">
+          <span class="ring-label">500 km (Raio Máximo)</span>
+        </div>
+        <div class="radar-ring ring-250">
+          <span class="ring-label">250 km</span>
+        </div>
+        <div class="radar-ring ring-100">
+          <span class="ring-label">100 km</span>
+        </div>
+
+        <!-- Ponto central da fábrica -->
+        <div class="factory-center-point">
+          <span class="center-pulse"></span>
+          <div class="center-marker">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <div class="center-tooltip">
+            <strong>Guararema - SP</strong>
+            <span>Origem do Frete</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diferenciais Logísticos -->
+    <div class="logistics-grid">
+      <div class="logistics-item glass-panel">
+        <div class="log-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        </div>
+        <div class="log-info">
+          <h4>Acesso Rodoviário Estratégico</h4>
+          <p>Conexão rápida à Rodovia Presidente Dutra (BR-116), Ayrton Senna / Carvalho Pinto (SP-070) e Rodoanel Mário Covas.</p>
+        </div>
+      </div>
+
+      <div class="logistics-item glass-panel">
+        <div class="log-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="log-info">
+          <h4>Agilidade & Pontualidade</h4>
+          <p>Frota própria e transportadores homologados para peças de grande porte e vãos especiais.</p>
+        </div>
       </div>
     </div>
     
+    <!-- Regiões Atendidas -->
     <div class="info-card">
-      <h3>Sediada em SP</h3>
-      <p class="text-muted">Nossa fábrica localizada estrategicamente permite atendimento eficiente num raio de até 500km.</p>
-      <ul class="states-list">
-        <li><span class="check">✓</span> São Paulo</li>
-        <li><span class="check">✓</span> Rio de Janeiro</li>
-        <li><span class="check">✓</span> Minas Gerais (Sul)</li>
-        <li><span class="check">✓</span> Paraná (Norte)</li>
-      </ul>
+      <div class="section-badge">COBERTURA REGIONAL</div>
+      <h3>Estados em que Atuamos</h3>
+      <p class="text-muted">Nossa malha logística atende grandes empreendimentos em até 500km de distância terrestre a partir de Guararema:</p>
+      
+      <div class="states-cards-grid">
+        <div class="state-card">
+          <div class="state-header">
+            <span class="state-badge">SP</span>
+            <strong>São Paulo</strong>
+          </div>
+          <p>Grande São Paulo, Vale do Paraíba, Alto Tietê, Campinas, Sorocaba, Baixada Santista e todo interior.</p>
+        </div>
+
+        <div class="state-card">
+          <div class="state-header">
+            <span class="state-badge">RJ</span>
+            <strong>Rio de Janeiro</strong>
+          </div>
+          <p>Região Metropolitana, Sul Fluminense (Resende, Volta Redonda, Barra Mansa) e Costa Verde.</p>
+        </div>
+
+        <div class="state-card">
+          <div class="state-header">
+            <span class="state-badge">MG</span>
+            <strong>Minas Gerais</strong>
+          </div>
+          <p>Sul de Minas (Pouso Alegre, Varginha, Extrema, Itajubá), Zona da Mata e Campo das Vertentes.</p>
+        </div>
+
+        <div class="state-card">
+          <div class="state-header">
+            <span class="state-badge">PR</span>
+            <strong>Paraná</strong>
+          </div>
+          <p>Região Metropolitana de Curitiba, Litoral Paranaense e Norte Pioneiro do estado.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA de Consulta -->
+    <div class="viabilidade-cta glass-panel">
+      <div class="cta-text">
+        <h3>Sua obra está nessa região?</h3>
+        <p>Consulte nossa equipe para verificar prazos de entrega e simular o plano de montagem para a sua cidade.</p>
+      </div>
+      <a href={whatsappUrl} target="_blank" rel="noopener" class="cta-whatsapp-btn hover-scale">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        <span>Consultar Frete & Montagem</span>
+      </a>
     </div>
   </section>
 
 </Layout>
 
 <style>
-
   .text-muted { color: var(--text-muted); }
 
   .map-section {
-    padding: 1rem 1.5rem 3rem;
+    padding: 1rem 1.5rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  .map-container {
-    height: 300px;
-    border-radius: var(--border-radius-lg);
-    background: #e0e7ff;
-    position: relative;
-    overflow: hidden;
+  /* Card do Ponto de Partida */
+  .origin-card {
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    border-left: 5px solid #fce883;
     box-shadow: var(--shadow-sm);
+  }
+
+  .origin-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #a89115;
+    background: rgba(252, 232, 131, 0.3);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+  }
+
+  .origin-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .origin-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #343432;
+    color: #fce883;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    flex-shrink: 0;
   }
 
-  .map-placeholder {
+  .origin-text h2 {
+    font-size: 1.15rem;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+    font-weight: 800;
+  }
+
+  .origin-address {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .origin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .origin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .google-btn {
+    background: #343432;
+    color: #ffffff;
+  }
+
+  .google-btn svg {
+    color: #fce883;
+  }
+
+  .waze-btn {
+    background: #f4f4f2;
+    color: #343432;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  /* Radar Visual */
+  .map-container {
+    height: 340px;
+    border-radius: var(--border-radius-lg);
+    background: #252523;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map-radar {
     position: relative;
     width: 100%;
     height: 100%;
-    /* Abstract map pattern */
-    background-image: radial-gradient(#c7d2fe 2px, transparent 2px);
-    background-size: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: radial-gradient(rgba(255,255,255,0.08) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
   }
 
-  .factory-point {
+  .radar-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1.5px dashed rgba(252, 232, 131, 0.35);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .ring-500 {
+    width: 310px;
+    height: 310px;
+    background: rgba(252, 232, 131, 0.03);
+    border-color: rgba(252, 232, 131, 0.5);
+  }
+
+  .ring-250 {
+    width: 210px;
+    height: 210px;
+    background: rgba(252, 232, 131, 0.05);
+  }
+
+  .ring-100 {
+    width: 110px;
+    height: 110px;
+    background: rgba(252, 232, 131, 0.08);
+  }
+
+  .ring-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #fce883;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    margin-top: -10px;
+    letter-spacing: 0.5px;
+  }
+
+  .factory-center-point {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
   }
-  
-  .factory-point .icon {
-    font-size: 1.5rem;
+
+  .center-marker {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fce883;
+    color: #262624;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(252, 232, 131, 0.6);
     position: relative;
     z-index: 2;
   }
 
-  .pulse {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--primary-color);
-    border-radius: 50%;
-    z-index: 1;
-    animation: pulse 2s infinite;
-    opacity: 0.6;
-  }
-
-  .radius-circle {
+  .center-pulse {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 250px;
-    height: 250px;
-    border: 2px dashed var(--primary-color);
+    width: 48px;
+    height: 48px;
+    background: rgba(252, 232, 131, 0.4);
     border-radius: 50%;
-    background: rgba(52, 52, 50, 0.05);
+    z-index: 1;
+    animation: radar-pulse 2s infinite;
   }
 
+  @keyframes radar-pulse {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.9; }
+    100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+  }
+
+  .center-tooltip {
+    position: absolute;
+    top: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    border: 1px solid rgba(252, 232, 131, 0.3);
+  }
+
+  .center-tooltip strong {
+    color: #ffffff;
+    font-size: 0.75rem;
+  }
+
+  .center-tooltip span {
+    color: #fce883;
+    font-size: 0.65rem;
+    font-weight: 600;
+  }
+
+  /* Logistics Grid */
+  .logistics-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .logistics-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .logistics-item {
+    background: #ffffff;
+    padding: 1.25rem;
+    border-radius: var(--border-radius);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .log-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(252, 232, 131, 0.2);
+    color: #343432;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .log-info h4 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+  }
+
+  .log-info p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Estados Atendidos */
   .info-card {
-    background: var(--surface-color);
+    background: #ffffff;
     padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-md);
   }
 
   .info-card h3 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
     color: var(--text-main);
+    font-size: 1.25rem;
+    font-weight: 800;
   }
   
-  .info-card p {
+  .info-card p.text-muted {
     font-size: 0.9rem;
     line-height: 1.5;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
 
-  .states-list {
-    list-style: none;
+  .states-cards-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
   }
 
-  .states-list li {
-    font-size: 0.85rem;
-    font-weight: 500;
+  @media (min-width: 640px) {
+    .states-cards-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .state-card {
+    background: #f8f8f6;
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .state-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .state-badge {
+    background: #343432;
+    color: #fce883;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+  }
+
+  .state-header strong {
     color: var(--text-main);
+    font-size: 0.95rem;
   }
 
-  .check {
-    color: var(--accent-color);
-    font-weight: bold;
-    margin-right: 0.25rem;
+  .state-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin: 0;
   }
 
-  
-  
-  @keyframes pulse {
-    0% { transform: scale(1); opacity: 0.6; }
-    70% { transform: scale(2); opacity: 0; }
-    100% { transform: scale(1); opacity: 0; }
+  /* Viabilidade CTA */
+  .viabilidade-cta {
+    background: linear-gradient(135deg, #343432 0%, #1e1e1c 100%);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    box-shadow: 0 10px 25px rgba(52, 52, 50, 0.2);
+  }
+
+  @media (min-width: 640px) {
+    .viabilidade-cta {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem;
+    }
+  }
+
+  .cta-text h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 0.35rem;
+    color: #ffffff;
+  }
+
+  .cta-text p {
+    font-size: 0.88rem;
+    color: #c9c9c4;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .cta-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #25D366;
+    color: #ffffff;
+    padding: 0.85rem 1.4rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 </style>
-
-
-
