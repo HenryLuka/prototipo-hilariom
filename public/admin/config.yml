@@ -1,13 +1,46 @@
+# Autenticacao via DecapBridge (PKCE): o editor entra com e-mail e senha,
+# sem precisar de conta no GitHub. O token de escrita fica guardado no
+# DecapBridge, nao neste arquivo.
 backend:
-  name: github
-  repo: henryluka/prototipo-hilariom
+  name: git-gateway
+  repo: HenryLuka/prototipo-hilariom
   branch: main
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/8545cae2-c757-4a4c-9c84-74018c04983e/pkce
+  auth_token_endpoint: /sites/8545cae2-c757-4a4c-9c84-74018c04983e/token
+  gateway_url: https://gateway.decapbridge.com
 
+  # Registra no historico quem fez cada alteracao.
+  commit_messages:
+    create: Create {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    update: Update {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    delete: Delete {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    uploadMedia: Upload “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    deleteMedia: Delete “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    openAuthoring: Message {{message}} - {{author-name}} <{{author-login}}> via DecapBridge
+
+# Campos do perfil do editor, vindos do DecapBridge.
+auth:
+  email_claim: email
+  first_name_claim: first_name
+  last_name_claim: last_name
+  avatar_url_claim: avatar_url
+
+# Edicao local (npx decap-server + npm run dev). Ignorado em producao.
 local_backend: true
 
-# Configurações Visuais do CMS
+# Configuracoes visuais do painel
 logo_url: "/prototipo-hilariom/logo.png"
 locale: "pt"
+
+# Endereco do site publicado, usado nos links "ver no site".
+# Precisa incluir a subpasta: o site nao responde na raiz do dominio.
+site_url: https://henryluka.github.io/prototipo-hilariom
+
+# Onde as imagens enviadas sao gravadas (caminho no repositorio) e como
+# sao referenciadas no conteudo (caminho sem a base — src/utils/asset.ts
+# acrescenta o prefixo na renderizacao).
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
