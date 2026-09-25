@@ -1,6 +1,7 @@
 ---import Icon from '../components/Icon.astro';
 
 import Layout from '../layouts/Layout.astro';
+import { asset } from '../utils/asset';
 import PageHeader from '../components/PageHeader.astro';
 
 const produtosData = import.meta.glob('../data/produtos/*.json', { eager: true });
@@ -20,7 +21,7 @@ const produtos = Object.values(produtosData).map((f: any) => f.default || f);
         <a href={`/prototipo-hilariom/produtos/${p.id}/`} class={`product-card fade-in-up delay-${(index % 3) + 1}`}>
           <div class="card-accent"></div>
           <div class="img-wrapper skeleton">
-            <img src={p.img} alt={p.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+            <img src={asset(p.img)} alt={p.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
             <div class="img-overlay">
               <span class="icon-plus">
                 <Icon name="icon_29b48b7f" width="24" height="24" />

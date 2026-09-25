@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+import { asset } from '../../utils/asset';
 export function getStaticPaths() {
   const produtosData = import.meta.glob('../../data/produtos/*.json', { eager: true });
   const produtos = Object.values(produtosData).map((f: any) => f.default || f);
@@ -27,7 +28,7 @@ const { produto } = Astro.props;
 
   <div class="product-image-card-premium fade-in-up delay-1">
     <div class="blueprint-bg-premium">
-      <img src={produto.img} alt={produto.title} loading="lazy" decoding="async" />
+      <img src={asset(produto.img)} alt={produto.title} loading="lazy" decoding="async" />
     </div>
   </div>
 

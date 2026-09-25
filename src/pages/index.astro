@@ -1,6 +1,7 @@
 ---import Icon from '../components/Icon.astro';
 
 import Layout from '../layouts/Layout.astro';
+import { asset } from '../utils/asset';
 import CtaOrcamento from '../components/CtaOrcamento.astro';
 
 // Quick Access data
@@ -201,7 +202,7 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
         {markets.map((m) => (
           <a href={m.href} class="market-card hover-scale">
             <div class="market-img skeleton">
-              <img src={m.img} alt={m.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+              <img src={asset(m.img)} alt={m.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
               <div class="market-overlay-card"></div>
             </div>
             <div class="market-label">
@@ -228,7 +229,7 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
         {featuredWorks.map((work) => (
           <a href={`/prototipo-hilariom/obras/${work.id}/`} class="obra-thumb hover-scale">
             <div class="obra-thumb-img skeleton">
-              <img src={work.img} alt={work.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+              <img src={asset(work.img)} alt={work.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
               <div class="obra-thumb-overlay"></div>
             </div>
             <div class="obra-thumb-info">
@@ -294,7 +295,7 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
         {produtos.map((p) => (
           <a href={`/prototipo-hilariom/produtos/${p.id}/`} class="peca-card-premium hover-scale">
             <div class="peca-img-wrapper skeleton">
-              <img src={p.img} alt={p.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+              <img src={asset(p.img)} alt={p.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
             </div>
             <div class="peca-info-premium">
               <h3 class="peca-title-premium">{p.title}</h3>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { asset } from '../utils/asset';
 import PageHeader from '../components/PageHeader.astro';
 
 const markets = [
@@ -45,7 +46,7 @@ const markets = [
     {markets.map((m, index) => (
       <div class={`market-card fade-in-up delay-${(index % 3) + 1}`} style={`--market-color: ${m.color}`}>
         <div class="market-img skeleton">
-          <img src={m.img} alt={m.title} loading="lazy" onload="this.parentElement.classList.remove('skeleton')" />
+          <img src={asset(m.img)} alt={m.title} loading="lazy" onload="this.parentElement.classList.remove('skeleton')" />
           <div class="market-overlay"></div>
           <h2 class="market-title">{m.title}</h2>
         </div>

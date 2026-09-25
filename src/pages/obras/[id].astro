@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+import { asset } from '../../utils/asset';
 export function getStaticPaths() {
   const obrasData = import.meta.glob('../../data/obras/*.json', { eager: true });
   const obras = Object.values(obrasData).map((f: any) => f.default || f);
@@ -16,7 +17,7 @@ const { obra } = Astro.props;
 <Layout title={`${obra.title} | Hilariom`}>
   <div class="obra-hero">
     <div class="hero-overlay"></div>
-    <img src={obra.img} alt={obra.title} class="hero-bg" />
+    <img src={asset(obra.img)} alt={obra.title} class="hero-bg" />
     
     <!-- Top Nav Actions (Back button) -->
     <div class="top-actions">
@@ -62,7 +63,7 @@ const { obra } = Astro.props;
           {obra.pecas?.map((peca: any) => (
             <a href={`/prototipo-hilariom/produtos/${peca.id}/`} class="peca-visual hover-scale">
               <div class="peca-thumb skeleton">
-                <img src={peca.img} alt={peca.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
+                <img src={asset(peca.img)} alt={peca.title} loading="lazy" decoding="async" onload="this.parentElement.classList.remove('skeleton')" />
               </div>
               <span>{peca.title}</span>
             </a>
@@ -76,7 +77,7 @@ const { obra } = Astro.props;
       <h3>Galeria da Obra</h3>
       <div class="gallery-grid">
         {obra.gallery?.map((photo: any, idx: number) => (
-          <img src={photo} class="gallery-img skeleton" alt={`Foto ${idx + 1}`} loading="lazy" decoding="async" onload="this.classList.remove('skeleton')" />
+          <img src={asset(photo)} class="gallery-img skeleton" alt={`Foto ${idx + 1}`} loading="lazy" decoding="async" onload="this.classList.remove('skeleton')" />
         ))}
       </div>
     </div>

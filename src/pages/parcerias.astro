@@ -1,6 +1,7 @@
 ---import Icon from '../components/Icon.astro';
 
 import Layout from '../layouts/Layout.astro';
+import { asset } from '../utils/asset';
 import PageHeader from '../components/PageHeader.astro';
 
 const parceirosData = import.meta.glob('../data/parcerias/*.json', { eager: true });
@@ -20,7 +21,7 @@ const parceiros = Object.values(parceirosData).map((f: any) => f.default || f);
     {parceiros.map((p) => (
       <div class="partner-card-premium hover-scale">
         <div class="partner-logo-wrapper">
-          <img src={p.logo} alt={`Logo ${p.name}`} loading="lazy" />
+          <img src={asset(p.logo)} alt={`Logo ${p.name}`} loading="lazy" />
         </div>
         <div class="partner-info-premium">
           <h4>{p.name}</h4>

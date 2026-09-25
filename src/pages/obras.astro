@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { asset } from '../utils/asset';
 import PageHeader from '../components/PageHeader.astro';
 
 const obrasData = import.meta.glob('../data/obras/*.json', { eager: true });
@@ -33,7 +34,7 @@ const segments = ['Todos', 'Industrial', 'Comercial', 'Logística', 'Agronegóci
     {obras.map((obra) => (
       <a href={`/prototipo-hilariom/obras/${obra.id}/`} class="obra-card hover-scale" data-segment={obra.segment}>
         <div class="img-wrapper skeleton">
-          <img src={obra.img} alt={obra.title} loading="lazy" onload="this.parentElement.classList.remove('skeleton')" />
+          <img src={asset(obra.img)} alt={obra.title} loading="lazy" onload="this.parentElement.classList.remove('skeleton')" />
         </div>
         <div class="obra-info">
           <h3>{obra.title}</h3>
