@@ -1,0 +1,27 @@
+{
+  "descricao": "É na usina que a obra começa. Veja como as peças são produzidas, controladas e preparadas antes de chegar ao canteiro.",
+  "video": "https://www.youtube.com/watch?v=ScMzIvxBSi4",
+  "capa": "/galpao_pre_moldado.png",
+  "diferenciais": [
+    {
+      "icone": "qualidade",
+      "titulo": "Controle de qualidade",
+      "texto": "Conferência dimensional e ensaios peça a peça antes da expedição."
+    },
+    {
+      "icone": "usina",
+      "titulo": "Usina automatizada",
+      "texto": "Pistas de produção com processo padronizado e alta repetibilidade."
+    },
+    {
+      "icone": "logistica",
+      "titulo": "Logística integrada",
+      "texto": "Acompanhamento do material do pátio até a montagem em obra."
+    },
+    {
+      "icone": "tecnologia",
+      "titulo": "Tecnologia construtiva",
+      "texto": "Formas metálicas, protensão e cura controlada em concreto de alta resistência."
+    }
+  ]
+}

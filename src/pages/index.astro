@@ -1,8 +1,36 @@
 ---import Icon from '../components/Icon.astro';
 
 import Layout from '../layouts/Layout.astro';
-import { asset } from '../utils/asset';
 import CtaOrcamento from '../components/CtaOrcamento.astro';
+import hero from '../data/config/hero.json';
+import fabrica from '../data/config/fabrica.json';
+import { asset } from '../utils/asset';
+
+
+// Clientes - editados no painel em "Clientes". Menor "ordem" aparece primeiro.
+const clientes = Object.values(import.meta.glob('../data/clientes/*.json', { eager: true }))
+  .map((f: any) => f.default || f)
+  .sort((a: any, b: any) => (a.ordem ?? 99) - (b.ordem ?? 99));
+
+// So vira link a obra que ainda existe: se uma obra for apagada no painel,
+// o cartao do cliente perde o link em vez de levar a uma pagina 404.
+const obrasExistentes = new Set(
+  Object.values(import.meta.glob('../data/obras/*.json', { eager: true }))
+    .map((f: any) => (f.default || f).id)
+);
+
+// Icones que o painel oferece para os diferenciais da fabrica.
+// A chave e o valor gravado em src/data/config/fabrica.json.
+const fabricaIcones: Record<string, string> = {
+  qualidade: '<path d="M9 12l2 2 4-4"></path><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.4 0 2.73.32 3.91.9"></path>',
+  usina: '<rect x="2" y="13" width="20" height="8" rx="1"></rect><path d="M6 13V8l4 3V8l4 3V8l4 3v2"></path><path d="M6 17h.01M10 17h.01M14 17h.01M18 17h.01"></path>',
+  logistica: '<path d="M1 3h13v13H1z"></path><path d="M14 8h4l3 3v5h-7V8z"></path><circle cx="5.5" cy="18.5" r="2"></circle><circle cx="17.5" cy="18.5" r="2"></circle>',
+  tecnologia: '<path d="M12 2v4M12 18v4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M2 12h4M18 12h4M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"></path><circle cx="12" cy="12" r="3.5"></circle>',
+  prazo: '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path>',
+  seguranca: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path>',
+  sustentabilidade: '<path d="M11 20A7 7 0 0 1 4 13c0-6 7-10 16-10 0 9-4 16-10 16z"></path><path d="M4 20c4-4 7-6 11-8"></path>',
+  estrutura: '<path d="M12 2l10 5-10 5L2 7l10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path>',
+};
 
 // Quick Access data
 const fastAccess = [
@@ -48,8 +76,8 @@ const produtosData = import.meta.glob('../data/produtos/*.json', { eager: true }
 const produtos = Object.values(produtosData).map((f: any) => f.default || f);
 
 // Configuração do Vídeo Institucional Hilariom
-// Cole abaixo o link completo do YouTube ou apenas o ID do vídeo (ex: 'https://www.youtube.com/watch?v=SEU_CODIGO' ou 'SEU_CODIGO')
-const institucionalVideoUrlOuId = 'https://www.youtube.com/watch?v=ScMzIvxBSi4'; 
+// O link é editado pelo painel: Configurações Globais → Página inicial — Nossa Fábrica.
+const institucionalVideoUrlOuId = fabrica.video;
 
 function getYoutubeEmbedUrl(input: string) {
   if (!input) return '';
@@ -64,14 +92,14 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
   <!-- 1. HERO FULL-SCREEN -->
   <section class="hero">
     <div class="hero-overlay"></div>
-    <img src="/prototipo-hilariom/galpao_pre_moldado.png" alt="Estrutura de Galpão Pré-fabricado Hilariom" class="hero-bg" style="object-fit: cover;" />
+    <img src={asset(hero.imagem)} alt={hero.imagem_alt} class="hero-bg" style="object-fit: cover;" fetchpriority="high" />
     <div class="hero-text">
       <div class="logo-hero-container fade-in-up">
-        <img src="/prototipo-hilariom/logo.png?v=2" alt="Hilariom - Soluções em Métodos Construtivos" class="hero-logo" />
+        <img src={asset(hero.logo)} alt="Hilariom - Soluções em Métodos Construtivos" class="hero-logo" />
       </div>
-      <a href="/prototipo-hilariom/contato/" class="hero-cta fade-in-up delay-1">
+      <a href={asset(hero.botao_link)} class="hero-cta fade-in-up delay-1">
         <Icon name="icon_ce998bbf" class="cta-icon" width="22" height="22" />
-        <span>Solicite um <strong>ORÇAMENTO</strong></span>
+        <span>{hero.botao_texto}{hero.botao_destaque && <> <strong>{hero.botao_destaque}</strong></>}</span>
       </a>
     </div>
   </section>
@@ -88,6 +116,73 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
       ))}
     </div>
   </section>
+
+  <!-- 3. NOSSA FÁBRICA (vídeo + diferenciais) -->
+  <section class="institutional-video-section fabrica-section fade-in-up">
+    <div class="section-header-premium" style="margin-top: 0.5rem; margin-bottom: 1.5rem;">
+      <div class="section-badge video-badge">
+        <span class="video-badge-pulse"></span>
+        NOSSA FÁBRICA
+      </div>
+      <h2>Nossa <strong>Fábrica</strong></h2>
+      <p>{fabrica.descricao}</p>
+    </div>
+
+    <div class="institutional-video-card">
+      <div class="video-card-header">
+        <div class="video-meta-left">
+          <span class="video-status-dot"></span>
+          <span class="video-meta-title">POR DENTRO DA USINA</span>
+        </div>
+        <div class="video-meta-badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+          FULL HD 1080P
+        </div>
+      </div>
+
+      <div class="institutional-player-box" id="institutionalPlayerBox" data-video-src={institutionalVideoEmbedUrl}>
+        <!-- Fachada de alta performance com imagem de capa nítida e botão Play destacado -->
+        <div class="institutional-video-facade" id="institutionalVideoFacade">
+          <img 
+            src={asset(fabrica.capa)}
+            alt="Fábrica Hilariom — produção de estruturas pré-fabricadas" 
+            class="video-poster-img"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="video-poster-gradient"></div>
+          
+          <button type="button" class="video-play-action" id="institutionalPlayBtn" aria-label="Reproduzir vídeo institucional da Hilariom">
+            <div class="play-btn-wrapper">
+              <div class="play-ripple"></div>
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+                  <polygon points="8 5 19 12 8 19 8 5"></polygon>
+                </svg>
+              </div>
+            </div>
+            <span class="play-action-title">Assistir o tour pela fábrica</span>
+            <span class="play-action-subtitle">Produção, controle de qualidade e expedição</span>
+          </button>
+        </div>
+
+        <!-- O Iframe oficial do YouTube com autoplay é acionado no play -->
+        <div class="institutional-iframe-container" id="institutionalIframeContainer"></div>
+      </div>
+    </div>
+      <div class="fabrica-features">
+      {fabrica.diferenciais.map((item) => (
+        <article class="fabrica-feature">
+          <span class="fabrica-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26" aria-hidden="true" set:html={fabricaIcones[item.icone] ?? fabricaIcones.estrutura}></svg>
+          </span>
+          <h3>{item.titulo}</h3>
+          <p>{item.texto}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
 
 
   <!-- 4. QUEM SOMOS (NARRATIVA PREMIUM) -->
@@ -131,61 +226,6 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
         <span>Conheça nossa história completa</span>
         <Icon name="icon_dc4fceff" width="18" height="18" />
       </a>
-    </div>
-  </section>
-
-  <!-- 4.1. VÍDEO INSTITUCIONAL HILARIOM -->
-  <section class="institutional-video-section fade-in-up">
-    <div class="section-header-premium" style="margin-top: 0.5rem; margin-bottom: 1.5rem;">
-      <div class="section-badge video-badge">
-        <span class="video-badge-pulse"></span>
-        VÍDEO INSTITUCIONAL
-      </div>
-      <h2>Hilariom em <strong>Movimento</strong></h2>
-      <p>Veja de perto nossa infraestrutura fabril, a tecnologia de ponta na pré-fabricação e a precisão da engenharia em campo.</p>
-    </div>
-
-    <div class="institutional-video-card">
-      <div class="video-card-header">
-        <div class="video-meta-left">
-          <span class="video-status-dot"></span>
-          <span class="video-meta-title">TOUR FABRIL & MONTAGEM</span>
-        </div>
-        <div class="video-meta-badge">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-          FULL HD 1080P
-        </div>
-      </div>
-
-      <div class="institutional-player-box" id="institutionalPlayerBox" data-video-src={institutionalVideoEmbedUrl}>
-        <!-- Fachada de alta performance com imagem de capa nítida e botão Play destacado -->
-        <div class="institutional-video-facade" id="institutionalVideoFacade">
-          <img 
-            src="/prototipo-hilariom/galpao_pre_moldado.png" 
-            alt="Vídeo Institucional Hilariom Estruturas Pré-Fabricadas" 
-            class="video-poster-img"
-            loading="lazy"
-            decoding="async"
-          />
-          <div class="video-poster-gradient"></div>
-          
-          <button type="button" class="video-play-action" id="institutionalPlayBtn" aria-label="Reproduzir vídeo institucional da Hilariom">
-            <div class="play-btn-wrapper">
-              <div class="play-ripple"></div>
-              <div class="play-btn-circle">
-                <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
-                  <polygon points="8 5 19 12 8 19 8 5"></polygon>
-                </svg>
-              </div>
-            </div>
-            <span class="play-action-title">Assistir Apresentação Oficial</span>
-            <span class="play-action-subtitle">Conheça nossa fábrica e capacidade construtiva</span>
-          </button>
-        </div>
-
-        <!-- O Iframe oficial do YouTube com autoplay é acionado no play -->
-        <div class="institutional-iframe-container" id="institutionalIframeContainer"></div>
-      </div>
     </div>
   </section>
 
@@ -311,34 +351,33 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
     </div>
   </section>
 
-  <!-- CTA PARCEIROS E FORNECEDORES (MINI BANNERS) -->
-  <section class="partner-mini-banner">
-    <div class="partner-banners-grid">
-      <a href="/prototipo-hilariom/parcerias/" class="partner-banner-content glass-panel hover-scale" style="text-decoration: none; color: inherit; display: flex;">
-        <div class="partner-icon">
-          <Icon name="icon_a4ea72a3" width="28" height="28" />
-        </div>
-        <div class="partner-text">
-          <h3>Nossos Parceiros</h3>
-          <p>Conheça os grandes fornecedores que constroem nossa história.</p>
-        </div>
-        <div class="partner-banner-btn" aria-hidden="true">
-          <Icon name="icon_0f0482d6" width="20" height="20" />
-        </div>
-      </a>
+  <!-- 7. CLIENTES -->
+  <section class="clientes-preview">
+    <div class="section-header-premium fade-in-up">
+      <div class="section-badge">CLIENTES</div>
+      <h2>Quem já construiu com a <strong>Hilariom</strong></h2>
+      <p>Indústrias, operadores logísticos e empresas que confiaram suas obras às nossas estruturas pré-fabricadas.</p>
+    </div>
 
-      <a href="/prototipo-hilariom/seja-parceiro/" class="partner-banner-content glass-panel hover-scale" style="text-decoration: none; color: inherit; display: flex;">
-        <div class="partner-icon">
-          <Icon name="icon_1c51ae6e" width="28" height="28" />
-        </div>
-        <div class="partner-text">
-          <h3>Seja Fornecedor</h3>
-          <p>Junte-se à nossa rede de fornecedores e empresas parceiras.</p>
-        </div>
-        <div class="partner-banner-btn" aria-hidden="true">
-          <Icon name="icon_0f0482d6" width="20" height="20" />
-        </div>
-      </a>
+    <div class="clientes-grid">
+      {clientes.map((c: any) => {
+        const temObra = Boolean(c.obra) && obrasExistentes.has(c.obra);
+        const Tag = temObra ? 'a' : 'div';
+        return (
+          <Tag class:list={['cliente-card', { 'is-link': temObra }]} href={temObra ? asset(`/obras/${c.obra}/`) : undefined}>
+            <div class="cliente-marca">
+              {c.logo
+                ? <img src={asset(c.logo)} alt={c.nome} loading="lazy" decoding="async" />
+                : <span class="cliente-nome">{c.nome}</span>}
+            </div>
+            <div class="cliente-info">
+              <span class="cliente-segmento">{c.segmento}</span>
+              {c.cidade && <span class="cliente-cidade">{c.cidade}</span>}
+            </div>
+            {temObra && <span class="cliente-obra">Ver obra <span aria-hidden="true">→</span></span>}
+          </Tag>
+        );
+      })}
     </div>
   </section>
 
@@ -925,85 +964,111 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
     font-weight: 800;
   }
 
-  /* ===== PARTNER BANNER ===== */
-  .partner-mini-banner {
-    padding: 0 1.5rem 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
+  /* ===== 7. CLIENTES ===== */
+  .clientes-preview {
+    width: 100%;
   }
 
-  .partner-banners-grid {
+  .clientes-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  @media (min-width: 768px) {
-    .partner-banners-grid {
-      grid-template-columns: 1fr 1fr;
-    }
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 
-  .partner-banner-content {
+  .cliente-card {
     display: flex;
-    align-items: center;
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 1.25rem;
-    box-shadow: var(--shadow-sm);
-    border-left: 4px solid var(--accent-color);
-    gap: 1rem;
-    transition: transform 0.2s, box-shadow 0.2s;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
 
-  .partner-banner-content:hover {
+  .cliente-card.is-link:hover,
+  .cliente-card.is-link:focus-visible {
+    border-color: var(--accent-color);
     box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    outline: none;
   }
 
-  .partner-icon {
+  .cliente-marca {
+    height: 56px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: rgba(252, 232, 131, 0.2);
-    color: var(--primary-color);
+  }
+
+  .cliente-marca img {
+    max-height: 48px;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.85;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+  }
+
+  .cliente-card.is-link:hover .cliente-marca img {
+    filter: none;
+    opacity: 1;
+  }
+
+  .cliente-nome {
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--text-main);
+  }
+
+  .cliente-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.6rem;
+  }
+
+  .cliente-segmento {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .cliente-segmento::before {
+    content: "";
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
+    background: var(--accent-color);
     flex-shrink: 0;
   }
 
-  .partner-text {
-    flex-grow: 1;
+  .cliente-cidade {
+    font-size: 0.75rem;
+    color: var(--text-muted);
   }
 
-  .partner-text h3 {
-    font-size: 1.05rem;
+  .cliente-obra {
+    margin-top: auto;
+    font-size: 0.78rem;
     font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 0.2rem;
   }
 
-  .partner-text p {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    line-height: 1.3;
-    margin: 0;
-  }
-
-  .partner-banner-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: var(--accent-color);
-    color: var(--primary-color);
-    border-radius: 50%;
-    flex-shrink: 0;
-    transition: background 0.2s;
-  }
-
-  .partner-banner-btn:hover {
-    background: #f7e06a;
+  @media (min-width: 768px) {
+    .clientes-grid {
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1rem;
+    }
+    .cliente-card { padding: 1.25rem; }
   }
 
   /* ===== 6. OBRAS ===== */
@@ -1688,6 +1753,63 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
   }
 
   /* ===== SEÇÃO VÍDEO INSTITUCIONAL ===== */
+  /* --- Diferenciais da fabrica, logo abaixo do video --- */
+  .fabrica-features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .fabrica-feature {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .fabrica-feature-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-color);
+    color: var(--text-main);
+    flex-shrink: 0;
+  }
+
+  .fabrica-feature h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+  }
+
+  .fabrica-feature p {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 768px) {
+    .fabrica-features {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .fabrica-feature { padding: 1.25rem 1.1rem; }
+    .fabrica-feature h3 { font-size: 0.98rem; }
+    .fabrica-feature p { font-size: 0.85rem; }
+  }
+
   .institutional-video-section {
     width: 100%;
     margin-top: 0.5rem;

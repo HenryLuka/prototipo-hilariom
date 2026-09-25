@@ -84,6 +84,24 @@ collections:
         hint: "Adicione fotos extras para o carrossel da obra"
         field: {label: "Foto", name: "photo", widget: "image"}
         
+  - name: "clientes"
+    label: "Clientes (Quem já construiu com a Hilariom)"
+    label_singular: "Cliente"
+    folder: "src/data/clientes"
+    create: true
+    extension: "json"
+    format: "json"
+    identifier_field: "nome"
+    summary: "{{nome}} — {{segmento}}"
+    description: "Empresas que já contrataram a Hilariom. Aparecem na página inicial, na seção Quem já construiu com a Hilariom."
+    fields:
+      - {label: "Nome da empresa", name: "nome", widget: "string"}
+      - {label: "Logo", name: "logo", widget: "image", required: false, hint: "De preferência PNG com fundo transparente. Sem logo, o nome aparece escrito no cartão."}
+      - {label: "Segmento", name: "segmento", widget: "select", options: ["Industrial", "Logística", "Agronegócio", "Comercial", "Institucionais", "Garagens"]}
+      - {label: "Cidade", name: "cidade", widget: "string", required: false, hint: "Ex: Guarulhos, SP"}
+      - {label: "Obra realizada", name: "obra", widget: "relation", collection: "obras", value_field: "id", search_fields: ["title"], display_fields: ["title"], required: false, hint: "Opcional. Se escolher uma obra, o cartão do cliente leva à página dela."}
+      - {label: "Ordem de exibição", name: "ordem", widget: "number", value_type: "int", default: 10, hint: "Menor número aparece primeiro."}
+
   - name: "produtos"
     label: "Produtos (Catálogo)"
     folder: "src/data/produtos"
@@ -121,3 +139,77 @@ collections:
           - {label: "Arquivo PDF", name: "arquivo", widget: "file", hint: "Faça o upload do arquivo PDF da apresentação"}
           - {label: "Tamanho do Arquivo (Ex: 5.2 MB)", name: "tamanho", widget: "string", required: false}
 
+      - label: "Página inicial — Topo (imagem principal)"
+        name: "hero"
+        file: "src/data/config/hero.json"
+        fields:
+          - label: "Imagem de fundo"
+            name: "imagem"
+            widget: "image"
+            hint: "A foto grande do topo do site. Use JPG na horizontal, com cerca de 1920 px de largura e até 500 KB — o painel não reduz o arquivo, e uma foto pesada deixa o site lento para abrir."
+          - label: "Descrição da imagem"
+            name: "imagem_alt"
+            widget: "string"
+            hint: "Descreva a foto em poucas palavras. É lida por leitores de tela e pelo Google."
+          - label: "Logo"
+            name: "logo"
+            widget: "image"
+            hint: "PNG com fundo transparente e em versão clara, porque fica sobre a foto."
+          - label: "Botão — texto"
+            name: "botao_texto"
+            widget: "string"
+            hint: "Ex.: Solicite um"
+          - label: "Botão — palavra em destaque"
+            name: "botao_destaque"
+            widget: "string"
+            required: false
+            hint: "Aparece em negrito depois do texto. Ex.: ORÇAMENTO"
+          - label: "Botão — leva para"
+            name: "botao_link"
+            widget: "select"
+            options:
+              - {label: "Contato e orçamento", value: "/contato/"}
+              - {label: "Apresentação comercial (PDF)", value: "/apresentacao/"}
+              - {label: "Obras", value: "/obras/"}
+              - {label: "Produtos", value: "/produtos/"}
+              - {label: "Mercados de atuação", value: "/mercados/"}
+              - {label: "Quem somos", value: "/sobre/"}
+
+      - label: "Página inicial — Nossa Fábrica"
+        name: "fabrica"
+        file: "src/data/config/fabrica.json"
+        fields:
+          - label: "Texto de apresentação"
+            name: "descricao"
+            widget: "text"
+            hint: "Aparece logo abaixo do título Nossa Fábrica."
+          - label: "Link do vídeo (YouTube)"
+            name: "video"
+            widget: "string"
+            hint: "Cole o link do YouTube, ex.: https://www.youtube.com/watch?v=XXXXXXXXXXX"
+            pattern: ['^(https?://(www\.|m\.)?(youtube\.com|youtu\.be)/.+|[\w-]{11})$', "Use um link do YouTube (youtube.com ou youtu.be)"]
+          - label: "Imagem de capa do vídeo"
+            name: "capa"
+            widget: "image"
+            hint: "Aparece antes de apertar o play. O ideal é um quadro do próprio vídeo."
+          - label: "Diferenciais da fábrica"
+            name: "diferenciais"
+            widget: "list"
+            summary: "{{fields.titulo}}"
+            hint: "Os cartões com ícone abaixo do vídeo. Arraste para reordenar."
+            fields:
+              - label: "Ícone"
+                name: "icone"
+                widget: "select"
+                default: "estrutura"
+                options:
+                  - {label: "Controle de qualidade (selo)", value: "qualidade"}
+                  - {label: "Usina / produção", value: "usina"}
+                  - {label: "Logística / caminhão", value: "logistica"}
+                  - {label: "Tecnologia / engrenagem", value: "tecnologia"}
+                  - {label: "Prazo / relógio", value: "prazo"}
+                  - {label: "Segurança / escudo", value: "seguranca"}
+                  - {label: "Sustentabilidade / folha", value: "sustentabilidade"}
+                  - {label: "Estrutura / camadas", value: "estrutura"}
+              - {label: "Título", name: "titulo", widget: "string"}
+              - {label: "Texto", name: "texto", widget: "text"}
