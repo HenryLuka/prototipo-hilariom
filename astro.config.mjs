@@ -41,7 +41,25 @@ export default defineConfig({
         ]
       },
       workbox: {
-        navigateFallback: '/prototipo-hilariom/',
+        // Sem navigateFallback de proposito. Ele e feito para SPA, em que um
+        // unico HTML atende todas as rotas. Aqui cada pagina tem seu proprio
+        // HTML em cache, entao o fallback so entrava quando a URL nao batia
+        // exatamente com o cache, e sempre servia a home no lugar da pagina
+        // pedida: o retorno do login do painel (/admin/?state=&code=), o
+        // filtro de obras (/obras/?segment=) e cliques de anuncio (?gclid=).
+        //
+        // Precisa ser null explicito: se a chave for omitida, o @vite-pwa/astro
+        // injeta navigateFallback = base por conta propria.
+        navigateFallback: null,
+
+        // Parametros que nao mudam o conteudo da pagina: a versao em cache
+        // continua valendo, inclusive offline.
+        ignoreURLParametersMatching: [
+          /^utm_/, /^fbclid$/,                      // padrao do Workbox
+          /^gclid$/, /^gbraid$/, /^wbraid$/,        // Google Ads
+          /^msclkid$/,                              // Microsoft Ads
+          /^segment$/,                              // filtro de obras
+        ],
         globPatterns: ['**/*.{css,js,html,svg,png,webp,avif,ico,txt}'],
         runtimeCaching: [
           {
