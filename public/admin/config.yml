@@ -85,7 +85,7 @@ collections:
         field: {label: "Foto", name: "photo", widget: "image"}
         
   - name: "clientes"
-    label: "Clientes (Quem já construiu com a Hilariom)"
+    label: "Clientes"
     label_singular: "Cliente"
     folder: "src/data/clientes"
     create: true
@@ -93,10 +93,11 @@ collections:
     format: "json"
     identifier_field: "nome"
     summary: "{{nome}} — {{segmento}}"
-    description: "Empresas que já contrataram a Hilariom. Aparecem na página inicial, na seção Quem já construiu com a Hilariom."
+    description: "Empresas que já contrataram a Hilariom. Aparecem na página Nossos Clientes."
     fields:
       - {label: "Nome da empresa", name: "nome", widget: "string"}
-      - {label: "Logo", name: "logo", widget: "image", required: false, hint: "De preferência PNG com fundo transparente. Sem logo, o nome aparece escrito no cartão."}
+      - {label: "Logo", name: "logo", widget: "image", required: false, hint: "De preferência PNG com fundo transparente. Sem logo, o cartão mostra as iniciais do nome."}
+      - {label: "Sobre o cliente", name: "sobre", widget: "text", required: false, hint: "Uma ou duas frases sobre o cliente ou a obra feita para ele."}
       - {label: "Segmento", name: "segmento", widget: "select", options: ["Industrial", "Logística", "Agronegócio", "Comercial", "Institucionais", "Garagens"]}
       - {label: "Cidade", name: "cidade", widget: "string", required: false, hint: "Ex: Guarulhos, SP"}
       - {label: "Obra realizada", name: "obra", widget: "relation", collection: "obras", value_field: "id", search_fields: ["title"], display_fields: ["title"], required: false, hint: "Opcional. Se escolher uma obra, o cartão do cliente leva à página dela."}
@@ -116,18 +117,6 @@ collections:
       - {label: "Imagem do Produto", name: "img", widget: "image"}
       - {label: "Descrição Técnica", name: "desc", widget: "text"}
 
-  - name: "parcerias"
-    label: "Parcerias (Logos)"
-    folder: "src/data/parcerias"
-    create: true
-    extension: "json"
-    format: "json"
-    identifier_field: "name"
-    summary: '{{name}} ({{time}})'
-    fields:
-      - {label: "Nome da Empresa Parceira", name: "name", widget: "string"}
-      - {label: "Tempo de Parceria", name: "time", widget: "string", hint: "Exemplo: 15 anos"}
-      - {label: "Logo da Empresa", name: "logo", widget: "image", hint: "Dê preferência para logos com fundo transparente (PNG)"}
 
   - name: "configuracoes"
     label: "Configurações Globais"

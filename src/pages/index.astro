@@ -7,18 +7,6 @@ import fabrica from '../data/config/fabrica.json';
 import { asset } from '../utils/asset';
 
 
-// Clientes - editados no painel em "Clientes". Menor "ordem" aparece primeiro.
-const clientes = Object.values(import.meta.glob('../data/clientes/*.json', { eager: true }))
-  .map((f: any) => f.default || f)
-  .sort((a: any, b: any) => (a.ordem ?? 99) - (b.ordem ?? 99));
-
-// So vira link a obra que ainda existe: se uma obra for apagada no painel,
-// o cartao do cliente perde o link em vez de levar a uma pagina 404.
-const obrasExistentes = new Set(
-  Object.values(import.meta.glob('../data/obras/*.json', { eager: true }))
-    .map((f: any) => (f.default || f).id)
-);
-
 // Icones que o painel oferece para os diferenciais da fabrica.
 // A chave e o valor gravado em src/data/config/fabrica.json.
 const fabricaIcones: Record<string, string> = {
@@ -351,33 +339,34 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
     </div>
   </section>
 
-  <!-- 7. CLIENTES -->
-  <section class="clientes-preview">
-    <div class="section-header-premium fade-in-up">
-      <div class="section-badge">CLIENTES</div>
-      <h2>Quem já construiu com a <strong>Hilariom</strong></h2>
-      <p>Indústrias, operadores logísticos e empresas que confiaram suas obras às nossas estruturas pré-fabricadas.</p>
-    </div>
+  <!-- CTA CLIENTES E FORNECEDORES (MINI BANNERS) -->
+  <section class="partner-mini-banner">
+    <div class="partner-banners-grid">
+      <a href="/prototipo-hilariom/parcerias/" class="partner-banner-content glass-panel hover-scale" style="text-decoration: none; color: inherit; display: flex;">
+        <div class="partner-icon">
+          <Icon name="icon_a4ea72a3" width="28" height="28" />
+        </div>
+        <div class="partner-text">
+          <h3>Nossos Clientes</h3>
+          <p>Conheça as empresas que já construíram com a Hilariom.</p>
+        </div>
+        <div class="partner-banner-btn" aria-hidden="true">
+          <Icon name="icon_0f0482d6" width="20" height="20" />
+        </div>
+      </a>
 
-    <div class="clientes-grid">
-      {clientes.map((c: any) => {
-        const temObra = Boolean(c.obra) && obrasExistentes.has(c.obra);
-        const Tag = temObra ? 'a' : 'div';
-        return (
-          <Tag class:list={['cliente-card', { 'is-link': temObra }]} href={temObra ? asset(`/obras/${c.obra}/`) : undefined}>
-            <div class="cliente-marca">
-              {c.logo
-                ? <img src={asset(c.logo)} alt={c.nome} loading="lazy" decoding="async" />
-                : <span class="cliente-nome">{c.nome}</span>}
-            </div>
-            <div class="cliente-info">
-              <span class="cliente-segmento">{c.segmento}</span>
-              {c.cidade && <span class="cliente-cidade">{c.cidade}</span>}
-            </div>
-            {temObra && <span class="cliente-obra">Ver obra <span aria-hidden="true">→</span></span>}
-          </Tag>
-        );
-      })}
+      <a href="/prototipo-hilariom/seja-parceiro/" class="partner-banner-content glass-panel hover-scale" style="text-decoration: none; color: inherit; display: flex;">
+        <div class="partner-icon">
+          <Icon name="icon_1c51ae6e" width="28" height="28" />
+        </div>
+        <div class="partner-text">
+          <h3>Seja Fornecedor</h3>
+          <p>Junte-se à nossa rede de fornecedores e empresas parceiras.</p>
+        </div>
+        <div class="partner-banner-btn" aria-hidden="true">
+          <Icon name="icon_0f0482d6" width="20" height="20" />
+        </div>
+      </a>
     </div>
   </section>
 
@@ -964,111 +953,85 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
     font-weight: 800;
   }
 
-  /* ===== 7. CLIENTES ===== */
-  .clientes-preview {
-    width: 100%;
+  /* ===== PARTNER BANNER ===== */
+  .partner-mini-banner {
+    padding: 0 1.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .clientes-grid {
+  .partner-banners-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .partner-banners-grid {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
-  .cliente-card {
+  .partner-banner-content {
     display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    padding: 1rem;
-    background: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    color: inherit;
-    text-decoration: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--accent-color);
+    gap: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .cliente-card.is-link:hover,
-  .cliente-card.is-link:focus-visible {
-    border-color: var(--accent-color);
+  .partner-banner-content:hover {
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-    outline: none;
   }
 
-  .cliente-marca {
-    height: 56px;
+  .partner-icon {
     display: flex;
     align-items: center;
-  }
-
-  .cliente-marca img {
-    max-height: 48px;
-    max-width: 100%;
-    object-fit: contain;
-    filter: grayscale(1);
-    opacity: 0.85;
-    transition: filter 0.2s ease, opacity 0.2s ease;
-  }
-
-  .cliente-card.is-link:hover .cliente-marca img {
-    filter: none;
-    opacity: 1;
-  }
-
-  .cliente-nome {
-    font-size: 0.95rem;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: var(--text-main);
-  }
-
-  .cliente-info {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem 0.6rem;
-  }
-
-  .cliente-segmento {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .cliente-segmento::before {
-    content: "";
-    width: 6px;
-    height: 6px;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(252, 232, 131, 0.2);
+    color: var(--primary-color);
     border-radius: 50%;
-    background: var(--accent-color);
     flex-shrink: 0;
   }
 
-  .cliente-cidade {
-    font-size: 0.75rem;
-    color: var(--text-muted);
+  .partner-text {
+    flex-grow: 1;
   }
 
-  .cliente-obra {
-    margin-top: auto;
-    font-size: 0.78rem;
+  .partner-text h3 {
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--text-main);
+    margin-bottom: 0.2rem;
   }
 
-  @media (min-width: 768px) {
-    .clientes-grid {
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 1rem;
-    }
-    .cliente-card { padding: 1.25rem; }
+  .partner-text p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .partner-banner-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .partner-banner-btn:hover {
+    background: #f7e06a;
   }
 
   /* ===== 6. OBRAS ===== */
@@ -2309,21 +2272,13 @@ const institutionalVideoEmbedUrl = getYoutubeEmbedUrl(institucionalVideoUrlOuId)
     }, 250);
   }
 
+  // Com o ClientRouter, astro:page-load dispara no primeiro carregamento e a
+  // cada navegacao. Um fallback extra para o primeiro carregamento fazia tudo
+  // inicializar duas vezes: o mapa baixava os blocos em dobro e o primeiro
+  // mapa, ja destruido, ainda recebia o invalidateSize agendado.
   document.addEventListener('astro:page-load', () => {
     initCarousels();
     initVideoPlayer();
     initHomeCoverageMap();
   });
-  // Fallback para primeiro carregamento
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initCarousels();
-      initVideoPlayer();
-      initHomeCoverageMap();
-    });
-  } else {
-    initCarousels();
-    initVideoPlayer();
-    initHomeCoverageMap();
-  }
 </script>
